@@ -2,9 +2,14 @@
 
 class RegisterController
 {
-	public static function RegisterAction()
+	public static function defaultAction()
 	{
-		$register = new RegisterModel($_POST['first_name'],$_POST['last_name'],$_POST['username'],$_POST['mail'],$_POST['password']);
-		$register->RegisterAction();
+		Controller::renderAction("register");
+	}
+	
+	public static function registerAction()
+	{
+		$register = new RegisterModel($_POST);
+		$register->registerAction();
 	}
 }
