@@ -4,9 +4,6 @@ class IndexController
 {
 	public static function defaultAction()
 	{
-		if (true)
-		{
-			header('Location: ./signin');
-		}
+    // If not connected -> header Location -> signin.php
 	}
 }
