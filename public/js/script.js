@@ -6,6 +6,9 @@ $(document).ready(function () {
 			function(data) {
 				var obj = JSON.parse(data);
 				$.each(obj, function(key, value) {
+					if (key == "error") {
+						$("#error").html(value);
+					}
 					if (key == "Signup" && value == "Valid") {
 						location.href = "./signin";
 					}
@@ -20,7 +23,10 @@ $(document).ready(function () {
 			function(data) {
 				var obj = JSON.parse(data);
 				$.each(obj, function(key, value) {
-					if (key == "signin" && value == "ok") {
+					if (key == "error") {
+						$("#error").html(value);
+					}
+					if (key == "Signin" && value == "ok") {
 						location.href = "./";
 					}
 				});
