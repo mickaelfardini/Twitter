@@ -9,6 +9,11 @@ class TweetController
 
 	public static function getTweetAction()
 	{
-		
+		TweetModel::getTweetAction();
+	}
+
+	public static function getLastTweetAction()
+	{
+		TweetModel::getLastTweetAction();
 	}
 }

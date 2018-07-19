@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	<link rel="stylesheet" type="text/css" href="/Twitter/public/css/home.css">
 	<title>Tweet Academie - Home</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
 			<li class="nav-item"><a class="nav-link" href="#">Mentions</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Messages</a></li>
 		</ul>
-		<img src="../img/birdie.png" alt="logo" width="35" height="35" class="d-inline-block align-top">
+		<img src="/Twitter/public/img/birdie.png" alt="logo" width="35" height="35" class="d-inline-block align-top">
 
 		<form class="form-inline">
 			<input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search"name="search">
@@ -47,11 +47,6 @@
 	</div>
 	<div class="content-main">
 		<ol id="timeline" class="list-group">
-			<li class="tweet list-group-item">`tweet`</li>
-			<li class="tweet list-group-item">`tweet`</li>
-			<li class="tweet list-group-item">`tweet`</li>
-			<li class="tweet list-group-item">`tweet`</li>
-			<li class="tweet list-group-item">`tweet`</li>
 		</ol>
 	</div>
 </div>
@@ -59,5 +54,7 @@
 src="https://code.jquery.com/jquery-3.3.1.js"
 integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 crossorigin="anonymous"></script>
+<script type="text/javascript" src="/Twitter/public/js/script.js"></script>
+<script type="text/javascript" src="/Twitter/public/js/tweets.js"></script>
 </body>
 </html>

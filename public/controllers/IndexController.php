@@ -8,5 +8,6 @@ class IndexController
 		{
 			header("Location: ./signin/");
 		}
+		Controller::renderAction("home");
 	}
 }
