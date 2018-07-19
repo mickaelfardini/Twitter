@@ -6,6 +6,9 @@ $(document).ready(function () {
 			function(data) {
 				var obj = JSON.parse(data);
 				$.each(obj, function(key, value) {
+					if (key == "error") {
+						$("#error").html(value);
+					}
 					if (key == "Signup" && value == "Valid") {
 						location.href = "./signin";
 					}
@@ -20,10 +23,24 @@ $(document).ready(function () {
 			function(data) {
 				var obj = JSON.parse(data);
 				$.each(obj, function(key, value) {
-					if (key == "signin" && value == "ok") {
-						location.href = "./";
+					if (key == "error") {
+						$("#error").html(value);
+					}
+					if (key == "Signin" && value == "ok") {
+						location.href = "/Twitter/";
 					}
 				});
 			});
+	});
+
+	$("#submitTweet").click(() => {
+		$.post("?page=tweet&action=postTweet",
+			{content: $("#myTweet").val()})
+		.done((data) => {
+			// A faire next -> del div -> req last tweet -> anim ?
+		})
+		.fail((err) => {
+
+		});
 	});
 });

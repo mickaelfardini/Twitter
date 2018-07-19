@@ -10,7 +10,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="offset-md-6 offset-lg-4 offset-xl-4 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+			<div class="offset-md-6 offset-lg-5 offset-xl-4 col-sm-12 col-md-6 col-lg-4 col-xl-3">
 				<h1>Sign in</h1>
 				<form id="formSignin" method="get">
 					<div class="form-group mx-sm-3 mb-2">
@@ -22,6 +22,7 @@
 						<input type="password" class="form-control" name="password" placeholder="Password">
 					</div>
 					<input type="button" value="Submit" id="submitSignin" class="btn btn-primary mx-sm-3">
+					<p class="mx-sm-3 change" id="error" style="color: red;"></p>
 					<p class=" mx-sm-3 change">Not a member yet? <a href="/Twitter/register">Register here</a></p>
 				</form>
 			</div>

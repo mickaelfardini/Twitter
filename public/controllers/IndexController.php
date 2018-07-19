@@ -2,8 +2,20 @@
 
 class IndexController
 {
+	public static $countTweets;
+
 	public static function defaultAction()
 	{
-    // If not connected -> header Location -> signin.php
+		if (!Controller::isConnected())
+		{
+			header("Location: ./signin/");
+		}
+		Controller::renderAction("home");
+	}
+
+	public static function countTweetsAction()
+	{
+		self::$countTweets = IndexModel::countTweetsAction();
+		return self::$countTweets;
 	}
 }

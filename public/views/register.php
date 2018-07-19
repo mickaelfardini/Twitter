@@ -13,31 +13,32 @@
 				<h1 class="text-center">Register</h1>
 				<form id="formRegister">
 					<div class="form-group mx-sm-3 mb-2">
-						<label for="inputFirstname">First name</label>
-						<input type="text" id ="inputFirstname" class="form-control" placeholder="John" name="inputFirstname">
+						<label for="Firstname">First name</label>
+						<input type="text" id ="Firstname" class="form-control" placeholder="John" name="Firstname">
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
-						<label for="inputLastname">Last name</label>
-						<input type="text" id="inputLastname" class="form-control" placeholder="Smith" name="inputLastname">
+						<label for="Lastname">Last name</label>
+						<input type="text" id="Lastname" class="form-control" placeholder="Smith" name="Lastname">
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
-						<label for="inputUsername">Username</label>
-						<input type="text" id="inputUsername" class="form-control" placeholder="johnsmith" name="inputUsername">
+						<label for="Username">Username</label>
+						<input type="text" id="Username" class="form-control" placeholder="johnsmith" name="Username">
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
-						<label for="inputEmail">Email</label>
-						<input type="email" id="inputEmail" class="form-control" placeholder="johnsmith@example.com" name="inputEmail">
+						<label for="Email">Email</label>
+						<input type="email" id="Email" class="form-control" placeholder="johnsmith@example.com" name="Email">
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
-						<label for="inputPassword">Password</label>
-						<input type="password" id="inputPassword" class="form-control" name="inputPassword"  placeholder="Password">
+						<label for="Password">Password</label>
+						<input type="password" id="Password" class="form-control" name="Password"  placeholder="Password">
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
-						<label for="inputPassword">Confirm password</label>
-						<input type="password" id="inputPasswordConfirm" class="form-control" name="inputPasswordConfirm" placeholder="Password">
+						<label for="Password">Confirm password</label>
+						<input type="password" id="PasswordConfirm" class="form-control" name="PasswordConfirm" placeholder="Password">
 					</div>
 					<div class="text-center">
 						<input type="button" value="Submit" id="submitRegister" class="btn btn-primary mx-sm-3">
+						<p class="mx-sm-3 change" id="error" style="color: red;"></p>
 						<p class=" mx-sm-3 change">Already a member? <a href="./signin/">Sign in here</a></p>
 					</div>
 				</form>

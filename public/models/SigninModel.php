@@ -12,7 +12,8 @@ class SigninModel
 			$this->password = $_POST["password"];
 		}
 		elseif(!isset($_GET["username"]) || !isset($_GET["password"])) {
-			echo json_encode(array("signin"=>"Fields filled out incorrectly"));
+			echo json_encode(array("error"=>"Fields filled out incorrectly"));
+			return 0;
 		}
 	}
 
@@ -43,7 +44,7 @@ class SigninModel
 			$hashed_input = hash('sha1', $this->password);
 			if($hashed_input !== $db_password['password']){
 				$alert = "Incorrect password/username combination";
-				echo json_encode(array("wrong_pass"=>"$alert"));
+				echo json_encode(array("error"=>"$alert"));
 				return false;
 			}
 			else
@@ -51,14 +52,16 @@ class SigninModel
 		}
 		else {
 			$alert = "This account does not exist";
-			echo json_encode(array("signinError"=>"$alert"));
+			echo json_encode(array("error"=>"$alert"));
+			return 0;
 		}
 	}
 
 	public function signinAction(){
 		if($this->checkPasswordAction()){
 			Session::setSessionAction($this->username);
-			echo json_encode(["signin" => "ok"]);
+			echo json_encode(["Signin" => "ok"]);
+			return 1;
 		}
 	}
 }

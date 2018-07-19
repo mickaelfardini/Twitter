@@ -8,37 +8,23 @@ class RegisterModel
 	protected $email;
 	protected $password;
 
-
 	public function __construct(array $post)
 	{
-		$this->firstname = $post['inputFirstname'];
-		$this->lastname = $post['inputLastname'];
-		$this->username = $post['inputUsername'];
-		$this->email = $post['inputEmail'];
-		$this->password = $post['inputPassword'];
+		$this->firstname = $post['Firstname'];
+		$this->lastname = $post['Lastname'];
+		$this->username = $post['Username'];
+		$this->email = $post['Email'];
+		$this->password = $post['Password'];
 	}
 
 	public function registerAction()
 	{
-		if(empty($this->firstname)){
-			echo json_encode(["Firstname:" => "Incorrect"]);
-			return 0;
-		}
-		if(empty($this->lastname)){
-			echo json_encode(["Lastname:" => "Incorrect"]);
-			return 0;
-		}
-		if(empty($this->username)){
-			echo json_encode(["Username:" => "Incorrect"]);
-			return 0;
-		}
-		if(empty($this->email)){
-			echo json_encode(["Email:" => "Incorrect"]);
-			return 0;
-		}
-		if(empty($this->password)){
-			echo json_encode(["Password:"=>"Incorrect"]);
-			return 0;
+		foreach ($_POST as $key => $value)
+		{
+			if (empty($value)) {
+				echo json_encode(["error" => "Le champ $key est mal rempli."]);
+				return 0;
+			}
 		}
 		$this->password .= "si tu aimes la wac tape dans tes mains";
 		$sql = PDOConnection::prepareAction("INSERT INTO user (firstname, lastname, username, email, password) VALUES (:firstname, :lastname, :username, :email, :password)");
@@ -50,5 +36,6 @@ class RegisterModel
 		$sql->execute();
 
 		echo json_encode(["Signup" => "Valid"]);
+		return 1;
 	}
 }
