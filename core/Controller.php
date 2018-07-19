@@ -6,4 +6,9 @@ class Controller
 	{
 		include 'views/' . $page . '.php';
 	}
+
+	public static function isConnected()
+	{
+		return null !== $_SESSION['name'] ? true : false;
+	}
 }
