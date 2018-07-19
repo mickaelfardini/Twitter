@@ -27,9 +27,20 @@ $(document).ready(function () {
 						$("#error").html(value);
 					}
 					if (key == "Signin" && value == "ok") {
-						location.href = "./";
+						location.href = "/Twitter/";
 					}
 				});
 			});
+	});
+
+	$("#submitTweet").click(() => {
+		$.post("?page=tweet&action=postTweet",
+			{content: $("#myTweet").val()})
+		.done((data) => {
+			// A faire next -> del div -> req last tweet -> anim ?
+		})
+		.fail((err) => {
+
+		});
 	});
 });

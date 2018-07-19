@@ -2,6 +2,7 @@
 
 class TweetController
 {
+
 	public static function defaultAction()
 	{
 		
@@ -15,5 +16,10 @@ class TweetController
 	public static function getLastTweetAction()
 	{
 		TweetModel::getLastTweetAction();
+	}
+
+	public static function postTweetAction()
+	{
+		TweetModel::postTweetAction();
 	}
 }

@@ -26,4 +26,15 @@ class TweetModel
 		$req->execute();
 		echo json_encode([$req->fetch(PDO::FETCH_ASSOC)]);
 	}
+
+	public static function postTweetAction()
+	{
+		$query = "INSERT INTO tweet (id_user, content_tweet, delete_tweet)
+					VALUES (:id_user, :content_tweet, :delete_tweet)";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute(array(
+			':id_user' => $_SESSION['id_user'],
+			':content_tweet' => $_POST['content'],
+			':delete_tweet' => 0));
+	}
 }
