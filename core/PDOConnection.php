@@ -32,7 +32,7 @@ class PDOConnection
 		}
 	}
 
-	public static function prepareAction(string $query)
+	public static function prepareAction($query)
 	{
 		$req = self::$db->prepare($query);
 		return $req;
