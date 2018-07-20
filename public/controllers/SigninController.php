@@ -4,7 +4,7 @@ class SigninController
 {
 	public static function defaultAction()
 	{
-		Controller::renderAction("Signin");
+		Controller::renderAction("signin");
 	}
 
 	public static function signinAction()
