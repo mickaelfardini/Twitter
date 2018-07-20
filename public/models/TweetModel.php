@@ -21,10 +21,12 @@ class TweetModel
 	{
 		$query = "SELECT id_tweet, content_tweet, date_tweet, username FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
-		ORDER BY date_tweet DESC LIMIT 1";
+		WHERE id_tweet > ?
+		AND delete_tweet = 0
+		ORDER BY date_tweet DESC";
 		$req = PDOConnection::prepareAction($query);
-		$req->execute();
-		echo json_encode([$req->fetch(PDO::FETCH_ASSOC)]);
+		$req->execute([$_POST['id_tweet']]);
+		echo json_encode([$req->fetchAll(PDO::FETCH_ASSOC)]);
 	}
 
 	public static function postTweetAction()
