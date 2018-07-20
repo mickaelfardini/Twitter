@@ -1,0 +1,41 @@
+<?php
+
+class RegisterModel
+{
+	protected $firstname;
+	protected $lastname;
+	protected $username;
+	protected $email;
+	protected $password;
+
+	public function __construct(array $post)
+	{
+		$this->firstname = $post['Firstname'];
+		$this->lastname = $post['Lastname'];
+		$this->username = $post['Username'];
+		$this->email = $post['Email'];
+		$this->password = $post['Password'];
+	}
+
+	public function registerAction()
+	{
+		foreach ($_POST as $key => $value)
+		{
+			if (empty($value)) {
+				echo json_encode(["error" => "Le champ $key est mal rempli."]);
+				return 0;
+			}
+		}
+		$this->password .= "si tu aimes la wac tape dans tes mains";
+		$sql = PDOConnection::prepareAction("INSERT INTO user (firstname, lastname, username, email, password) VALUES (:firstname, :lastname, :username, :email, :password)");
+		$sql->bindValue(':firstname', $this->firstname);
+		$sql->bindValue(':lastname', $this->lastname);
+		$sql->bindValue(':username', $this->username);
+		$sql->bindValue(':email', $this->email);
+		$sql->bindValue(':password', sha1($this->password));
+		$sql->execute();
+
+		echo json_encode(["Signup" => "Valid"]);
+		return 1;
+	}
+}
