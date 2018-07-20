@@ -41,7 +41,7 @@ class SigninModel
 			$db_password = $sql->fetch();
 
 			$this->password .= "si tu aimes la wac tape dans tes mains";
-			$hashed_input = hash('sha1', $this->password);
+			$hashed_input = hash('ripemd160', $this->password);
 			if($hashed_input !== $db_password['password']){
 				$alert = "Incorrect password/username combination";
 				echo json_encode(array("error"=>"$alert"));

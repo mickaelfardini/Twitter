@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+	$("#body").css("background-color", "#1da1f2");
 	var lasttweet = 0;
 	$.get("?page=tweet&action=getTweet")
 	.done((data) => {

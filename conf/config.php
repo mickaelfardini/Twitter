@@ -3,8 +3,8 @@
 require_once '../core/PDOConnection.php';
 
 $array['dbname'] = "common-database";
-$array['host'] = "127.0.0.1";
+$array['host'] = "localhost";
 $array['user'] = "root";
-$array['pwd'] = "";
+$array['pwd'] = "R00t1234";
 
 $pdo = new PDOConnection($array);

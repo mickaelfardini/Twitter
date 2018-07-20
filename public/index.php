@@ -12,3 +12,4 @@ $action = isset($_GET['action']) ? $_GET['action'] . "Action" : "defaultAction";
 include "controllers/" . ucfirst($controller) . ".php";
 include "models/" . ucfirst($model) . ".php";
 $controller::$action();
+// Session::destroySessionAction();

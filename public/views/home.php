@@ -1,3 +1,6 @@
+<?php
+$countTweet = IndexController::countTweetsAction()[0];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="/Twitter/public/css/home.css">
 	<title>Tweet Academie - Home</title>
 </head>
-<body>
+<body style="background-color: <?=$_SESSION['theme']?>">
 	<nav class="navbar navbar-light t navbar-expand-lg justify-content-between">
 		<ul class="inf navbar-nav">
 			<li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
@@ -23,14 +26,14 @@
 		<div class="side">
 			<div class="left-bar">
 				<img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon" class="icon">
-				<a class="profile-link href="#">@lamaland</a>
+				<a class="profile-link" href="#">@<?=$_SESSION['name']?></a>
 				<ul class="prof navbar-nav">	
-					<li class="nav-item"><a class="nav-link" href="#">Tweets</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"><?=$countTweet?> Tweets</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Followers</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Following</a></li>
 				</ul>
 			</div>
-		<div class="left-tags">
+		<div class="left-tags rounded">
 			<ul class="tags list-group">
 				<li class="list-group-item">#un</li>
 				<li class="list-group-item">#dos</li>
@@ -45,7 +48,15 @@
 			</ul>
 		</div>
 	</div>
-	<div class="content-main">
+	<div class="content-main rounded">
+		<div class="row">
+			<div class="logo col-1 align-middle"><img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon"></div>
+		  <div class="form-group col-9">
+		    <label for="myTweet">Tweet</label>
+		    <textarea class="form-control" id="myTweet" rows="3"></textarea>
+		  </div>
+		  <div><button class="btn btn-primary align-middle" id="submitTweet">Tweet !</button></div>
+		</div>
 		<ol id="timeline" class="list-group">
 		</ol>
 	</div>
