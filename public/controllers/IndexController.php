@@ -18,4 +18,10 @@ class IndexController
 		self::$countTweets = IndexModel::countTweetsAction();
 		return self::$countTweets;
 	}
+
+	
+	public static function LogoutAction() 
+	{
+		Session::destroySessionAction();
+	}
 }

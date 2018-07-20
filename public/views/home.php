@@ -21,6 +21,7 @@ $countTweet = IndexController::countTweetsAction()[0];
 		<form class="form-inline">
 			<input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search"name="search">
 		</form>	
+		<button type="button" id="logout" name="logout" value="logout" class="btn btn-primary">Log Out</button>
 	</nav>
 	<div class="main">
 		<div class="side">
@@ -50,8 +51,8 @@ $countTweet = IndexController::countTweetsAction()[0];
 	</div>
 	<div class="content-main rounded">
 		<div class="row">
-			<div class="logo col-1 align-middle"><img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon"></div>
-		  <div class="form-group col-9">
+			<div class="logo col-2 align-middle"><img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon"></div>
+		  <div class="form-group col-8">
 		    <label for="myTweet">Tweet</label>
 		    <textarea class="form-control" id="myTweet" rows="3"></textarea>
 		  </div>

@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-	$("#body").css("background-color", "#1da1f2");
 	var lasttweet = 0;
 	$.get("?page=tweet&action=getTweet")
 	.done((data) => {
@@ -13,7 +12,7 @@ $(document).ready(function () {
 				+ '<a href="/Twitter/user/'
 				+ value.username + '">@' + value.username + '</a><br>'
 				+ value.content_tweet + 
-				'</li>')
+				'</li>');
 		});
 	})
 	.fail((err) => {
@@ -21,17 +20,27 @@ $(document).ready(function () {
 	})
 	// Tweet recuperation
 	setInterval(function() {
-		$.get("?page=tweet&action=getLastTweet",
+		$.post("?page=tweet&action=getLastTweet",
+			{id_tweet: lasttweet},
 			function(data) {
 				var obj = JSON.parse(data);
-				if (obj[0]['id_tweet'] != lasttweet) {
-					lasttweet = obj[0]['id_tweet'];
-					$("#timeline").prepend('<li class="tweet list-group-item">'
+				// if (obj[0]['id_tweet'] != lasttweet) {
+				// 	lasttweet = obj[0]['id_tweet'];
+				// 	$("#timeline").prepend('<li class="tweet list-group-item">'
+				// + '<a href="/Twitter/user/'
+				// + obj[0].username + '">@' + obj[0].username + '</a><br>'
+				// + obj[0].content_tweet + 
+				// '</li>');
+				// }
+				$.each(obj[0], (key, value) => {
+			lasttweet = value.id_tweet;
+			$("#timeline").prepend(
+				'<li class="tweet list-group-item">'
 				+ '<a href="/Twitter/user/'
-				+ obj[0].username + '">@' + obj[0].username + '</a><br>'
-				+ obj[0].content_tweet + 
+				+ value.username + '">@' + value.username + '</a><br>'
+				+ value.content_tweet + 
 				'</li>');
-				}
+		});
 			});
 	}, 5000);
 });
