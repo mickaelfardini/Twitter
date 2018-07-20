@@ -18,4 +18,8 @@ class AccountController
 		$signin = new SigninModel();
 		$signin->signinAction();
 	}
+	public static function themeAction()
+	{
+		
+	}
 }

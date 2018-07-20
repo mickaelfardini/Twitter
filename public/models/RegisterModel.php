@@ -26,6 +26,10 @@ class RegisterModel
 				return 0;
 			}
 		}
+		if (!$this->verifyMailAction($_POST['Email'])) {
+			echo json_encode(["error" => "Veuillez renseigner un mail valide."]);
+			return 0;
+		}
 		$this->password .= "si tu aimes la wac tape dans tes mains";
 		$sql = PDOConnection::prepareAction("INSERT INTO user (firstname, lastname, username, email, password) VALUES (:firstname, :lastname, :username, :email, :password)");
 		$sql->bindValue(':firstname', $this->firstname);
@@ -37,5 +41,14 @@ class RegisterModel
 
 		echo json_encode(["Signup" => "Valid"]);
 		return 1;
+	}
+
+	public function verifyMailAction($email)
+	{ 
+		$regex = "/^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,6})$/"; 
+		if (preg_match($regex, $email)) {
+			return true;
+		}		
+		return false;
 	}
 }
