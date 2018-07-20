@@ -12,7 +12,7 @@ $countTweet = IndexController::countTweetsAction()[0];
 <body style="background-color: <?=$_SESSION['theme']?>">
 	<nav class="navbar navbar-light t navbar-expand-lg justify-content-between">
 		<ul class="inf navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="./">Home</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Mentions</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Messages</a></li>
 		</ul>
@@ -21,6 +21,7 @@ $countTweet = IndexController::countTweetsAction()[0];
 		<form class="form-inline">
 			<input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search"name="search">
 		</form>	
+		<button type="button" id="logout" name="logout" value="logout" class="btn btn-primary">Log Out</button>
 	</nav>
 	<div class="main">
 		<div class="side">

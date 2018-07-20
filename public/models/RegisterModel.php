@@ -32,7 +32,7 @@ class RegisterModel
 		$sql->bindValue(':lastname', $this->lastname);
 		$sql->bindValue(':username', $this->username);
 		$sql->bindValue(':email', $this->email);
-		$sql->bindValue(':password', hash('ripemd160',$this->password));
+		$sql->bindValue(':password', sha1($this->password));
 		$sql->execute();
 
 		echo json_encode(["Signup" => "Valid"]);
