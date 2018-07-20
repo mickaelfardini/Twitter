@@ -16,6 +16,16 @@ $(document).ready(function () {
 			});
 	});
 
+		//Log out Button
+	$("#logout").click(function() {
+		$.get("?action=Logout")
+		.done(() => {
+			location.href = "./";
+		});
+
+
+	});
+	
 	// Login Button
 	$("#submitSignin").click(function() {
 		$.post("?page=signin&action=signin",
