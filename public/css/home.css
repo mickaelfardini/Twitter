@@ -52,3 +52,9 @@ nav {
 .tags {
 	border-color: white;
 }
+
+#charLeft {
+	font-style: italic;
+	font-size: 12px;
+	color: grey;
+}
