@@ -6,10 +6,14 @@
 	<link rel="stylesheet" href="/Twitter/public/css/style.css">
 	<title>Tweet Academie - Edit Profile</title>
 </head>
-<body>
+<body style="background-color: <?=$_SESSION['theme']?>">
 	<nav class="navbar navbar-light navbar-expand-lg justify-content-between">
 		<ul class="navbar-nav">
+<<<<<<< HEAD:public/views/editProfile.php
 			<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+=======
+			<li class="nav-item"><a class="nav-link" href="/Twitter/home">Home</a></li>
+>>>>>>> 3d998fb5999062dc0cde08aec06cbb90139f3bdb:public/views/profile.php
 			<li class="nav-item"><a class="nav-link" href="#">Mentions</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Messages</a></li>
 		</ul>
@@ -19,6 +23,7 @@
 			<input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search"name="search">
 		</form>	
 	</nav>
+<<<<<<< HEAD:public/views/editProfile.php
 	<br>
 <form>
   <div class="container">
@@ -99,5 +104,8 @@
 </div>
 </div>
 </form>
+=======
+	
+>>>>>>> 3d998fb5999062dc0cde08aec06cbb90139f3bdb:public/views/profile.php
 </body>
 </html>

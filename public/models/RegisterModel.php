@@ -31,12 +31,14 @@ class RegisterModel
 			return 0;
 		}
 		$this->password .= "si tu aimes la wac tape dans tes mains";
+		$hashed = hash('ripemd160', $this->password);
+
 		$sql = PDOConnection::prepareAction("INSERT INTO user (firstname, lastname, username, email, password) VALUES (:firstname, :lastname, :username, :email, :password)");
 		$sql->bindValue(':firstname', $this->firstname);
 		$sql->bindValue(':lastname', $this->lastname);
 		$sql->bindValue(':username', $this->username);
 		$sql->bindValue(':email', $this->email);
-		$sql->bindValue(':password', sha1($this->password));
+		$sql->bindValue(':password', $hashed);
 		$sql->execute();
 
 		echo json_encode(["Signup" => "Valid"]);

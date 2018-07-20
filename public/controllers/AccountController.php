@@ -20,6 +20,7 @@ class AccountController
 	}
 	public static function themeAction()
 	{
-		
+		$theme = new AccountModel();
+		$theme->ThemeAction();
 	}
 }
