@@ -51,8 +51,8 @@ $countTweet = IndexController::countTweetsAction()[0];
 	</div>
 	<div class="content-main rounded">
 		<div class="row">
-			<div class="logo col-1 align-middle"><img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon"></div>
-		  <div class="form-group col-9">
+			<div class="logo col-2 align-middle"><img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon"></div>
+		  <div class="form-group col-8">
 		    <label for="myTweet">Tweet</label>
 		    <textarea class="form-control" id="myTweet" rows="3"></textarea>
 		  </div>
