@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="/Twitter/public/css/style.css">
-	<title>Tweet Academie - Register</title>
-</head>
+<?php
+include 'inc/header.php';
+?>
 <body>
 	<div class="container-fluid">
 		<div class="row">
@@ -37,7 +32,7 @@
 						<input type="password" id="PasswordConfirm" class="form-control" name="PasswordConfirm" placeholder="Password">
 					</div>
 					<div class="text-center">
-						<input type="button" value="Submit" id="submitRegister" class="btn btn-primary mx-sm-3">
+						<input type="submit" value="Submit" id="submitRegister" class="btn btn-primary mx-sm-3">
 						<p class="mx-sm-3 change" id="error" style="color: red;"></p>
 						<p class=" mx-sm-3 change">Already a member? <a href="./signin/">Sign in here</a></p>
 					</div>

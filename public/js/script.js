@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	// Register Button
-	$("#submitRegister").click(function() {
+	$("#submitRegister").click(function(e) {
+		e.preventDefault();
 		$.post("?page=register&action=register",
 			$("#formRegister").serializeArray(),
 			function(data) {
@@ -22,12 +23,11 @@ $(document).ready(function () {
 		.done(() => {
 			location.href = "./";
 		});
-
-
 	});
 	
 	// Login Button
-	$("#submitSignin").click(function() {
+	$("#submitSignin").click(function(e) {
+		e.preventDefault();
 		$.post("?page=signin&action=signin",
 			$("#formSignin").serializeArray(),
 			function(data) {

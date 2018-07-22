@@ -8,7 +8,8 @@ class IndexController
 	{
 		if (!Controller::isConnected())
 		{
-			header("Location: ./signin/");
+			header("Location: /Twitter/signin/");
+			return 0;
 		}
 		Controller::renderAction("home");
 	}

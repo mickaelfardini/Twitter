@@ -47,7 +47,7 @@ class RegisterModel
 
 	public function verifyMailAction($email)
 	{ 
-		$regex = "/^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,6})$/"; 
+		$regex = "/^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,6})$/";
 		if (preg_match($regex, $email)) {
 			return true;
 		}		

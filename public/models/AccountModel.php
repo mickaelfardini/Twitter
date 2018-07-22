@@ -4,7 +4,9 @@ class AccountModel
 {
 	public function ThemeAction()
 	{
-		$reqtheme = PDOConnection::prepreAction("UPDATE theme from user SET theme = ? WHERE id_user = ?");
-
+		$query = "UPDATE theme FROM user SET theme = ?
+					WHERE id_user = ?"
+		$reqtheme = PDOConnection::prepreAction($query);
+		$reqtheme->execute([$_POST['theme'], $_SESSION['id_user']]);
 	}
 }

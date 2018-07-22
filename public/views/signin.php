@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Tweet Academie - Sign in</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="/Twitter/public/css/style.css">
-</head>
+<?php
+include 'inc/header.php';
+?>
 <body>
 
 	<div class="container-fluid">
@@ -21,7 +16,7 @@
 						<label for="signPassword">Password</label>
 						<input type="password" class="form-control" name="password" placeholder="Password">
 					</div>
-					<input type="button" value="Submit" id="submitSignin" class="btn btn-primary mx-sm-3">
+					<input type="submit" value="Submit" id="submitSignin" class="btn btn-primary mx-sm-3">
 					<p class="mx-sm-3 change" id="error" style="color: red;"></p>
 					<p class=" mx-sm-3 change">Not a member yet? <a href="/Twitter/register">Register here</a></p>
 				</form>
