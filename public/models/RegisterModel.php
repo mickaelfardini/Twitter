@@ -30,6 +30,32 @@ class RegisterModel
 			echo json_encode(["error" => "Veuillez renseigner un mail valide."]);
 			return 0;
 		}
+		if (!$this->verifyUsernameAction($_POST['Username'])) {
+			echo json_encode(["error" => "Ce pseudo est deja utilisé."]);
+			return 0;
+		}
+		$this->signupAction();
+		echo json_encode(["Signup" => "Valid"]);
+		return 1;
+	}
+
+	public function verifyMailAction($email)
+	{
+		$query = "SELECT * FROM user WHERE email = ?";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$email]);
+		if ($req->fetch(PDO::FETCH_ASSOC)) {
+			return false;
+		}
+		$regex = "/^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,6})$/";
+		if (preg_match($regex, $email)) {
+			return true;
+		}		
+		return false;
+	}
+
+	public function signupAction()
+	{
 		$this->password .= "si tu aimes la wac tape dans tes mains";
 		$hashed = hash('ripemd160', $this->password);
 
@@ -40,17 +66,17 @@ class RegisterModel
 		$sql->bindValue(':email', $this->email);
 		$sql->bindValue(':password', $hashed);
 		$sql->execute();
-
-		echo json_encode(["Signup" => "Valid"]);
 		return 1;
 	}
 
-	public function verifyMailAction($email)
-	{ 
-		$regex = "/^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,6})$/";
-		if (preg_match($regex, $email)) {
-			return true;
-		}		
-		return false;
+	public function verifyUsernameAction($user)
+	{
+		$query = "SELECT * FROM user WHERE username = ?";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$user]);
+		if ($req->fetch()) {
+			return false;
+		}
+		return true;
 	}
 }

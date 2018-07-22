@@ -1,7 +1,7 @@
 <?php
 include 'inc/header.php';
 ?>
-<body>
+<body class="signinPage">
 
 	<div class="container-fluid">
 		<div class="row">
