@@ -41,13 +41,13 @@ class TweetModel
 			echo json_encode(["error" => "Le tweet ne doit pas exceder 140 caracteres."]);
 			return 0;
 		}
-		$content = self::checkTweetAction($_POST['content']);
+		self::insertTagsAction($_POST['content']);
 		$query = "INSERT INTO tweet (id_user, content_tweet, delete_tweet)
 		VALUES (:id_user, :content_tweet, :delete_tweet)";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute(array(
 			':id_user' => $_SESSION['id_user'],
-			':content_tweet' => $content,
+			':content_tweet' => $_POST['content'],
 			':delete_tweet' => 0));
 		echo json_encode(["PostTweet" => "ok"]);
 		return 1;
@@ -73,5 +73,20 @@ class TweetModel
 			$tweets[$k] = $tweet;
 		}
 		return $tweets;
+	}
+
+	private static function insertTagsAction($content)
+	{
+		preg_match_all("/#([a-zA-Z]+)/", $content, $matches);
+		foreach ($matches[1] as $match) {
+			$query = "SELECT * FROM hashtag WHERE name_hashtag = ?";
+			$req = PDOConnection::prepareAction($query);
+			$req->execute([$match]);
+			if(!$req->fetchAll(PDO::FETCH_ASSOC)) {
+				$query = "INSERT INTO hashtag (name_hashtag) VALUES (?)";
+				$req = PDOConnection::prepareAction($query);
+				$req->execute([$match]);
+			}
+		}
 	}
 }
