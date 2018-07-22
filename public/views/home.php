@@ -1,5 +1,6 @@
 <?php
 $countTweet = IndexController::countTweetsAction()[0];
+$hashtags = IndexController::countTagsAction();
 include 'inc/header.php';
 include 'inc/navbar.php'; ?>
 	<div class="main">
@@ -16,18 +17,10 @@ include 'inc/navbar.php'; ?>
 			<div class="left-tags rounded">
 				<ul class="tags list-group">
 					<?php foreach ($hashtags as $tag): ?>
+					<li class="list-group-item">
+						<a href="/Twitter/tags/<?=$tag['name']?>">#<?=$tag['name']?></a> - <?=$tag['count']?> tweets
+					</li>
 					<?php endforeach ?>
-					Bonjour, <a href="/Twitter/tags/test">#test</a> @choco et demain #<a href="/Twitter/<a href="/Twitter/tags/tag">#tag</a>s/trololo">#trololo</a> + @<a href="/Twitter/tags/test">#test</a>@oki #<a href="/Twitter/<a href="/Twitter/tags/tag">#tag</a>s/hash">#hash</a>#<a href="/Twitter/tags/tag">#tag</a> demain#<a href="/Twitter/tags/test">#test</a>
-					<li class="list-group-item">#un</li>
-					<li class="list-group-item">#dos</li>
-					<li class="list-group-item">#three</li>
-					<li class="list-group-item">#quatre</li>
-					<li class="list-group-item">#cinco</li>
-					<li class="list-group-item">#six</li>
-					<li class="list-group-item">#septante</li>
-					<li class="list-group-item">#hui</li>
-					<li class="list-group-item">#nonante</li>
-					<li class="list-group-item">#ten</li>
 				</ul>
 			</div>
 		</div>
