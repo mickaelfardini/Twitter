@@ -1,28 +1,7 @@
 <?php
 $countTweet = IndexController::countTweetsAction()[0];
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="/Twitter/public/css/home.css">
-	<title>Tweet Academie - Home</title>
-</head>
-<body style="background-color: <?=$_SESSION['theme']?>">
-	<nav class="navbar navbar-light t navbar-expand-lg justify-content-between">
-		<ul class="inf navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="./">Home</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Mentions</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Messages</a></li>
-		</ul>
-		<img src="/Twitter/public/img/birdie.png" alt="logo" width="35" height="35" class="d-inline-block align-top">
-
-		<form class="form-inline">
-			<input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search"name="search">
-		</form>	
-		<button type="button" id="logout" name="logout" value="logout" class="btn btn-primary">Log Out</button>
-	</nav>
+include 'inc/header.php';
+include 'inc/navbar.php'; ?>
 	<div class="main">
 		<div class="side">
 			<div class="left-bar">
@@ -42,7 +21,7 @@ $countTweet = IndexController::countTweetsAction()[0];
 					<li class="list-group-item">#quatre</li>
 					<li class="list-group-item">#cinco</li>
 					<li class="list-group-item">#six</li>
-					<li class="list-group-item">#sept</li>
+					<li class="list-group-item">#septante</li>
 					<li class="list-group-item">#hui</li>
 					<li class="list-group-item">#nonante</li>
 					<li class="list-group-item">#ten</li>

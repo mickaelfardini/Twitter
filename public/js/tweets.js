@@ -9,7 +9,7 @@ $(document).ready(function () {
 			lasttweet = value.id_tweet;
 			$("#timeline").prepend(
 				'<li class="tweet list-group-item">'
-				+ '<a href="/Twitter/user/'
+				+ '<a href="/Twitter/profile/'
 				+ value.username + '">@' + value.username + '</a><br>'
 				+ value.content_tweet + 
 				'</li>');
@@ -28,7 +28,7 @@ $(document).ready(function () {
 					lasttweet = value.id_tweet;
 					$("#timeline").prepend(
 						'<li class="tweet list-group-item">'
-						+ '<a href="/Twitter/user/'
+						+ '<a href="/Twitter/profile/'
 						+ value.username + '">@' + value.username + '</a><br>'
 						+ value.content_tweet + 
 						'</li>');
@@ -49,7 +49,8 @@ $(document).ready(function () {
 	});
 
 	// Envoi du tweet
-	$("#submitTweet").click(() => {
+	$("#submitTweet").click((e) => {
+		e.preventDefault();
 		$.post("?page=tweet&action=postTweet",
 			{content: $("#myTweet").val()})
 		.done((data) => {
