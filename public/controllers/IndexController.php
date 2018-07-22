@@ -3,7 +3,8 @@
 class IndexController
 {
 	public static $countTweets;
-
+	public static $countTags;
+	
 	public static function defaultAction()
 	{
 		if (!Controller::isConnected())
@@ -18,6 +19,12 @@ class IndexController
 	{
 		self::$countTweets = IndexModel::countTweetsAction();
 		return self::$countTweets;
+	}
+
+	public static function countTagsAction()
+	{
+		self::$countTags = IndexModel::countTagsAction();
+		return self::$countTags;
 	}
 
 	

@@ -10,6 +10,7 @@ RewriteEngine on
 # Règles de réécriture d'URL :
 #--------------------------------------------------
 
+# Controller
 RewriteRule ^([a-zA-Z0-9]+)/$   public/index.php?page=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9]+)$   public/index.php?page=$1 [L,QSA]
 
