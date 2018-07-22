@@ -19,7 +19,7 @@ $(document).ready(function () {
 		console.error(err);
 	})
 	// Tweet recuperation
-	setInterval(function() {
+	function getLastTweet() {
 		$.post("?page=tweet&action=getLastTweet",
 			{id_tweet: lasttweet},
 			function(data) {
@@ -34,7 +34,8 @@ $(document).ready(function () {
 						'</li>');
 				});
 			});
-	}, 5000);
+	}
+	setInterval(getLastTweet, 5000);
 
 	// Gestion du nombre de caracteres
 	$("#myTweet").keyup(() => {
@@ -54,6 +55,9 @@ $(document).ready(function () {
 		$.post("?page=tweet&action=postTweet",
 			{content: $("#myTweet").val()})
 		.done((data) => {
+			getLastTweet();
+			$("#myTweet").val("");
+			$("#charLeft").html("140 caracteres restants.");
 			var obj = JSON.parse(data);
 			$.each(obj, (key, value) => {
 				if (key == "error") {
