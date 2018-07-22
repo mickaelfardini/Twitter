@@ -15,6 +15,9 @@ include 'inc/navbar.php'; ?>
 			</div>
 			<div class="left-tags rounded">
 				<ul class="tags list-group">
+					<?php foreach ($hashtags as $tag): ?>
+					<?php endforeach ?>
+					Bonjour, <a href="/Twitter/tags/test">#test</a> @choco et demain #<a href="/Twitter/<a href="/Twitter/tags/tag">#tag</a>s/trololo">#trololo</a> + @<a href="/Twitter/tags/test">#test</a>@oki #<a href="/Twitter/<a href="/Twitter/tags/tag">#tag</a>s/hash">#hash</a>#<a href="/Twitter/tags/tag">#tag</a> demain#<a href="/Twitter/tags/test">#test</a>
 					<li class="list-group-item">#un</li>
 					<li class="list-group-item">#dos</li>
 					<li class="list-group-item">#three</li>
@@ -42,10 +45,11 @@ include 'inc/navbar.php'; ?>
 			</ol>
 		</div>
 	</div>
-	<script
-	src="https://code.jquery.com/jquery-3.3.1.js"
-	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-	crossorigin="anonymous"></script>
+	<!-- <script -->
+	<!-- src="https://code.jquery.com/jquery-3.3.1.js" -->
+	<!-- integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" -->
+	<!-- crossorigin="anonymous"></script> -->
+	<script type="text/javascript" src="/Twitter/public/js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="/Twitter/public/js/script.js"></script>
 	<script type="text/javascript" src="/Twitter/public/js/tweets.js"></script>
 </body>

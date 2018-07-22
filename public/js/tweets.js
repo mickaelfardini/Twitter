@@ -5,7 +5,7 @@ $(document).ready(function () {
 	.done((data) => {
 		var obj = JSON.parse(data);
 
-		$.each(obj[0], (key, value) => {
+		$.each(obj, (key, value) => {
 			lasttweet = value.id_tweet;
 			$("#timeline").prepend(
 				'<li class="tweet list-group-item">'
@@ -24,7 +24,7 @@ $(document).ready(function () {
 			{id_tweet: lasttweet},
 			function(data) {
 				var obj = JSON.parse(data);
-				$.each(obj[0], (key, value) => {
+				$.each(obj, (key, value) => {
 					lasttweet = value.id_tweet;
 					$("#timeline").prepend(
 						'<li class="tweet list-group-item">'
