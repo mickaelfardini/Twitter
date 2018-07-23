@@ -9,7 +9,7 @@ include 'inc/navbar.php'; ?>
 				<img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon" class="icon">
 				<a class="profile-link" href="/Twitter/profile">@<?=$_SESSION['name']?></a>
 				<ul class="prof navbar-nav">	
-					<li class="nav-item"><a id="nbTweets" class="nav-link" href="#"><?=$countTweet?> Tweets</a></li>
+					<li class="nav-item"><a id="nbTweets" class="nav-link" href="/Twitter/profile"><?=$countTweet?> Tweets</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Followers</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Following</a></li>
 				</ul>
@@ -26,7 +26,7 @@ include 'inc/navbar.php'; ?>
 		</div>
 		<div class="content-main rounded">
 			<div class="row">
-				<div class="logo col-2 align-middle"><img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon"></div>
+				<div class="logo col-2 align-middle"></div>
 				<div class="form-group col-8">
 					<label for="myTweet">Tweet</label>
 					<textarea class="form-control" id="myTweet" rows="3"></textarea>

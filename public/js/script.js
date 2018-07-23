@@ -21,7 +21,7 @@ $(document).ready(function () {
 	$("#logout").click(function() {
 		$.get("?action=Logout")
 		.done(() => {
-			location.href = "./";
+			location.href = "./signin";
 		});
 	});
 	
