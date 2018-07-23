@@ -13,7 +13,8 @@ class IndexModel
 
 	public static function countTagsAction()
 	{
-		$query = "SELECT COUNT(*) AS 'count', name_hashtag AS 'name' FROM tweet_to_tag
+		$query = "SELECT COUNT(*) AS 'count', name_hashtag AS 'name' 
+					FROM tweet_to_tag
 					JOIN hashtag ON id_tag = id_hashtag
 					GROUP BY id_tag ORDER BY COUNT(*) DESC LIMIT 10";
 		$req = PDOConnection::prepareAction($query);

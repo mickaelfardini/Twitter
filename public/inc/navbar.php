@@ -8,7 +8,7 @@
 		<img src="/Twitter/public/img/birdie.png" alt="logo" width="35" height="35" class="d-inline-block align-top">
 
 		<form class="form-inline">
-			<input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search"name="search">
+			<input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
 		</form>	
 		<button type="button" id="logout" name="logout" value="logout" class="btn btn-primary">Log Out</button>
 	</nav>

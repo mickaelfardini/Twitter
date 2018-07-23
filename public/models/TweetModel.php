@@ -9,7 +9,8 @@ class TweetModel
 
 	public static function getTweetAction()
 	{
-		$query = "SELECT id_tweet, content_tweet, date_tweet, username FROM tweet
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username 
+		FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
 		ORDER BY date_tweet ASC";
 		$req = PDOConnection::prepareAction($query);
@@ -22,7 +23,8 @@ class TweetModel
 
 	public static function getLastTweetAction()
 	{
-		$query = "SELECT id_tweet, content_tweet, date_tweet, username FROM tweet
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username 
+		FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
 		WHERE id_tweet > ?
 		AND delete_tweet = 0

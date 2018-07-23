@@ -15,10 +15,11 @@ class PDOConnection
 	{
 		if (self::$db == null)
 		{
-			$config = "mysql:dbname=" . $this->infos["dbname"] . ";host=" . $this->infos["host"];
+			$config = "mysql:dbname=" . $this->infos["dbname"];
+			$config .= ";host=" . $this->infos["host"];
 			try
 			{
-			self::$db = new PDO($config, $this->infos["user"], $this->infos["pwd"]);
+				self::$db = new PDO($config, $this->infos["user"], $this->infos["pwd"]);
 			}
 			catch (PDOException $e)
 			{
