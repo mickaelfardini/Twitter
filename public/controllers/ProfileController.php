@@ -20,9 +20,9 @@ class ProfileController
 
 	public static function getUserInfo()
 	{
-		self::$user = isset($_GET['action']) ? $_GET['action'] : $_SESSION['name'];
+		self::$user = isset($_GET['action']) ? $_GET['action'] : $_SESSION['username'];
 		if (isset($_GET['action']) && $_GET['action'] == "edit") {
-			self::$user = $_SESSION['name'];
+			self::$user = $_SESSION['username'];
 		}
 		return ProfileModel::getUserInfo(self::$user);
 	}

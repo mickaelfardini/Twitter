@@ -1,33 +1,21 @@
 <?php
 $user = ProfileController::getUserInfo()[0];
-// $countTweet = Controller::countTweetsAction()[0];
-// $hashtags = Controller::countTagsAction();
+$countTweet = Controller::countTweetsAction()[0];
+$hashtags = Controller::countTagsAction();
 include 'inc/header.php';
 include 'inc/navbar.php';
 ?>
 <br>
-<div class="main">
-	<div class="side">
-		<div class="left-bar">
-			<a class="profile-link" href="/Twitter/profile"><img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon" class="icon"></a>
-			<a class="profile-link" href="/Twitter/profile">@<?=$_SESSION['username']?></a>
-			<ul class="prof navbar-nav">	
-				<li class="nav-item"><a id="nbTweets" class="nav-link" href="/Twitter/profile"><?=$countTweet?> Tweets</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Followers</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Following</a></li>
-			</ul>
-		</div>
-		<div class="left-tags rounded">
-			<ul class="tags list-group">
-				<?php foreach ($hashtags as $tag): ?>
-					<li class="list-group-item">
-						<a href="/Twitter/tags/<?=$tag['name']?>">#<?=$tag['name']?></a> - <?=$tag['count']?> tweets
-					</li>
-				<?php endforeach ?>
-			</ul>
-		</div>
-	</div>
-</div>
+<div class=" main user">
+	<div class="side left-bar">
+		<img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon"><!-- Recup l'icon de l'user -->
+		<ul class="prof navbar-nav">
+			<li class="nav-item" id="firstname"><?=$user["firstname"]?></li>
+			<li class="nav-item" id="username"><a class="nav-link" href="/Twitter/profile">@<?=$user['username']?></a></li>
+			<li class="nav-item" id="register_date">Member since <?=substr($user["register_date"], 0, -8)?></li>
+			<li class="nav-item" id="editProfile"><a href="/Twitter/profile/edit">Edit profile</a></li>
+		</ul>
+	</div>	
 <div class="content-main rounded container bg-light">
 	<div class="row">
 		<div class="col-md-9">
@@ -35,13 +23,13 @@ include 'inc/navbar.php';
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-12 lead">
-							<?=$_SESSION['name']?>
+							<?=$_SESSION['username']?>
 							<hr>
 						</div>
 					</div>
 					<div class="col-md-8">
 						<form>
-							<select>
+							<select class="form-control">
 								<option value="#1da1f2">Couleur par défaut</option>
 								<option value="#DB1702">Rouge</option>
 								<option value="#0000FF">Bleu</option>
@@ -54,7 +42,7 @@ include 'inc/navbar.php';
 							</select>
 							<div class="form-group"><br />
 								<label>Edit Avatar :</label>
-								<input id="inputFile" type="file">
+								<input class="form-control" id="inputFile" type="file">
 								<div class="form-group">									
 									<label>Last name</label>
 									<input class="form-control" type="text" value="<?=$user['lastname']?>">
@@ -65,19 +53,19 @@ include 'inc/navbar.php';
 								</div>
 								<div class="form-group">
 									<label>Your Mail Adress</label><br />
-									<input type="mail" name="changeMail" value="<?=$user['email']?>">
+									<input class="form-control" type="mail" name="changeMail" value="<?=$user['email']?>">
 								</div>
 								<div class="form-group">
 									<label>Change Mail</label><br />
-									<input type="mail" name="confirmChangeMail" value="<?=$user['email']?>">
+									<input class="form-control" type="mail" name="confirmChangeMail" value="<?=$user['email']?>">
 								</div>
 								<div class="form-group">
 									<label>Your Password</label><br />
-									<input type="password" name="changePassword" placeholder="*****">
+									<input class="form-control" type="password" name="changePassword" placeholder="*****">
 								</div>
 								<div class="form-group">
 									<label>New Password</label><br />
-									<input type="password" name="changePassword" placeholder="*****">
+									<input class="form-control" type="password" name="changePassword" placeholder="*****">
 								</div>
 								<div class="radio">
 									<label class="radio-inline">
@@ -87,7 +75,7 @@ include 'inc/navbar.php';
 										<input value="female" name="" id="" type="radio">Femme
 									</label><br />
 								</div>
-								<input type="submit" id="profileEdit" name="profilEdit" value="Save Profile">
+								<input class="form-control" type="submit" id="profileEdit" name="profilEdit" value="Save Profile">
 							</div>
 						</div>
 					</div>

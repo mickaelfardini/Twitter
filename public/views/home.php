@@ -1,12 +1,12 @@
 <?php
-$countTweet = IndexController::countTweetsAction()[0];
-$hashtags = IndexController::countTagsAction();
+$countTweet = Controller::countTweetsAction()[0];
+$hashtags = Controller::countTagsAction();
 include 'inc/header.php';
 include 'inc/navbar.php'; ?>
 	<div class="main">
 		<div class="side">
 			<div class="left-bar">
-				<a class="profile-link" href="/Twitter/profile"><img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon" class="icon"></a>
+				<a class="profile-link" href="/Twitter/profile"><img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon"></a>
 				<a class="profile-link" href="/Twitter/profile">@<?=$_SESSION['username']?></a>
 				<ul class="prof navbar-nav">	
 					<li class="nav-item"><a id="nbTweets" class="nav-link" href="/Twitter/profile"><?=$countTweet?> Tweets</a></li>
@@ -26,7 +26,7 @@ include 'inc/navbar.php'; ?>
 		</div>
 		<div class="content-main rounded">
 			<div class="row">
-				<div class="logo col-2 align-middle"></div>
+				<div class="logo col-2 align-middle"><img src="<?=$_SESSION["avatar"]?>" alt="icon" class="rounded"></div>
 				<div class="form-group col-8">
 					<label for="myTweet">Tweet</label>
 					<textarea class="form-control" id="myTweet" rows="3"></textarea>
