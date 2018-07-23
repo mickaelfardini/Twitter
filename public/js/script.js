@@ -11,7 +11,7 @@ $(document).ready(function () {
 						$("#error").html(value);
 					}
 					if (key == "Signup" && value == "Valid") {
-						location.href = "./signin";
+						location.href = "/Twitter/signin";
 					}
 				});
 			});
@@ -21,7 +21,7 @@ $(document).ready(function () {
 	$("#logout").click(function() {
 		$.get("?action=Logout")
 		.done(() => {
-			location.href = "./";
+			location.href = "/Twitter/signin";
 		});
 	});
 	

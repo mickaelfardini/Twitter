@@ -59,12 +59,14 @@ class RegisterModel
 		$this->password .= "si tu aimes la wac tape dans tes mains";
 		$hashed = hash('ripemd160', $this->password);
 
-		$sql = PDOConnection::prepareAction("INSERT INTO user (firstname, lastname, username, email, password) VALUES (:firstname, :lastname, :username, :email, :password)");
+		$sql = PDOConnection::prepareAction("INSERT INTO user (firstname, lastname, username, email, password, avatar) VALUES (:firstname, :lastname, :username, :email, :password, :avatar)");
 		$sql->bindValue(':firstname', $this->firstname);
 		$sql->bindValue(':lastname', $this->lastname);
 		$sql->bindValue(':username', $this->username);
 		$sql->bindValue(':email', $this->email);
 		$sql->bindValue(':password', $hashed);
+		$sql->bindValue(':avatar', "/Twitter/public/img/default.jpg");
+
 		$sql->execute();
 		return 1;
 	}

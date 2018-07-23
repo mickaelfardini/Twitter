@@ -9,6 +9,6 @@ class Controller
 
 	public static function isConnected()
 	{
-		return null !== $_SESSION['name'] ? true : false;
+		return null !== $_SESSION['username'] ? true : false;
 	}
 }
