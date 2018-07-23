@@ -42,8 +42,8 @@ include 'inc/navbar.php'; ?>
 	<!-- src="https://code.jquery.com/jquery-3.3.1.js" -->
 	<!-- integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" -->
 	<!-- crossorigin="anonymous"></script> -->
-	<script type="text/javascript" src="/Twitter/public/js/jquery-3.3.1.js"></script>
-	<script type="text/javascript" src="/Twitter/public/js/script.js"></script>
-	<script type="text/javascript" src="/Twitter/public/js/tweets.js"></script>
+	<script src="/Twitter/public/js/jquery-3.3.1.js"></script>
+	<script src="/Twitter/public/js/script.js"></script>
+	<script src="/Twitter/public/js/tweets.js"></script>
 </body>
 </html>
