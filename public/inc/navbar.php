@@ -1,7 +1,7 @@
 <body style="background-color: <?=$_SESSION['theme']?>">
 	<nav class="navbar navbar-light t navbar-expand-lg justify-content-between">
 		<ul class="inf navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="./">Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="/Twitter">Home</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Mentions</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Messages</a></li>
 		</ul>

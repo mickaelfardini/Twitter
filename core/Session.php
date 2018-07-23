@@ -15,9 +15,10 @@ class Session
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$name]);	
 		$result = $req->fetch(PDO::FETCH_ASSOC);
-		$_SESSION['name'] = $result['username'];
+		$_SESSION['username'] = $result['username'];
 		$_SESSION['theme'] = $result['theme'];
 		$_SESSION['id_user'] = $result['id_user'];
+		$_SESSION['firstname'] = $result['firstname'];
 	}
 
 	public static function destroySessionAction()

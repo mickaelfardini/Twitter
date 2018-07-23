@@ -10,9 +10,8 @@ $user = ProfileController::getUserInfo();
 	<div class="side left-bar">
 		<img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon" class="icon"><!-- Recup l'icon de l'user -->
 		<ul class="prof navbar-nav">
-			<!-- condition pour s'il n'y a pas de tweets sur le profil -->
 			<li class="nav-item" id="firstname"><?=$user[0]["firstname"]?></li>
-			<li class="nav-item" id="username"><a class="nav-link" href="/Twitter/profile">@<?=$_SESSION['name']?></a></li>
+			<li class="nav-item" id="username"><a class="nav-link" href="/Twitter/profile">@<?=$user[0]['username']?></a></li>
 			<li class="nav-item" id="register_date">Member since <?=substr($user[0]["register_date"], 0, -8)?></li>
 			<li class="nav-item" id="editProfile"><a href="#">Edit profile</a></li>
 		</ul>
@@ -22,7 +21,7 @@ $user = ProfileController::getUserInfo();
 			<h4>Tweets:</h4>
 			<ol class="list-group">
 			<?php	foreach($user as $u){?>
-				<li class="list-group-item tweet"><a class="nav-link" href="/Twitter/profile">@<?=$_SESSION['name']?></a><br><?=($u["content_tweet"]);?></li>
+				<li class="list-group-item tweet"><a class="nav-link" href="/Twitter/profile">@<?=$_SESSION['username']?></a><br><?=($u["content_tweet"]);?></li>
 			<?php } ?>
 			</ol>
 		</div>	
@@ -30,7 +29,7 @@ $user = ProfileController::getUserInfo();
 
 	</div>
 </div>
-	<script type="text/javascript" src="/Twitter/public/js/jquery-3.3.1.js"></script>
-	<script type="text/javascript" src="/Twitter/public/js/script.js"></script>
+	<script src="/Twitter/public/js/jquery-3.3.1.js"></script>
+	<script src="/Twitter/public/js/script.js"></script>
 </body>
 </html>
