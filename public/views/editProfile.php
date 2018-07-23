@@ -1,50 +1,82 @@
 <?php
+$user = ProfileController::getUserInfo()[0];
+// $countTweet = Controller::countTweetsAction()[0];
+// $hashtags = Controller::countTagsAction();
 include 'inc/header.php';
 include 'inc/navbar.php';
 ?>
 <br>
-<form>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-9">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-12 lead">
-								Le pseudo de la personne
-								<hr>
-							</div>
+<div class="main">
+	<div class="side">
+		<div class="left-bar">
+			<a class="profile-link" href="/Twitter/profile"><img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon" class="icon"></a>
+			<a class="profile-link" href="/Twitter/profile">@<?=$_SESSION['username']?></a>
+			<ul class="prof navbar-nav">	
+				<li class="nav-item"><a id="nbTweets" class="nav-link" href="/Twitter/profile"><?=$countTweet?> Tweets</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Followers</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Following</a></li>
+			</ul>
+		</div>
+		<div class="left-tags rounded">
+			<ul class="tags list-group">
+				<?php foreach ($hashtags as $tag): ?>
+					<li class="list-group-item">
+						<a href="/Twitter/tags/<?=$tag['name']?>">#<?=$tag['name']?></a> - <?=$tag['count']?> tweets
+					</li>
+				<?php endforeach ?>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="content-main rounded container bg-light">
+	<div class="row">
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12 lead">
+							<?=$_SESSION['name']?>
+							<hr>
 						</div>
-						<div class="col-md-8">
-							<div class="form-group"> 
-								<input type="text" class = "form-control" id="" value="Edit Avatar">
-								<input id="" type="file">
-								<div class="form-group">
-									<label for="">Last name</label>
-									<input class="form-control" id="" type="text" placeholder="Smith">
+					</div>
+					<div class="col-md-8">
+						<form>
+							<select>
+								<option value="#1da1f2">Couleur par défaut</option>
+								<option value="#DB1702">Rouge</option>
+								<option value="#0000FF">Bleu</option>
+								<option value="#000000">Noir</option>
+								<option value="#FFFF00">Jaune</option>
+								<option value="#00FF00">Vert</option>
+								<option value="#FFFFFF">Blanc</option>
+								<option value="#EE82EE">Violet</option>
+								<option value="#ED7F10">Orange</option>
+							</select>
+							<div class="form-group"><br />
+								<label>Edit Avatar :</label>
+								<input id="inputFile" type="file">
+								<div class="form-group">									
+									<label>Last name</label>
+									<input class="form-control" type="text" value="<?=$user['lastname']?>">
 								</div>
 								<div class="form-group">
-									<label for="">First name</label>
-									<input class="form-control" id="" type="text" placeholder="John">
+									<label>First name</label>
+									<input class="form-control" type="text" value="<?=$user['firstname']?>">
 								</div>
 								<div class="form-group">
-									<label for="">Username</label>
-									<input class="form-control" id="" type="text" placeholder="JohnSmith">
+									<label>Your Mail Adress</label><br />
+									<input type="mail" name="changeMail" value="<?=$user['email']?>">
 								</div>
 								<div class="form-group">
-									<label for="">Your Mail Adress</label><br />
-									<input type="mail" name="changeMail" placeholder="JohnSmith@example.com">
+									<label>Change Mail</label><br />
+									<input type="mail" name="confirmChangeMail" value="<?=$user['email']?>">
 								</div>
 								<div class="form-group">
-									<label for="">Change Mail</label><br />
-									<input type="mail" name="confirmChangeMail" placeholder="JohnSmith@example.com">
-								</div>
-								<div class="form-group">
-									<label for="">Your Password</label><br />
+									<label>Your Password</label><br />
 									<input type="password" name="changePassword" placeholder="*****">
 								</div>
 								<div class="form-group">
-									<label for="">New Password</label><br />
+									<label>New Password</label><br />
 									<input type="password" name="changePassword" placeholder="*****">
 								</div>
 								<div class="radio">
@@ -54,12 +86,8 @@ include 'inc/navbar.php';
 									<label class="radio-inline">
 										<input value="female" name="" id="" type="radio">Femme
 									</label><br />
-									<input type="submit" name="profilEdit" value="Save Profile">
 								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
+								<input type="submit" id="profileEdit" name="profilEdit" value="Save Profile">
 							</div>
 						</div>
 					</div>
