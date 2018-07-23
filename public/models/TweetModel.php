@@ -9,7 +9,7 @@ class TweetModel
 
 	public static function getTweetAction()
 	{
-		$query = "SELECT id_tweet, content_tweet, date_tweet, username 
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
 		FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
 		ORDER BY date_tweet ASC";

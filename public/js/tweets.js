@@ -9,6 +9,7 @@ $(document).ready(function () {
 			lasttweet = value.id_tweet;
 			$("#timeline").prepend(
 				'<li class="tweet list-group-item">'
+				+ '<img src="'+value.avatar+'" class="icon-tweet">'
 				+ '<a href="/Twitter/profile/'
 				+ value.username + '">@' + value.username + '</a><br>'
 				+ value.content_tweet + 
@@ -27,7 +28,7 @@ $(document).ready(function () {
 				$.each(obj, (key, value) => {
 					lasttweet = value.id_tweet;
 					$("#timeline").prepend(
-						'<li class="tweet list-group-item">'
+						'<img src="<?=$_SESSION["avatar"]?>"><li class="tweet list-group-item">'
 						+ '<a href="/Twitter/profile/'
 						+ value.username + '">@' + value.username + '</a><br>'
 						+ value.content_tweet + 
