@@ -7,7 +7,7 @@ include 'inc/navbar.php'; ?>
 		<div class="side">
 			<div class="left-bar">
 				<img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon" class="icon">
-				<a class="profile-link" href="#">@<?=$_SESSION['name']?></a>
+				<a class="profile-link" href="/Twitter/profile">@<?=$_SESSION['name']?></a>
 				<ul class="prof navbar-nav">	
 					<li class="nav-item"><a id="nbTweets" class="nav-link" href="#"><?=$countTweet?> Tweets</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">Followers</a></li>
