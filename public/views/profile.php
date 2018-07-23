@@ -8,7 +8,7 @@ $user = ProfileController::getUserInfo();
 ?>
 <div class=" main user">
 	<div class="side left-bar">
-		<img src="https://pbs.twimg.com/profile_images/973163557633380357/aXWT-Dry_bigger.jpg" alt="icon" class="icon"><!-- Recup l'icon de l'user -->
+		<img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon"><!-- Recup l'icon de l'user -->
 		<ul class="prof navbar-nav">
 			<li class="nav-item" id="firstname"><?=$user[0]["firstname"]?></li>
 			<li class="nav-item" id="username"><a class="nav-link" href="/Twitter/profile">@<?=$user[0]['username']?></a></li>
