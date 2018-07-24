@@ -28,7 +28,7 @@ include 'inc/navbar.php';
 						</div>
 					</div>
 					<div class="col-md-8">
-						<form>
+						<form method="POST" action="">
 							<select class="form-control">
 								<option value="#1da1f2">Couleur par défaut</option>
 								<option value="#DB1702">Rouge</option>
