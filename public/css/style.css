@@ -105,3 +105,8 @@ nav {
 #register_date {
 	font-size: 10px;
 }
+
+.message-content-received {
+	height: 250px;
+	overflow-y: scroll;
+}
