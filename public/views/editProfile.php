@@ -98,5 +98,7 @@ include 'inc/navbar.php';
 	</div>
 </div>
 </form>
+<script src="/Twitter/public/js/jquery-3.3.1.js"></script>
+<script src="/Twitter/public/js/script.js"></script>
 </body>
 </html>
