@@ -17,24 +17,16 @@ $tweets = ProfileController::getUserTweets();
 		</ul>
 	</div>
 	<div class="content-main rounded">
-		<div class="row">
-			<div class="logo col-2 align-middle"><img src="<?=$_SESSION["avatar"]?>" alt="icon" class="rounded"></div>
-			<div class="form-group col-8">
-				<label for="myTweet">Tweet</label>
-				<textarea class="form-control" id="myTweet" rows="3"></textarea>
-			</div>
-			<div><button class="btn btn-primary align-middle" id="submitTweet">Tweet !</button></div>
-		</div>
 		<div>
 			<h4>Tweets:</h4>
 			<ol class="list-group">
-			<?php	if(empty($user))
-						echo "No tweets to show.";
-					else{
-					foreach($tweets as $tweet):?>
-				<li class="list-group-item tweet"><img src="<?=$user["avatar"]?>" class="float-left icon-tweet"><a class="nav-link" href="/Twitter/profile">@<?=$_SESSION['username']?></a><br><?=($tweet["content_tweet"]);?></li>
-				<?php endforeach ?>
-			</ol>
+                <?php    if(empty($tweets)):
+                echo "No tweets to show.";
+                else:
+                    foreach($tweets as $tweet):?>
+                    <li class="list-group-item tweet"><img src="<?=$user["avatar"]?>" class="float-left icon-tweet"><a class="nav-link" href="/Twitter/profile">@<?=$_SESSION['username']?></a><br><?=($tweet["content_tweet"]);?></li>
+                <?php endforeach; endif; ?>
+            </ol>
 		</div>
 	</div>
 </div>

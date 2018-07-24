@@ -27,7 +27,6 @@ include 'inc/navbar.php';
 					</div>
 					<div class="col-md-8">
 						<form method="POST" action="">
-
 							<select class="form-control">
 								<option value="#1da1f2">Couleur par défaut</option>
 								<option value="#DB1702">Rouge</option>
@@ -44,19 +43,19 @@ include 'inc/navbar.php';
 								<input class="form-control" id="inputFile" type="file">
 								<div class="form-group">									
 									<label>Last name</label>
-									<input class="form-control" type="text" value="<?=$user['lastname']?>">
+									<input class="form-control" type="text" placeholder="<?=$user['lastname']?>">
 								</div>
 								<div class="form-group">
 									<label>First name</label>
-									<input class="form-control" type="text" value="<?=$user['firstname']?>">
+									<input class="form-control" type="text" placeholder="<?=$user['firstname']?>">
 								</div>
 								<div class="form-group">
 									<label>Your Mail Adress</label><br />
-									<input class="form-control" type="mail" name="changeMail" value="<?=$user['email']?>">
+									<input class="form-control" type="mail" name="changeMail" placeholder="<?=$user['email']?>">
 								</div>
 								<div class="form-group">
 									<label>Change Mail</label><br />
-									<input class="form-control" type="mail" name="confirmChangeMail" value="<?=$user['email']?>">
+									<input class="form-control" type="mail" name="confirmChangeMail" placeholder="<?=$user['email']?>">
 								</div>
 								<div class="form-group">
 									<label>Your Password</label><br />
@@ -65,37 +64,11 @@ include 'inc/navbar.php';
 								<div class="form-group">
 									<label>New Password</label><br />
 									<input class="form-control" type="password" name="changePassword" placeholder="*****">
-								</div>
-								<div class="radio">
-									<label class="radio-inline">
-										<input value="male" checked="checked" name="" id="" type="radio">Homme
-									</label>
-									<label class="radio-inline">
-										<input value="female" name="" id="" type="radio">Femme
-									</label><br />
-								</div>
-								<input class="form-control" type="submit" id="profileEdit" name="profilEdit" value="Save Profile">
+								<input class="form-group" type="submit" id="profileEdit" name="profilEdit" value="Save Profile">
+								<input class="btn btn-danger" type="button" id="DeleteUser" name="Delete Account" value="Delete Profile">
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="delete-user-modal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">
-					<p>Are you sure you want to delete account?</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-danger">Delete</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 </form>
 <script src="/Twitter/public/js/jquery-3.3.1.js"></script>
 <script src="/Twitter/public/js/script.js"></script>
