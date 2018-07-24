@@ -4,13 +4,12 @@ include 'inc/navbar.php';
 
 $user = ProfileController::getUserInfo();
 $tweets = ProfileController::getUserTweets();
-// Recup les infos du gars (user ou personne dans l'url apres le /profile/...)
-// Var Dump a retirer, juste histoire de montrer comment recup les infos et comment elles se presentent.
 ?>
 <div class=" main user">
 	<div class="side left-bar">
 		<img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon"><!-- Recup l'icon de l'user -->
 		<ul class="prof navbar-nav">
+
 			<li class="nav-item" id="firstname"><?=$user["firstname"]?></li>
 			<li class="nav-item" id="username"><a class="nav-link" href="/Twitter/profile">@<?=$user['username']?></a></li>
 			<li class="nav-item" id="register_date">Member since <?=substr($user["register_date"], 0, -8)?></li>
@@ -29,7 +28,10 @@ $tweets = ProfileController::getUserTweets();
 		<div>
 			<h4>Tweets:</h4>
 			<ol class="list-group">
-				<?php foreach($tweets as $tweet):?>
+			<?php	if(empty($user))
+						echo "No tweets to show.";
+					else{
+					foreach($tweets as $tweet):?>
 				<li class="list-group-item tweet"><img src="<?=$user["avatar"]?>" class="float-left icon-tweet"><a class="nav-link" href="/Twitter/profile">@<?=$_SESSION['username']?></a><br><?=($tweet["content_tweet"]);?></li>
 				<?php endforeach ?>
 			</ol>
