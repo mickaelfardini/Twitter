@@ -1,7 +1,5 @@
 <?php
-$user = ProfileController::getUserInfo()[0];
-$countTweet = Controller::countTweetsAction()[0];
-$hashtags = Controller::countTagsAction();
+$user = ProfileController::getUserInfo();
 include 'inc/header.php';
 include 'inc/navbar.php';
 ?>
@@ -29,6 +27,7 @@ include 'inc/navbar.php';
 					</div>
 					<div class="col-md-8">
 						<form method="POST" action="">
+
 							<select class="form-control">
 								<option value="#1da1f2">Couleur par défaut</option>
 								<option value="#DB1702">Rouge</option>

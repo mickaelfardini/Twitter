@@ -28,7 +28,9 @@ $(document).ready(function () {
 				$.each(obj, (key, value) => {
 					lasttweet = value.id_tweet;
 					$("#timeline").prepend(
-						'<img src="<?=$_SESSION["avatar"]?>"><li class="tweet list-group-item">'
+						'<li class="tweet list-group-item">'
+						+ '<img src="'+value.avatar+'" class="icon-tweet">'
+
 						+ '<a href="/Twitter/profile/'
 						+ value.username + '">@' + value.username + '</a><br>'
 						+ value.content_tweet + 
