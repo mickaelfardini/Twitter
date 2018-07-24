@@ -1,11 +1,11 @@
 <?php
 $countTweet = Controller::countTweetsAction()[0];
 $hashtags = Controller::countTagsAction();
-
+// $mentions = Controller::getMentions();
 include 'inc/header.php';
 include 'inc/navbar.php'; ?>
-	<div class="main">
-		<div class="side">
+<div class="main">
+	<div class="side">
 			<div class="left-bar">
 				<a class="profile-link" href="/Twitter/profile"><img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon"></a>
 				<a class="profile-link" href="/Twitter/profile">@<?=$_SESSION['username']?></a>
@@ -26,25 +26,12 @@ include 'inc/navbar.php'; ?>
 			</div>
 		</div>
 		<div class="content-main rounded">
-			<div class="row">
-				<div class="logo col-2 align-middle"><img src="<?=$_SESSION["avatar"]?>" alt="icon" class="rounded"></div>
-				<div class="form-group col-8">
-					<label for="myTweet">Tweet</label>
-					<textarea class="form-control" id="myTweet" rows="3"></textarea>
-				</div>
-				<div><button class="btn btn-primary align-middle" id="submitTweet">Tweet !</button></div>
-			</div>
-			<div class="row"><p id="charLeft">140 caracteres restants.</p></div>
-			<ol id="timeline" class="list-group">
-			</ol>
+		<div>
+			<h4>Mentions:</h4>
 		</div>
 	</div>
-	<!-- <script -->
-	<!-- src="https://code.jquery.com/jquery-3.3.1.js" -->
-	<!-- integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" -->
-	<!-- crossorigin="anonymous"></script> -->
-	<script src="/Twitter/public/js/jquery-3.3.1.js"></script>
-	<script src="/Twitter/public/js/script.js"></script>
-	<script src="/Twitter/public/js/tweets.js"></script>
+</div>
+<script src="/Twitter/public/js/jquery-3.3.1.js"></script>
+<script src="/Twitter/public/js/script.js"></script>
 </body>
 </html>
