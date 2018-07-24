@@ -53,8 +53,7 @@ $(document).ready(function () {
 	});
 
 	// Envoi du tweet
-	$("#submitTweet").click((e) => {
-		e.preventDefault();
+	$("#submitTweet").click(() => {
 		$.post("?page=tweet&action=postTweet",
 			{content: $("#myTweet").val()})
 		.done((data) => {

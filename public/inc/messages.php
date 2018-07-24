@@ -1,5 +1,5 @@
 <!-- Message List -->
-<div class="modal fade bd-example-modal-lg" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="container-fluid">
@@ -41,7 +41,7 @@
 							</div>
 						</div>
 						<div class="modal-footer text-left">
-							<textarea class="form-control" id="myTweet" rows="3"></textarea>
+							<textarea class="form-control" rows="3"></textarea>
       </div>	
 					</div>
 				</div>
@@ -49,9 +49,6 @@
 		</div>
 	</div>
 </div>
-</div>
-</div>
-
 
 <!-- Message to someone -->
 <div class="modal fade" id="messageToModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
