@@ -30,6 +30,7 @@ $(document).ready(function () {
 					$("#timeline").prepend(
 						'<li class="tweet list-group-item">'
 						+ '<img src="'+value.avatar+'" class="icon-tweet">'
+
 						+ '<a href="/Twitter/profile/'
 						+ value.username + '">@' + value.username + '</a><br>'
 						+ value.content_tweet + 

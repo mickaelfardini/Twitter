@@ -2,6 +2,9 @@
 
 class Controller
 {
+	public static $countTweets;
+	public static $countTags;
+
 	public static function renderAction($page)
 	{
 		include 'views/' . $page . '.php';

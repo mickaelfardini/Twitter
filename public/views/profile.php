@@ -35,9 +35,7 @@ $tweets = ProfileController::getUserTweets();
 				<li class="list-group-item tweet"><img src="<?=$user["avatar"]?>" class="float-left icon-tweet"><a class="nav-link" href="/Twitter/profile">@<?=$_SESSION['username']?></a><br><?=($tweet["content_tweet"]);?></li>
 				<?php endforeach ?>
 			</ol>
-		</div>	
-
-
+		</div>
 	</div>
 </div>
 <script src="/Twitter/public/js/jquery-3.3.1.js"></script>
