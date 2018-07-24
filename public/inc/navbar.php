@@ -3,7 +3,7 @@
 		<ul class="inf navbar-nav">
 			<li class="nav-item"><a class="nav-link" href="/Twitter">Home</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Mentions</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#messageModal" href="#">Messages</a></li>
+			<li class="nav-item"><a class="nav-link" id="msgLink" data-toggle="modal" data-target="#messageModal" href="#">Messages</a></li>
 		</ul>
 		<img src="/Twitter/public/img/birdie.png" alt="logo" width="35" height="35" class="d-inline-block align-top">
 

@@ -1,7 +1,7 @@
 <?php
 include 'inc/header.php';
 include 'inc/navbar.php';
-include 'inc/messages.php';
+include 'inc/modal.php';
 
 $user = ProfileController::getUserInfo();
 $tweets = ProfileController::getUserTweets();
@@ -25,7 +25,7 @@ $tweets = ProfileController::getUserTweets();
 				echo "No tweets to show.";
 				else:
 					foreach($tweets as $tweet):?>
-					<li class="list-group-item tweet"><img src="<?=$user["avatar"]?>" class="float-left icon-tweet"><a class="nav-link" href="/Twitter/profile">@<?=$_SESSION['username']?></a><br><?=($tweet["content_tweet"]);?></li>
+					<li class="list-group-item tweet"><img src="<?=$user["avatar"]?>" class="float-left icon-tweet"><a class="nav-link" href="/Twitter/profile">@<?=$user['username']?></a><br><?=($tweet["content_tweet"]);?></li>
 				<?php endforeach; endif; ?>
 			</ol>
 		</div>
