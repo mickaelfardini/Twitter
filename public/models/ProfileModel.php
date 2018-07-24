@@ -7,7 +7,7 @@ class ProfileModel
 		$query = "SELECT * FROM user
 					WHERE user.username = ?";
 		$req = PDOConnection::prepareAction($query);
-		$req->execute([$user]);
+		$req->execute([htmlspecialchars($user)]);
 		return $req->fetch(PDO::FETCH_ASSOC);
 	}
 
@@ -19,7 +19,7 @@ class ProfileModel
 					AND delete_tweet = 0
 					ORDER BY date_tweet DESC";
 		$req = PDOConnection::prepareAction($query);
-		$req->execute([$user]);
+		$req->execute([htmlspecialchars($user)]);
 		return $req->fetchAll(PDO::FETCH_ASSOC);
 	}
 }

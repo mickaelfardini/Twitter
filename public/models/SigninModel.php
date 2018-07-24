@@ -20,7 +20,7 @@ class SigninModel
 	public function checkAccountAction(){
 		$query = "SELECT * FROM user WHERE username LIKE :username";
 		$sql = PDOConnection::prepareAction($query);
-		$sql->bindParam(':username', $this->username);
+		$sql->bindParam(':username', htmlspecialchars($this->username));
 		$sql->execute();
 		$user = $sql->fetch();
 
@@ -36,7 +36,7 @@ class SigninModel
 		if($this->checkAccountAction()){
 			$query = "SELECT password FROM user WHERE username LIKE :username";
 			$sql = PDOConnection::prepareAction($query);
-			$sql->bindParam(':username', $this->username);
+			$sql->bindParam(':username', htmlspecialchars($this->username));
 			$sql->execute();
 			$db_password = $sql->fetch();
 

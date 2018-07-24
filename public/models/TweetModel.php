@@ -41,7 +41,7 @@ class TweetModel
 		AND delete_tweet = 0
 		ORDER BY date_tweet DESC";
 		$req = PDOConnection::prepareAction($query);
-		$req->execute([$_POST['id_tweet']]);
+		$req->execute([htmlspecialchars($_POST['id_tweet'])]);
 		$result = $req->fetchAll(PDO::FETCH_ASSOC);
 		$result = self::checkTweetAction($result);
 		echo json_encode($result);
@@ -58,8 +58,8 @@ class TweetModel
 		VALUES (:id_user, :content_tweet, :delete_tweet)";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute(array(
-			':id_user' => $_SESSION['id_user'],
-			':content_tweet' => $_POST['content'],
+			':id_user' => htmlspecialchars($_SESSION['id_user']),
+			':content_tweet' => htmlspecialchars($_POST['content']),
 			':delete_tweet' => 0));
 		self::insertTagsAction($_POST['content']);
 		echo json_encode(["PostTweet" => "ok"]);
@@ -104,7 +104,7 @@ class TweetModel
 			if(!$req->fetchAll(PDO::FETCH_ASSOC)) {
 				$query = "INSERT INTO hashtag (name_hashtag) VALUES (?)";
 				$req = PDOConnection::prepareAction($query);
-				$req->execute([$match]);
+				$req->execute([htmlspecialchars($match)]);
 			}
 			self::tweetToTagAction($match, $id_tweet);
 		}

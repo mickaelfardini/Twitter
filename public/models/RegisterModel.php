@@ -66,11 +66,11 @@ class RegisterModel
 		$query .= ":username, :email, :password, :avatar)";
 
 		$sql = PDOConnection::prepareAction($query);
-		$sql->bindValue(':firstname', $this->firstname);
-		$sql->bindValue(':lastname', $this->lastname);
-		$sql->bindValue(':username', $this->username);
-		$sql->bindValue(':email', $this->email);
-		$sql->bindValue(':password', $hashed);
+		$sql->bindValue(':firstname', htmlspecialchars($this->firstname));
+		$sql->bindValue(':lastname', htmlspecialchars($this->lastname));
+		$sql->bindValue(':username', htmlspecialchars($this->username));
+		$sql->bindValue(':email', htmlspecialchars($this->email));
+		$sql->bindValue(':password', htmlspecialchars(($hashed)));
 		$sql->bindValue(':avatar', "/Twitter/public/img/default.jpg");
 
 		$sql->execute();

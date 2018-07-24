@@ -41,7 +41,7 @@
 							</div>
 						</div>
 						<div class="modal-footer text-left">
-							<textarea class="form-control" id="myTweet" rows="3"></textarea>
+							<textarea class="form-control" rows="3"></textarea>
       </div>	
 					</div>
 				</div>
