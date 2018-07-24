@@ -1,7 +1,5 @@
 <?php
-$user = ProfileController::getUserInfo()[0];
-$countTweet = Controller::countTweetsAction()[0];
-$hashtags = Controller::countTagsAction();
+$user = ProfileController::getUserInfo();
 include 'inc/header.php';
 include 'inc/navbar.php';
 ?>

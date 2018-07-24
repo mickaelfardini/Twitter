@@ -26,4 +26,9 @@ class ProfileController
 		}
 		return ProfileModel::getUserInfo(self::$user);
 	}
+
+	public static function getUserTweets()
+	{
+		return ProfileModel::getUserTweets(self::$user);
+	}
 }

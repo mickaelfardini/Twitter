@@ -2,9 +2,6 @@
 
 class Controller
 {
-	public static $countTweets;
-	public static $countTags;
-
 	public static function renderAction($page)
 	{
 		include 'views/' . $page . '.php';
@@ -17,13 +14,16 @@ class Controller
 
 	public static function countTweetsAction()
 	{
-		self::$countTweets = Model::countTweetsAction();
-		return self::$countTweets;
+		return Model::countTweetsAction();
 	}
 
 	public static function countTagsAction()
 	{
-		self::$countTags = Model::countTagsAction();
-		return self::$countTags;
+		return Model::countTagsAction();
+	}
+
+	public static function noResultAction()
+	{
+		self::renderAction("404");
 	}
 }
