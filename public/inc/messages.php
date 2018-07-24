@@ -1,5 +1,5 @@
 <?php
-$messages = MessageController::getUserMessagesAction();
+// $messages = MessageController::getUserMessagesAction();
 $contacts = MessageController::getUserContactAction();
 // var_dump($messages);
 ?>
@@ -10,7 +10,7 @@ $contacts = MessageController::getUserContactAction();
 		<div class="col-md-4">
 			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 				<?php foreach ($contacts as $contact) : ?>
-  <a class="nav-link" id="v-pills-<?=$contact?>-tab" data-toggle="pill" aria-selected="true"><?=$contact?></a>
+  <a class="nav-link" id="v-pills-<?=$contact?>-tab" href="#v-pills-<?=$contact?>" data-toggle="pill" aria-selected="true"><?=$contact?></a>
   				<?php endforeach ?>
 </div>
 		</div>
@@ -21,11 +21,10 @@ $contacts = MessageController::getUserContactAction();
 			<div class="row">
 				<div class="col-md-12 message-content-received">
 					<div class="tab-content" id="v-pills-tabContent">
-  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-</div>
+					<?php foreach($contacts as $contact): ?>
+  						<div class="tab-pane fade" id="v-pills-<?=$contact?>" role="tabpanel" aria-labelledby="v-pills-<?=$contact?>-tab"></div>
+  					<?php endforeach ?>
+  					</div>
 				</div>
 			</div>
 			<div class="modal-footer text-left">
@@ -34,6 +33,8 @@ $contacts = MessageController::getUserContactAction();
 		</div>
 	</div>
 </div>
+
+<script src="/Twitter/public/js/script.js"></script>
 
 <!-- 
 <div class="container-fluid">

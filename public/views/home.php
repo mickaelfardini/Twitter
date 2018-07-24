@@ -3,7 +3,8 @@ $countTweet = Controller::countTweetsAction()[0];
 $hashtags = Controller::countTagsAction();
 include 'inc/header.php';
 include 'inc/navbar.php';
-include 'inc/messages.php'; ?>
+include 'inc/modal.php'; ?>
+
 <div class="main">
 	<div class="side">
 		<div class="left-bar">

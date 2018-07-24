@@ -7,6 +7,11 @@ class MessageController
 		include 'inc/messages.php';
 	}
 
+	public static function getMessageAction()
+	{
+		MessageModel::getMessageAction();
+	}
+
 	public static function getUserMessagesAction()
 	{
 		return MessageModel::getUserMessagesAction();
