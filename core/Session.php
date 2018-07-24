@@ -20,6 +20,7 @@ class Session
 		$_SESSION['id_user'] = $result['id_user'];
 		$_SESSION['firstname'] = $result['firstname'];
 		$_SESSION['avatar'] = $result['avatar'];
+		$_SESSION['register_date'] = $result['register_date'];
 	}
 
 	public static function destroySessionAction()

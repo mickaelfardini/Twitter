@@ -1,7 +1,5 @@
 <?php
-$user = ProfileController::getUserInfo()[0];
-$countTweet = Controller::countTweetsAction()[0];
-$hashtags = Controller::countTagsAction();
+$user = ProfileController::getUserInfo();
 include 'inc/header.php';
 include 'inc/navbar.php';
 ?>
@@ -28,7 +26,8 @@ include 'inc/navbar.php';
 						</div>
 					</div>
 					<div class="col-md-8">
-						<form>
+						<form method="POST" action="">
+
 							<select class="form-control">
 								<option value="#1da1f2">Couleur par défaut</option>
 								<option value="#DB1702">Rouge</option>
@@ -98,5 +97,7 @@ include 'inc/navbar.php';
 	</div>
 </div>
 </form>
+<script src="/Twitter/public/js/jquery-3.3.1.js"></script>
+<script src="/Twitter/public/js/script.js"></script>
 </body>
 </html>

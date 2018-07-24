@@ -9,9 +9,15 @@ class TweetModel
 
 	public static function getTweetAction()
 	{
+		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER']))
+		{
+			self::getTweetFromTagAction();
+			return 1;
+		}
 		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
 		FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
+		WHERE delete_tweet = 0
 		ORDER BY date_tweet ASC";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute();
@@ -23,10 +29,15 @@ class TweetModel
 
 	public static function getLastTweetAction()
 	{
-		$query = "SELECT id_tweet, content_tweet, date_tweet, username 
+		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER']))
+		{
+			self::getLastTweetFromTagAction($_POST['id_tweet']);
+			return 1;
+		}
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
 		FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
-		WHERE id_tweet > ?
+		WHERE tweet.id_tweet > ?
 		AND delete_tweet = 0
 		ORDER BY date_tweet DESC";
 		$req = PDOConnection::prepareAction($query);
@@ -80,7 +91,7 @@ class TweetModel
 	private static function insertTagsAction($content)
 	{
 		$query = "SELECT id_tweet FROM tweet WHERE id_user = ?
-					ORDER BY date_tweet DESC LIMIT 1";
+		ORDER BY date_tweet DESC LIMIT 1";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$_SESSION['id_user']]);
 		$id_tweet = $req->fetch(PDO::FETCH_ASSOC)['id_tweet'];
@@ -109,5 +120,43 @@ class TweetModel
 		$query = "INSERT INTO tweet_to_tag (id_tweet, id_tag) VALUES (?, ?)";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$id_tweet, $id_hashtag]);
+	}
+
+	private static function getTweetFromTagAction()
+	{
+		$query = "SELECT tweet.id_tweet, content_tweet, date_tweet, username, avatar 
+		FROM tweet
+		JOIN tweet_to_tag ON tweet.id_tweet = tweet_to_tag.id_tweet
+		JOIN hashtag ON tweet_to_tag.id_tag = hashtag.id_hashtag
+		JOIN user ON tweet.id_user = user.id_user
+		WHERE hashtag.name_hashtag = ?
+		ORDER BY date_tweet ASC";
+		preg_match("/\/tags\/([a-zA-Z0-9]+)/", $_SERVER['HTTP_REFERER'], $match);
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$match[1]]);
+		$result = $req->fetchAll(PDO::FETCH_ASSOC);
+		$result = self::checkTweetAction($result);
+		echo json_encode($result);
+		return 1;
+	}
+
+	private static function getLastTweetFromTagAction($id)
+	{
+		$query = "SELECT tweet.id_tweet, content_tweet, date_tweet, username, avatar 
+		FROM tweet
+		JOIN tweet_to_tag ON tweet.id_tweet = tweet_to_tag.id_tweet
+		JOIN hashtag ON tweet_to_tag.id_tag = hashtag.id_hashtag
+		JOIN user ON tweet.id_user = user.id_user
+		WHERE hashtag.name_hashtag = ?
+		AND tweet.id_tweet > ?
+		AND delete_tweet = 0
+		ORDER BY date_tweet DESC";
+		preg_match("/\/tags\/([a-zA-Z0-9]+)/", $_SERVER['HTTP_REFERER'], $match);
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$match[1], $id]);
+		$result = $req->fetchAll(PDO::FETCH_ASSOC);
+		$result = self::checkTweetAction($result);
+		echo json_encode($result);
+		return 1;
 	}
 }
