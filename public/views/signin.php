@@ -14,7 +14,7 @@ include 'inc/header.php';
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
 						<label for="signPassword">Password</label>
-						<input type="password" id="signPassword" class="form-control" name="password" placeholder="Password">
+						<input type="password" class="form-control" id="signPassword" name="password" placeholder="Password">
 					</div>
 					<input type="submit" value="Submit" id="submitSignin" class="btn btn-primary mx-sm-3">
 					<p class="mx-sm-3 change" id="error" style="color: red;"></p>
