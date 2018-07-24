@@ -26,7 +26,7 @@ include 'inc/navbar.php';
 						</div>
 					</div>
 					<div class="col-md-8">
-						<form method="POST" action="">
+						<form method="POST" action="/Twitter/account/edit">
 							<select class="form-control">
 								<option value="#1da1f2">Couleur par défaut</option>
 								<option value="#DB1702">Rouge</option>
@@ -43,29 +43,29 @@ include 'inc/navbar.php';
 								<input class="form-control" id="inputFile" type="file">
 								<div class="form-group">									
 									<label>Last name</label>
-									<input class="form-control" type="text" placeholder="<?=$user['lastname']?>">
+									<input class="form-control" name="lastname" type="text" placeholder="<?=$user['lastname']?>">
 								</div>
 								<div class="form-group">
 									<label>First name</label>
-									<input class="form-control" type="text" placeholder="<?=$user['firstname']?>">
+									<input class="form-control" name="firstname" type="text" placeholder="<?=$user['firstname']?>">
 								</div>
 								<div class="form-group">
 									<label>Your Mail Adress</label><br />
-									<input class="form-control" type="mail" name="changeMail" placeholder="<?=$user['email']?>">
+									<input class="form-control" type="mail" name="email" placeholder="<?=$user['email']?>">
 								</div>
 								<div class="form-group">
 									<label>Change Mail</label><br />
-									<input class="form-control" type="mail" name="confirmChangeMail" placeholder="<?=$user['email']?>">
+									<input class="form-control" type="mail" name="email" placeholder="<?=$user['email']?>">
 								</div>
 								<div class="form-group">
 									<label>Your Password</label><br />
-									<input class="form-control" type="password" name="changePassword" placeholder="*****">
+									<input class="form-control" type="password" name="password" placeholder="*****">
 								</div>
 								<div class="form-group">
 									<label>New Password</label><br />
-									<input class="form-control" type="password" name="changePassword" placeholder="*****">
+									<input class="form-control" type="password" name="password" placeholder="*****">
 								<input class="form-group" type="submit" id="profileEdit" name="profilEdit" value="Save Profile">
-								<input class="btn btn-danger" type="button" id="DeleteUser" name="Delete Account" value="Delete Profile">
+								<input class="btn btn-danger" type="button" id="DeleteUser" name="deleteAccount" value="Delete Profile">
 							</div>
 						</div>
 					</div>
