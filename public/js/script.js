@@ -16,14 +16,6 @@ $(document).ready(function () {
 				});
 			});
 	});
-
-		//Log out Button
-	$("#logout").click(function() {
-		$.get("?action=Logout")
-		.done(() => {
-			location.href = "/Twitter/signin";
-		});
-	});
 	
 	// Login Button
 	$("#submitSignin").click(function(e) {
@@ -41,5 +33,13 @@ $(document).ready(function () {
 					}
 				});
 			});
+	});
+
+		//Log out Button
+	$("#logout").click(function() {
+		$.get("?action=Logout")
+		.done(() => {
+			location.href = "/Twitter/signin";
+		});
 	});
 });
