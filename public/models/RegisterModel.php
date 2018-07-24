@@ -27,7 +27,7 @@ class RegisterModel
 			}
 		}
 		if (!$this->verifyMailAction($_POST['Email'])) {
-			echo json_encode(["error" => "Veuillez renseigner un mail valide."]);
+			echo json_encode(["error" => "Renseignez un mail valide."]);
 			return 0;
 		}
 		if (!$this->verifyUsernameAction($_POST['Username'])) {
@@ -47,7 +47,9 @@ class RegisterModel
 		if ($req->fetch(PDO::FETCH_ASSOC)) {
 			return false;
 		}
-		$regex = "/^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,6})$/";
+		$regex = "/^[[:alnum:]]([-_.]?[[:alnum:]])*";
+		$regex .= "@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,6})$/";
+
 		if (preg_match($regex, $email)) {
 			return true;
 		}		
@@ -59,7 +61,11 @@ class RegisterModel
 		$this->password .= "si tu aimes la wac tape dans tes mains";
 		$hashed = hash('ripemd160', $this->password);
 
-		$sql = PDOConnection::prepareAction("INSERT INTO user (firstname, lastname, username, email, password, avatar) VALUES (:firstname, :lastname, :username, :email, :password, :avatar)");
+		$query = "INSERT INTO user (firstname, lastname, username, email, ";
+		$query .= "password, avatar) VALUES (:firstname, :lastname, ";
+		$query .= ":username, :email, :password, :avatar)";
+
+		$sql = PDOConnection::prepareAction($query);
 		$sql->bindValue(':firstname', $this->firstname);
 		$sql->bindValue(':lastname', $this->lastname);
 		$sql->bindValue(':username', $this->username);
