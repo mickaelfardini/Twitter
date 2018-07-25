@@ -28,6 +28,6 @@ class AccountController
 	public static function editAction()
 	{
 		$edit = new AccountModel();
-		$edit->
+		$edit->EditAction();
 	}
 }
