@@ -110,3 +110,8 @@ nav {
 	height: 250px;
 	overflow-y: scroll;
 }
+
+.glyphicons-conversation {
+	background-image: url("/Twitter/public/img/glyphicons/glyphicons-245-conversation.png");
+
+}

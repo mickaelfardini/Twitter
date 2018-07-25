@@ -119,14 +119,15 @@ $(document).ready(function () {
 
 	$("#timeline").on("mouseenter", "li", function(){
 		$(this).append('<p id="btnTwt"></p>');
-		$("#btnTwt").html('<button type="button" id="btnPrvMsg" class="btn btn-default" value="'
-				+ $(this)[0].attributes["value"].value +'" '
+		var name = $(this)[0].attributes["value"].value
+		$("#btnTwt").html('<span type="button" id="btnPrvMsg" class="glyphicon glyphicons-conversation btn btn-default" value="'
+				+ name +'" '
 				+ 'data-toggle="modal" data-target="#messageToModal">'
-				+ '<span class="glyphicon glyphicon-align-left" aria-hidden="true" id=""></span>'
-				+ '</button>');
+				+ '</span>');
 	
 		$("#btnTwt").click(function() {
-			$.get("?page=message&action=private")
+			$.post("?page=message&action=private",
+				{username: name})
 			.done((data) => {
 			$("#msgToModal").html(data);
 		});

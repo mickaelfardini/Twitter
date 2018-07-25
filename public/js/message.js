@@ -14,4 +14,21 @@ $(document).ready(function () {
 		});
 	});
 
+	$("#sndPrvMsg").click(function() {
+		$.post("?page=message&action=send",
+		{username: $("#toUser").val(),
+		 content: $("#msgContent").val()})
+		.done((data) => {
+			var obj = JSON.parse(data);
+			$.each(obj, (k, v) => {
+				if (k == "error") {
+					$("#msgStatus").html('<span style="color: red;">'+v+'</span>');
+				}
+				if (k == "ok") {
+					$("#msgStatus").html('<span style="color: green;">'+v+'</span>');
+					$("#msgContent").val("");
+				}
+			});
+		});
+	});
 });

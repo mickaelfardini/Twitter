@@ -7,6 +7,11 @@ class MessageController
 		include 'inc/messages.php';
 	}
 
+	public static function sendAction()
+	{
+		MessageModel::sendAction();
+	}
+
 	public static function privateAction()
 	{
 		include 'inc/privateMessage.php';
