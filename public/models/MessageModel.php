@@ -49,4 +49,30 @@ class MessageModel
 		}
 		return $arr;
 	}
+
+	public static function sendAction()
+	{
+		$query = "SELECT id_user FROM user WHERE username = ?";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_POST['username']]);
+		$id = $req->fetch(PDO::FETCH_ASSOC)['id_user'];
+
+		if (!$id) {
+			echo json_encode(["error" => "Invalid username"]);
+			return 0;
+		}
+
+		$query = "INSERT INTO message (id_sender, id_receiver, content_message)
+					VALUES (?, ?, ?)";
+		$req = PDOConnection::prepareAction($query);
+		if($req->execute([$_SESSION['id_user'],
+						$id,
+						$_POST['content']]))
+		{
+			echo json_encode(["ok" => "Message successfully sent."]);
+			return 1;
+		}
+		echo json_encode(["error" => "An error has occured."]);
+		return 0;
+	}
 }
