@@ -118,8 +118,11 @@ $(document).ready(function () {
 	});
 
 	$("#timeline").on("mouseenter", "li", function(){
-		$(this).append('<p id="btnTwt"></p>');
 		var name = $(this)[0].attributes["value"].value
+		if ("@"+name == $("#myUsername").html()) {
+			return false;
+		}
+		$(this).append('<p id="btnTwt"></p>');
 		$("#btnTwt").html('<span type="button" id="btnPrvMsg" class="glyphicon glyphicons-conversation btn btn-default" value="'
 				+ name +'" '
 				+ 'data-toggle="modal" data-target="#messageToModal">'
