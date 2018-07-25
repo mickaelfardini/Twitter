@@ -15,6 +15,7 @@ class RegisterModel
 		$this->username = $post['Username'];
 		$this->email = $post['Email'];
 		$this->password = $post['Password'];
+		$this->password_confirm = $post['confirmPassword'];
 	}
 
 	public function registerAction()
@@ -32,6 +33,11 @@ class RegisterModel
 		}
 		if (!$this->verifyUsernameAction($_POST['Username'])) {
 			echo json_encode(["error" => "Ce pseudo est deja utilisé."]);
+			return 0;
+		}
+		if(!$this->verifyPasswordAction($_POST['Password'], $_POST['confirmPassword']))
+		{
+			echo json_encode(["error" => "Les mots de passe ne correspondent pas."]);
 			return 0;
 		}
 		$this->signupAction();
@@ -83,6 +89,15 @@ class RegisterModel
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$user]);
 		if ($req->fetch()) {
+			return false;
+		}
+		return true;
+	}
+
+	public function verifyPasswordAction($password, $password2)
+	{
+		if($password !== $password2)
+		{
 			return false;
 		}
 		return true;
