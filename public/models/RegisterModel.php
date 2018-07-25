@@ -28,7 +28,7 @@ class RegisterModel
 			}
 		}
 		if (!$this->verifyMailAction($_POST['Email'])) {
-			echo json_encode(["error" => "Veuillez renseigner un mail valide."]);
+			echo json_encode(["error" => "Renseignez un mail valide."]);
 			return 0;
 		}
 		if (!$this->verifyUsernameAction($_POST['Username'])) {
@@ -49,11 +49,13 @@ class RegisterModel
 	{
 		$query = "SELECT * FROM user WHERE email = ?";
 		$req = PDOConnection::prepareAction($query);
-		$req->execute([$email]);
+		$req->execute([htmlspecialchars($email)]);
 		if ($req->fetch(PDO::FETCH_ASSOC)) {
 			return false;
 		}
-		$regex = "/^[[:alnum:]]([-_.]?[[:alnum:]])*@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,6})$/";
+		$regex = "/^[[:alnum:]]([-_.]?[[:alnum:]])*";
+		$regex .= "@[[:alnum:]]([-.]?[[:alnum:]])*\.([a-z]{2,6})$/";
+
 		if (preg_match($regex, $email)) {
 			return true;
 		}		
@@ -65,12 +67,16 @@ class RegisterModel
 		$this->password .= "si tu aimes la wac tape dans tes mains";
 		$hashed = hash('ripemd160', $this->password);
 
-		$sql = PDOConnection::prepareAction("INSERT INTO user (firstname, lastname, username, email, password, avatar) VALUES (:firstname, :lastname, :username, :email, :password, :avatar)");
-		$sql->bindValue(':firstname', $this->firstname);
-		$sql->bindValue(':lastname', $this->lastname);
-		$sql->bindValue(':username', $this->username);
-		$sql->bindValue(':email', $this->email);
-		$sql->bindValue(':password', $hashed);
+		$query = "INSERT INTO user (firstname, lastname, username, email, ";
+		$query .= "password, avatar) VALUES (:firstname, :lastname, ";
+		$query .= ":username, :email, :password, :avatar)";
+
+		$sql = PDOConnection::prepareAction($query);
+		$sql->bindValue(':firstname', htmlspecialchars($this->firstname));
+		$sql->bindValue(':lastname', htmlspecialchars($this->lastname));
+		$sql->bindValue(':username', htmlspecialchars($this->username));
+		$sql->bindValue(':email', htmlspecialchars($this->email));
+		$sql->bindValue(':password', htmlspecialchars(($hashed)));
 		$sql->bindValue(':avatar', "/Twitter/public/img/default.jpg");
 
 		$sql->execute();

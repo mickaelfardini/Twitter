@@ -42,4 +42,12 @@ $(document).ready(function () {
 			location.href = "/Twitter/signin";
 		});
 	});
+
+		// Message 
+	$("#msgLink").click(function() {
+		$.get("?page=message")
+		.done((data) => {
+			$("#msgModal").html(data);
+		});
+	});
 });
