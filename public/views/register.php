@@ -25,11 +25,18 @@ include 'inc/header.php';
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
 						<label for="Password">Password</label>
-						<input type="password" id="Password" class="form-control" name="Password"  placeholder="Password">
+						<input type="password" id="Password" class="form-control" name="Password"  placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
 						<label for="Password">Confirm password</label>
-						<input type="password" id="PasswordConfirm" class="form-control" name="PasswordConfirm" placeholder="Password">
+						<input type="password" id="confirmPassword" class="form-control" name="confirmPassword" placeholder="Confirm Your Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+					</div>
+					<div id="message">
+						<h3>Password must contain the following:</h3>
+						<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+						<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+						<p id="number" class="invalid">A <b>number</b></p>
+						<p id="length" class="invalid">Minimum <b>8 characters</b></p>
 					</div>
 					<div class="text-center">
 						<input type="submit" value="Submit" id="submitRegister" class="btn btn-primary mx-sm-3">
@@ -44,6 +51,6 @@ include 'inc/header.php';
 	src="https://code.jquery.com/jquery-3.3.1.js"
 	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 	crossorigin="anonymous"></script>
-	<script src="public/js/script.js"></script>
+	<script src="/Twitter/public/js/jschris.js"></script>
 </body>
 </html>

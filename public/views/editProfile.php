@@ -59,11 +59,11 @@ include 'inc/navbar.php';
 								</div>
 								<div class="form-group">
 									<label>Your Password</label><br />
-									<input class="form-control" type="password" name="password" placeholder="*****">
+									<input class="form-control" type="password" id="Password" name="password" placeholder="*****">
 								</div>
 								<div class="form-group">
 									<label>New Password</label><br />
-									<input class="form-control" type="password" name="password" placeholder="*****">
+									<input class="form-control" id="newPassword" type="password" name="newpassword" placeholder="*****">
 								<input class="form-group" type="submit" id="profileEdit" name="profilEdit" value="Save Profile">
 								<input class="btn btn-danger" type="button" id="DeleteUser" name="deleteAccount" value="Delete Profile">
 							</div>
