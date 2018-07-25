@@ -2,12 +2,14 @@
 
 class MentionsModel
 {
-	public static function getUserMentionsAction($content)
+	public static function getMentions($username)
 	{
-		$query = "SELECT *	FROM tweet 	WHERE content_tweet LIKE ? ORDER BY date_tweet DESC";
-
-		// preg_match_all("/@([a-zA-Z]+)/", $content, $matches);
-
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar FROM tweet 	JOIN user ON tweet.id_user = user.id_user WHERE content_tweet LIKE :username ORDER BY date_tweet DESC";
+		$sql = PDOConnection::prepareAction($query);
+		$sql->bindValue(":username", "%@".$username."%");
+		$sql->execute();
+		$res = $sql->fetchAll();
+		 return $res;
 	}
 }
 

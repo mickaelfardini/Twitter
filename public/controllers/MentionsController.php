@@ -2,6 +2,8 @@
 
 class MentionsController
 {
+	public $username;
+
 	public static function defaultAction()
 	{
 		Controller::renderAction("mentions");
@@ -9,6 +11,6 @@ class MentionsController
 
 	public static function getMentionsAction()
 	{
-		MentionsModel::getMentions();
+		MentionsModel::getMentions($_SESSION["username"]);
 	}
 }
