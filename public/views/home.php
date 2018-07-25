@@ -1,6 +1,7 @@
 <?php
 $countTweet = Controller::countTweetsAction()[0];
 $hashtags = Controller::countTagsAction();
+
 include 'inc/header.php';
 include 'inc/navbar.php';
 include 'inc/modal.php'; ?>
