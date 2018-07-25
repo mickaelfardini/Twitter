@@ -31,4 +31,9 @@ class ProfileController
 	{
 		return ProfileModel::getUserTweets(self::$user);
 	}
+
+	public static function getFollowersAction()
+	{
+		ProfileModel::getFollowersAction();
+	}
 }
