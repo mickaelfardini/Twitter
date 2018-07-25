@@ -43,7 +43,7 @@ class RegisterModel
 	{
 		$query = "SELECT * FROM user WHERE email = ?";
 		$req = PDOConnection::prepareAction($query);
-		$req->execute([$email]);
+		$req->execute([htmlspecialchars($email)]);
 		if ($req->fetch(PDO::FETCH_ASSOC)) {
 			return false;
 		}
