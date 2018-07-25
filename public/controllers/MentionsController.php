@@ -2,8 +2,6 @@
 
 class MentionsController
 {
-	public $username;
-
 	public static function defaultAction()
 	{
 		Controller::renderAction("mentions");
