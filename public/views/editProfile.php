@@ -9,7 +9,7 @@ include 'inc/navbar.php';
 		<img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon"><!-- Recup l'icon de l'user -->
 		<ul class="prof navbar-nav">
 			<li class="nav-item" id="firstname"><?=$user["firstname"]?></li>
-			<li class="nav-item" id="username"><a class="nav-link" href="/Twitter/profile">@<?=$user['username']?></a></li>
+			<li class="nav-item" id="username"><a class="nav-link" href="/Twitter/profile" id="myUsername">@<?=$user['username']?></a></li>
 			<li class="nav-item" id="register_date">Member since <?=substr($user["register_date"], 0, -8)?></li>
 			<li class="nav-item" id="editProfile"><a href="/Twitter/profile/edit">Edit profile</a></li>
 		</ul>
@@ -59,11 +59,11 @@ include 'inc/navbar.php';
 								</div>
 								<div class="form-group">
 									<label>Your Password</label><br />
-									<input class="form-control" type="password" name="password" placeholder="*****">
+									<input class="form-control" type="password" id="Password" name="password" placeholder="*****">
 								</div>
 								<div class="form-group">
 									<label>New Password</label><br />
-									<input class="form-control" type="password" name="password" placeholder="*****">
+									<input class="form-control" id="newPassword" type="password" name="newpassword" placeholder="*****">
 								<input class="form-group" type="submit" id="profileEdit" name="profilEdit" value="Save Profile">
 								<input class="btn btn-danger" type="button" id="DeleteUser" name="deleteAccount" value="Delete Profile">
 							</div>

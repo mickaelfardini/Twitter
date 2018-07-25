@@ -9,12 +9,12 @@ $(document).ready(function () {
 		$.each(obj, (key, value) => {
 			lasttweet = value.id_tweet;
 			$("#timeline").prepend(
-				'<li class="tweet list-group-item">'
+				'<li class="tweet list-group-item" value="'+value.username+'">'
 				+ '<img src="'+value.avatar+'" class="icon-tweet">'
 				+ '<a href="/Twitter/profile/'
 				+ value.username + '">@' + value.username + '</a><br>'
-				+ value.content_tweet + 
-				'</li>');
+				+ value.content_tweet
+				+ '</li>');
 		});
 	})
 	.fail((err) => {
@@ -34,8 +34,8 @@ $(document).ready(function () {
 
 						+ '<a href="/Twitter/profile/'
 						+ value.username + '">@' + value.username + '</a><br>'
-						+ value.content_tweet + 
-						'</li>');
+						+ value.content_tweet +
+						+ '</li>');
 				});
 			});
 	}
@@ -115,5 +115,29 @@ $(document).ready(function () {
 			});
 			// $("#nbTweets") = IndexController::countTweetAction()
 		});
+	});
+
+	$("#timeline").on("mouseenter", "li", function(){
+		var name = $(this)[0].attributes["value"].value
+		if ("@"+name == $("#myUsername").html()) {
+			return false;
+		}
+		$(this).append('<p id="btnTwt"></p>');
+		$("#btnTwt").html('<span type="button" id="btnPrvMsg" class="glyphicon glyphicons-conversation btn btn-default" value="'
+				+ name +'" '
+				+ 'data-toggle="modal" data-target="#messageToModal">'
+				+ '</span>');
+	
+		$("#btnTwt").click(function() {
+			$.post("?page=message&action=private",
+				{username: name})
+			.done((data) => {
+			$("#msgToModal").html(data);
+		});
+	});
+	});
+
+	$("#timeline").on("mouseleave", "li", function() {
+		$("#btnTwt").remove();
 	});
 });
