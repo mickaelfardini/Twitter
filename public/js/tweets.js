@@ -76,6 +76,8 @@ $(document).ready(function () {
 		$("#autocomp").fadeOut();
 		console.log(this)
 		$("#myTweet").val($("#myTweet").val().replace("@"+ACuser, this.textContent + " "));
+		ACuser = "";
+		autocomplete = 0;
 	});
 
 	// Gestion du nombre de caracteres

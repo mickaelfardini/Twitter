@@ -3,7 +3,8 @@ $countTweet = Controller::countTweetsAction()[0];
 $hashtags = Controller::countTagsAction();
 $mentions = MentionsModel::getMentions($_SESSION["username"]);
 include 'inc/header.php';
-include 'inc/navbar.php'; ?>
+include 'inc/navbar.php';
+include 'inc/modal.php'; ?>
 <div class="main">
 	<div class="side">
 			<div class="left-bar">
@@ -40,7 +41,6 @@ include 'inc/navbar.php'; ?>
 		</div>
 	</div>
 </div>
-<script src="/Twitter/public/js/jquery-3.3.1.js"></script>
-<script src="/Twitter/public/js/script.js"></script>
+<?php include 'inc/footer.php'; ?>
 </body>
 </html>
