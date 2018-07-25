@@ -2,6 +2,7 @@
 	<nav class="navbar navbar-light t navbar-expand-lg justify-content-between">
 		<ul class="inf navbar-nav">
 			<li class="nav-item"><a class="nav-link" href="/Twitter">Home</a></li>
+
 			<li class="nav-item"><a class="nav-link" href="/Twitter/mentions">Mentions</a></li>
 			<li class="nav-item"><a class="nav-link" data-toggle="modal" data-target="#messageModal" href="#">Messages</a></li>
 		</ul>

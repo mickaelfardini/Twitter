@@ -1,6 +1,7 @@
 <?php
 include 'inc/header.php';
 include 'inc/navbar.php';
+include 'inc/modal.php';
 
 $user = ProfileController::getUserInfo();
 $tweets = ProfileController::getUserTweets();
@@ -20,18 +21,23 @@ $tweets = ProfileController::getUserTweets();
 		<div>
 			<h4>Tweets:</h4>
 			<ol class="list-group">
+				<?php	if(empty($tweets)):
+				echo "No tweets to show.";
+				else:
+					foreach($tweets as $tweet):?>
+
 				<?php
               if(empty($user)):
 				        echo "No tweets to show.";
 				      else:
 					      foreach($tweets as $tweet):?>
+
 					<li class="list-group-item tweet"><img src="<?=$user["avatar"]?>" class="float-left icon-tweet"><a class="nav-link" href="/Twitter/profile">@<?=$user['username']?></a><br><?=($tweet["content_tweet"]);?></li>
 				<?php endforeach; endif; ?>
 			</ol>
 		</div>
 	</div>
 </div>
-<script src="/Twitter/public/js/jquery-3.3.1.js"></script>
-<script src="/Twitter/public/js/script.js"></script>
+<?php include 'inc/footer.php';?>
 </body>
 </html>
