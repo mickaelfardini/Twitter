@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-	var lasttweet = 0;
+	var lasttweet, autocomplete = 0;
+	var ACuser = "";
 	$.get("?page=tweet&action=getTweet")
 	.done((data) => {
 		var obj = JSON.parse(data);
@@ -40,8 +41,53 @@ $(document).ready(function () {
 	}
 	setInterval(getLastTweet, 5000);
 
+	function autoComplete(e) {
+		if (e.key == " ") {
+			autocomplete = 0;
+			return 1;
+		}
+		if (e.key == "Backspace") {
+			ACuser = ACuser.substring(0, ACuser.length - 1);
+		}
+		if (e.key.length == 1 && e.key != "@") {
+			ACuser += e.key;
+		}
+		if (!isNaN(ACuser[0])) {
+			ACuser = ACuser.slice(0, 1);
+		}
+
+		$.post("?page=profile&action=getFollowers",
+			{search: ACuser})
+		.done((data) => {
+			$("#autocomp").html("");
+			$("#autocomp").fadeIn();
+			$("#autocomp").append("<ul class='list-group'>");
+			var obj = JSON.parse(data);
+			$.each(obj[0], function(k, v) {
+				$("#autocomp").append("<li class='list-group-item'>"+
+					"<img class='icon-tweet' src='"
+					+v.avatar+"'>@" + v.username + "</li>");
+			});
+			$("#autocomp").append("</ul>");
+		});
+	}
+
+	$("#autocomp").on("click", "li", function() {
+		$("#autocomp").fadeOut();
+		console.log(this)
+		$("#myTweet").val($("#myTweet").val().replace("@"+ACuser, this.textContent + " "));
+		ACuser = "";
+		autocomplete = 0;
+	});
+
 	// Gestion du nombre de caracteres
-	$("#myTweet").keyup(() => {
+	$("#myTweet").keyup((e) => {
+		var twt = $("#myTweet").val();
+		// console.log($("#myTweet").val().match(/@([a-zA-Z0-9]+)/));
+		if(twt[twt.length-1] == "@" || autocomplete == 1) {
+			autocomplete = 1;
+			autoComplete(e);
+		}
 		var countChr = 140 - $("#myTweet").val().length;
 		if (countChr <= 0) {
 			$("#charLeft").css("color", "red");
@@ -53,8 +99,7 @@ $(document).ready(function () {
 	});
 
 	// Envoi du tweet
-	$("#submitTweet").click((e) => {
-		e.preventDefault();
+	$("#submitTweet").click(() => {
 		$.post("?page=tweet&action=postTweet",
 			{content: $("#myTweet").val()})
 		.done((data) => {
