@@ -22,4 +22,16 @@ class ProfileModel
 		$req->execute([$user]);
 		return $req->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+	public static function getFollowersAction()
+	{
+		$query = "SELECT username, avatar FROM user
+					WHERE username LIKE ?
+					LIMIT 15";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_POST['search']."%"]);
+		// var_dump($req->fetchAll(PDO::FETCH_ASSOC));
+		echo json_encode([$req->fetchAll(PDO::FETCH_ASSOC)]);
+		// var_dump($_POST);
+	}
 }

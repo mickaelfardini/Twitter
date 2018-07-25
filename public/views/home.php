@@ -32,6 +32,7 @@ include 'inc/modal.php'; ?>
 			<div class="form-group col-8">
 				<label for="myTweet">Tweet</label>
 				<textarea class="form-control" id="myTweet" rows="3"></textarea>
+				<div id="autocomp"></div>
 			</div>
 			<div><button class="btn btn-primary align-middle" id="submitTweet">Tweet !</button></div>
 		</div>
