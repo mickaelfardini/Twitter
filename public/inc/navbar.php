@@ -8,7 +8,7 @@
 		</ul>
 		<img src="/Twitter/public/img/birdie.png" alt="logo" width="35" height="35" class="d-inline-block align-top">
 
-		<form class="form-inline">
+		<form class="form-inline" id="formSearch">
 			<input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
 			<p><ul id="searchComp"></ul></p>
 		</form>	
