@@ -9,7 +9,8 @@ $(document).ready(function () {
 		$.each(obj, (key, value) => {
 			lasttweet = value.id_tweet;
 			$("#timeline").prepend(
-				'<li class="tweet list-group-item" value="'+value.username+'">'
+				'<li class="tweet list-group-item" value="'+value.username+'"'
+				+' idTweet="'+lasttweet+'">'
 				+ '<img src="'+value.avatar+'" class="icon-tweet">'
 				+ '<a href="/Twitter/profile/'
 				+ value.username + '">@' + value.username + '</a><br>'
@@ -29,7 +30,8 @@ $(document).ready(function () {
 				$.each(obj, (key, value) => {
 					lasttweet = value.id_tweet;
 					$("#timeline").prepend(
-						'<li class="tweet list-group-item">'
+						'<li class="tweet list-group-item" value="'+value.username+'"'
+						+' idTweet="'+lasttweet+'">'
 						+ '<img src="'+value.avatar+'" class="icon-tweet">'
 
 						+ '<a href="/Twitter/profile/'
@@ -119,19 +121,28 @@ $(document).ready(function () {
 
 	$("#timeline").on("mouseenter", "li", function(){
 		var name = $(this)[0].attributes["value"].value
+		var idTweet = $(this)[0].attributes["idTweet"].value
 		if ("@"+name == $("#myUsername").html()) {
 			return false;
 		}
 		$(this).append('<p id="btnTwt"></p>');
-		$("#btnTwt").html('<span type="button" id="btnPrvMsg" class="glyphicon glyphicons-conversation btn btn-default" value="'
-			+ name +'" '
-			+ 'data-toggle="modal" data-target="#messageToModal">message'
-			+ '</span>');
-		$("#btnTwt").append('<p>'
-			+ '<span type="button" id="btnFollow" class="glyphicon glyphicons-conversation btn btn-default" value="'
-			+ name +'" '
-			+ '>follow'
-			+ '</span></p>')
+		$("#btnTwt").html('<a class="btn" id="btnPrvMsg" value="'+name+'" '
+			+'data-toggle="modal" data-target="#messageToModal">'
+			+'<img src="/Twitter/public/img/glyphicons/'
+			+'glyphicons-245-conversation.png">'
+			+'</a>');
+		$("#btnTwt").append('<a class="btn" id="btnFollow" value="'+name+'">'
+			+'<img src="/Twitter/public/img/glyphicons/'
+			+'glyphicons-152-new-window.png">'
+			+'</a>')
+		$("#btnTwt").append('<a class="btn" id="btnRT" value="'+idTweet+'">'
+			+'<img src="/Twitter/public/img/glyphicons/'
+			+'glyphicons-230-retweet-2.png">'
+			+'</a>')
+		$("#btnTwt").append('<a class="btn" id="btnLike" value="'+idTweet+'">'
+			+'<img src="/Twitter/public/img/glyphicons/'
+			+'glyphicons-20-heart-empty.png">'
+			+'</a>')
 
 		$("#btnPrvMsg").click(function() {
 			$.post("?page=message&action=private",
@@ -147,9 +158,36 @@ $(document).ready(function () {
 			.done((data) => {
 			});
 		});
+
+		$("#btnRT").click(function() {
+			$.post("?page=profile&action=retweet",
+				{id_tweet: idTweet})
+			.done((data) => {
+			});
+		});
+
+		$("#btnLike").click(function() {
+			$.post("?page=profile&action=like",
+				{id_tweet: idTweet})
+			.done((data) => {
+			});
+		});
 	});
 
 	$("#timeline").on("mouseleave", "li", function() {
 		$("#btnTwt").remove();
+	});
+
+	$("#upImg").click(function() {
+		$("#customFile").click();
+	});
+
+	$("#customFile").change(function() {
+		$.post("?action=upload",
+		$("#imgForm").serializeArray(),
+		(data) => {
+			console.log(data);
+		});
+		// $("#imgForm").submit();
 	});
 });

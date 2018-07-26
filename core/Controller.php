@@ -34,4 +34,9 @@ class Controller
 	{
 		self::renderAction("404");
 	}
+
+	public static function uploadAction()
+	{
+		Model::uploadAction();
+	}
 }

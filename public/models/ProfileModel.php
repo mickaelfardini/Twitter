@@ -12,7 +12,7 @@ class ProfileModel
 	}
 
 	public static function getUserTweets($user)
-	{co
+	{
 		$query = "SELECT id_tweet, content_tweet FROM tweet
 					JOIN user ON tweet.id_user = user.id_user
 					WHERE user.username = ?
@@ -62,5 +62,29 @@ class ProfileModel
 					AND id_follower = ?";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$id, $_SESSION['id_user']]);
+	}
+
+	public static function likeAction()
+	{
+		$query = "INSERT INTO likes (id_user, id_tweet)
+					VALUES (?, ?)";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_SESSION['id_user'], $_POST['id_tweet']]);
+	}
+
+	public static function unLikeAction()
+	{
+		$query = "UPDATE likes SET status_like = 0
+					WHERE id_user = ?";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_SESSION['id_user']]);
+	}
+
+	public static function retweetAction()
+	{
+		$query = "INSERT INTO retweet (id_user, id_tweet, delete_retweet)
+					VALUES (?, ?, 0)";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_SESSION['id_user'], $_POST['id_tweet']]);
 	}
 }

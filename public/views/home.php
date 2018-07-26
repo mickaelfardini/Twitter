@@ -37,11 +37,16 @@ include 'inc/modal.php'; ?>
 			</div>
 			<div><button class="btn btn-primary align-middle" id="submitTweet">Tweet !</button></div>
 		</div>
-		<div class="row"><p id="charLeft">140 caracteres restants.</p></div>
-		<ol id="timeline" class="list-group">
-		</ol>
+		<div class="row">
+			<form id="imgForm">
+				<img src="/Twitter/public/img/glyphicons/glyphicons-12-camera.png" id="upImg">
+				<input hidden type="file" class="custom-file-input" name="SelectedFile" id="customFile">
+			</form>
+			<p id="charLeft">140 caracteres restants.</p></div>
+			<ol id="timeline" class="list-group">
+			</ol>
+		</div>
 	</div>
-</div>
-<?php include 'inc/footer.php';?>
+	<?php include 'inc/footer.php';?>
 </body>
 </html>

@@ -41,4 +41,24 @@ class ProfileController
 	{
 		ProfileModel::followAction();
 	}
+
+	public static function unFollowAction()
+	{
+		ProfileModel::unFollowAction();
+	}
+
+	public static function likeAction()
+	{
+		ProfileModel::likeAction();
+	}
+
+	public static function retweetAction()
+	{
+		ProfileModel::retweetAction();
+	}
+
+	public static function unLikeAction()
+	{
+		ProfileModel::likeAction();
+	}
 }
