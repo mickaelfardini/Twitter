@@ -34,4 +34,9 @@ class ProfileModel
 		echo json_encode([$req->fetchAll(PDO::FETCH_ASSOC)]);
 		// var_dump($_POST);
 	}
+
+	public static function followAction()
+	{
+		$query = "INSERT INTO follow ()"
+	}
 }

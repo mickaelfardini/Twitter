@@ -36,4 +36,9 @@ class ProfileController
 	{
 		ProfileModel::getFollowersAction();
 	}
+
+	public static function followAction()
+	{
+		ProfileModel::followAction();
+	}
 }

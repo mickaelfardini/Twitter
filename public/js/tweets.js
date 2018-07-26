@@ -125,14 +125,26 @@ $(document).ready(function () {
 		$(this).append('<p id="btnTwt"></p>');
 		$("#btnTwt").html('<span type="button" id="btnPrvMsg" class="glyphicon glyphicons-conversation btn btn-default" value="'
 				+ name +'" '
-				+ 'data-toggle="modal" data-target="#messageToModal">'
+				+ 'data-toggle="modal" data-target="#messageToModal">message'
 				+ '</span>');
+		$("#btnTwt").append('<p>'
+			+ '<span type="button" id="btnFollow" class="glyphicon glyphicons-conversation btn btn-default" value="'
+				+ name +'" '
+				+ '>follow'
+				+ '</span></p>')
 	
 		$("#btnTwt").click(function() {
 			$.post("?page=message&action=private",
 				{username: name})
 			.done((data) => {
 			$("#msgToModal").html(data);
+		});
+
+		$("#btnFollow").click(function() {
+			$.post("?page=profile&action=follow",
+				{username: name})
+			.done((data) => {
+				
 		});
 	});
 	});
