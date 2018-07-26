@@ -34,7 +34,9 @@ class Model
 
 	public static function uploadAction()
 	{
-		var_dump($_FILES['SelectedFile']['name'], $_FILES['SelectedFile']['tmp_name']);
+		var_dump($_FILES['SelectedFile']['name'],
+			$_FILES['SelectedFile']['tmp_name'],
+			self::rdnName());
 		die;
 		if($_FILES['SelectedFile']['error'] > 0){
 			echo json_encode(
@@ -61,4 +63,14 @@ class Model
 		}
 		echo json_encode(["ok" => $_FILES['SelectedFile']['name']]);
 	}
+
+	private static function rdnName() {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < 4; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
 }
