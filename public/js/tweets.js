@@ -183,11 +183,20 @@ $(document).ready(function () {
 	});
 
 	$("#customFile").change(function() {
-		$.post("?action=upload",
-		$("#imgForm").serializeArray(),
-		(data) => {
-			console.log(data);
-		});
-		// $("#imgForm").submit();
+		$("#imgForm").submit();
+	});
+	$("#imgForm").submit((e) => {
+		var file = $("#customFile")[0].files[0];
+		e.preventDefault();
+		var xmlhttp = new XMLHttpRequest();
+		var xh = new FormData();
+		xh.append("SelectedFile", file);
+		xmlhttp.open("POST", "?action=upload", true);
+		xmlhttp.onreadystatechange = function () {
+			if (this.readyState === 4 && this.status === 200) {
+				var resp = JSON.parse(this.response);
+			}
+		};
+		xmlhttp.send(xh);
 	});
 });

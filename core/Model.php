@@ -34,7 +34,8 @@ class Model
 
 	public static function uploadAction()
 	{
-		var_dump($_FILES, $_POST);
+		var_dump($_FILES['SelectedFile']['name'], $_FILES['SelectedFile']['tmp_name']);
+		die;
 		if($_FILES['SelectedFile']['error'] > 0){
 			echo json_encode(
 				['error' => 'An error ocurred when uploading.']);
