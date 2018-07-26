@@ -12,7 +12,7 @@ class ProfileModel
 	}
 
 	public static function getUserTweets($user)
-	{
+	{co
 		$query = "SELECT id_tweet, content_tweet FROM tweet
 					JOIN user ON tweet.id_user = user.id_user
 					WHERE user.username = ?
@@ -37,6 +37,30 @@ class ProfileModel
 
 	public static function followAction()
 	{
-		$query = "INSERT INTO follow ()"
+		$query = "SELECT id_user FROM user
+					WHERE username = ?";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_POST['username']]);
+		$id = $req->fetch(PDO::FETCH_ASSOC)['id_user'];
+
+		$query = "INSERT INTO follow (id_followed, id_follower)
+					VALUES (?, ?)";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$id, $_SESSION['id_user']]);
+	}
+
+	public static function unFollowAction()
+	{
+		$query = "SELECT id_user FROM user
+					WHERE username = ?";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_POST['username']]);
+		$id = $req->fetch(PDO::FETCH_ASSOC)['id_user'];
+
+		$query = "UPDATE follow SET status_follow = 0
+					WHERE id_followed = ?
+					AND id_follower = ?";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$id, $_SESSION['id_user']]);
 	}
 }

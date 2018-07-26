@@ -2,11 +2,6 @@
 
 class Model
 {
-	public static function defaultAction()
-	{
-		
-	}
-
 	public static function countTweetsAction()
 	{
 		$query = "SELECT COUNT(*) FROM tweet
@@ -15,6 +10,7 @@ class Model
 		$req->execute([$_SESSION['id_user']]);
 		return $req->fetch();
 	}
+
 
 	public static function countTagsAction()
 	{
@@ -25,5 +21,14 @@ class Model
 		$req = PDOConnection::prepareAction($query);
 		$req->execute();
 		return $req->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	public static function countFollowersAction()
+	{
+		$query = "SELECT COUNT(*) FROM follow
+		WHERE id_followed = ?";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_SESSION['id_user']]);
+		return $req->fetch();
 	}
 }
