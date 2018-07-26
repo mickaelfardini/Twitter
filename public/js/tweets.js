@@ -195,6 +195,12 @@ $(document).ready(function () {
 		xmlhttp.onreadystatechange = function () {
 			if (this.readyState === 4 && this.status === 200) {
 				var resp = JSON.parse(this.response);
+				var txt = $("#myTweet").html();
+				$.each(resp, function(k, v) {
+						if (k == "ok") {
+							$("#myTweet").html(txt + " $" + resp.name);
+						}
+				});
 			}
 		};
 		xmlhttp.send(xh);

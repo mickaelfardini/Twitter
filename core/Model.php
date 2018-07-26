@@ -34,10 +34,10 @@ class Model
 
 	public static function uploadAction()
 	{
-		var_dump($_FILES['SelectedFile']['name'],
-			$_FILES['SelectedFile']['tmp_name'],
-			self::rdnName());
-		die;
+		$rdn = self::rdnName();
+		if (file_exists($rdn . ".png") || file_exists($rdn . ".jpg")) {
+			self::uploadAction();
+		}
 		if($_FILES['SelectedFile']['error'] > 0){
 			echo json_encode(
 				['error' => 'An error ocurred when uploading.']);
@@ -48,20 +48,17 @@ class Model
 		}
 		if($_FILES['SelectedFile']['type'] != 'image/png'
 			&& $_FILES['SelectedFile']['type'] != 'image/jpeg'){
-			echo json_encode(
-				['error' => 'Unsupported filetype uploaded.']);
+			echo json_encode(['error' => 'Unsupported filetype uploaded.']);
 		}
 		if($_FILES['SelectedFile']['size'] > 500000){
 			echo json_encode(
 				['error' => 'File uploaded exceeds maximum upload size.']);
 		}
-
 		if(!move_uploaded_file($_FILES['SelectedFile']['tmp_name'], 'upload/'
-			. $_FILES['SelectedFile']['name'])){
-			echo json_encode(
-				['error' => 'Error uploading file']);
+			. $rdn . "." .pathinfo($_FILES['SelectedFile']['name'])['extension'])){
+			echo json_encode(['error' => 'Error uploading file']);
 		}
-		echo json_encode(["ok" => $_FILES['SelectedFile']['name']]);
+		echo json_encode(["ok" => $rdn . "." .pathinfo($_FILES['SelectedFile']['name'])['extension'], "name" => $rdn]);
 	}
 
 	private static function rdnName() {
