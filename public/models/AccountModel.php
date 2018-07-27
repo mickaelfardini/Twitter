@@ -18,8 +18,6 @@ class AccountModel
 		if(isset($_POST['theme'])){
 			$_SESSION['theme'] = $_POST['theme'];
 		}
-		// $hashed = hash('ripemd160', $_POST['password']);
-		// $hashed .= "si tu aimes la wac tape dans tes mains";
 		header('Location: /Twitter/profile');
 	}
 }

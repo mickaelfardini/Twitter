@@ -4,7 +4,7 @@ include 'inc/header.php';
 <body class="signinPage">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="offset-md-6 offset-lg-4 offset-xl-4 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+			<div class="offset-md-6 offset-lg-4 offset-xl-4 col-sm-12 col-md-8 col-lg-4 col-xl-3">
 				<h1 class="text-center">Register</h1>
 				<form id="formRegister">
 					<div class="form-group mx-sm-3 mb-2">
