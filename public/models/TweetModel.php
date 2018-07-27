@@ -13,6 +13,10 @@ class TweetModel
 			self::getTweetFromTagAction();
 			return 1;
 		}
+		if (preg_match("/\/mentions(\/)?/", $_SERVER['HTTP_REFERER'])) {
+			self::getMentions();
+			return 1;
+		}
 		if (preg_match("/\/profile(\/([a-zA-Z0-9]+))?/", $_SERVER['HTTP_REFERER'], $match)) {
 			self::getUserTweets($match);
 			return 1;
@@ -34,6 +38,10 @@ class TweetModel
 	{
 		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER'])) {
 			self::getLastTweetFromTagAction($_POST['id_tweet']);
+			return 1;
+		}
+		if (preg_match("/\/mentions(\/)?/", $_SERVER['HTTP_REFERER'])) {
+			self::getLastMentions($_POST['id_tweet']);
 			return 1;
 		}
 		if (preg_match("/\/profile(\/([a-zA-Z0-9]+))?/", $_SERVER['HTTP_REFERER'], $match)) {
@@ -207,5 +215,39 @@ class TweetModel
 		$result = $req->fetchAll(PDO::FETCH_ASSOC);
 		$result = self::checkTweetAction($result);
 		echo json_encode($result);
+	}
+
+	private static function getMentions()
+	{
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
+		FROM tweet
+		JOIN user ON tweet.id_user = user.id_user 
+		WHERE content_tweet LIKE :username
+		AND delete_tweet = 0
+		ORDER BY date_tweet ASC";
+		$sql = PDOConnection::prepareAction($query);
+		$sql->bindValue(":username", "%@".$_SESSION['username']."%");
+		$sql->execute();
+		$res = $sql->fetchAll(PDO::FETCH_ASSOC);
+		$res = self::checkTweetAction($res);
+		echo json_encode($res);
+	}
+
+	private static function getLastMentions($id)
+	{
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
+		FROM tweet
+		JOIN user ON tweet.id_user = user.id_user 
+		WHERE content_tweet LIKE :username 
+		AND tweet.id_tweet > :last
+		AND delete_tweet = 0
+		ORDER BY date_tweet DESC";
+		$sql = PDOConnection::prepareAction($query);
+		$sql->bindValue(":username", "%@".$_SESSION['username']."%");
+		$sql->bindValue(":last", $id);
+		$sql->execute();
+		$res = $sql->fetchAll(PDO::FETCH_ASSOC);
+		$res = self::checkTweetAction($res);
+		echo json_encode($res);
 	}
 }

@@ -2,7 +2,7 @@
 $countTweet = Controller::countTweetsAction()[0];
 $hashtags = Controller::countTagsAction();
 $followers = Controller::countFollowersAction()[0];
-$mentions = MentionsModel::getMentions($_SESSION["username"]);
+$followings = Controller::countFollowersAction()[0];
 
 include 'inc/header.php';
 include 'inc/navbar.php';
@@ -17,15 +17,8 @@ include 'inc/modal.php'; ?>
 		</div>
 		<div class="col-sm-12 col-md-8 col-lg-7">
 			<div class="bg-color rounded">
-				<h4>Mentions:</h4>
-				<ol class="list-group">
-					<?php
-					if(empty($mentions))
-						echo "No mentions to show.";
-					else{
-						foreach($mentions as $mention):?>
-						<li class="list-group-item tweet"><img src="<?=$mention["avatar"]?>" class="float-left icon-tweet"><a class="nav-link" href="/Twitter/profile/<?=$mention["username"]?>"><?=$mention["username"]?></a><?=$mention["content_tweet"];?></li>
-					<?php endforeach; }?>
+				<h4>Mentions :</h4>
+				<ol id="timeline" class="list-group">
 				</ol>
 			</div>
 		</div>
