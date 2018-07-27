@@ -13,6 +13,10 @@ class TweetModel
 			self::getTweetFromTagAction();
 			return 1;
 		}
+		if (preg_match("/\/mentions(\/)?/", $_SERVER['HTTP_REFERER'])) {
+			self::getMentions();
+			return 1;
+		}
 		if (preg_match("/\/profile(\/([a-zA-Z0-9]+))?/", $_SERVER['HTTP_REFERER'], $match)) {
 			self::getUserTweets($match);
 			return 1;
@@ -34,6 +38,10 @@ class TweetModel
 	{
 		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER'])) {
 			self::getLastTweetFromTagAction($_POST['id_tweet']);
+			return 1;
+		}
+		if (preg_match("/\/mentions(\/)?/", $_SERVER['HTTP_REFERER'])) {
+			self::getLastMentions($_POST['id_tweet']);
 			return 1;
 		}
 		if (preg_match("/\/profile(\/([a-zA-Z0-9]+))?/", $_SERVER['HTTP_REFERER'], $match)) {
@@ -74,20 +82,36 @@ class TweetModel
 
 	private static function checkTweetAction($tweets)
 	{
+		$tweets = self::checkImage($tweets);
 		foreach ($tweets as $k => $tweet) {
-			preg_match_all("/#([a-zA-Z]+)/", $tweet['content_tweet'], $matches);
+			preg_match_all("/#([a-zA-Z0-9]+)/", $tweet['content_tweet'], $matches);
 			foreach ($matches[0] as $key => $tag) {
 				$replace = "<a href=\"/Twitter/tags/".$matches[1][$key]."\">$tag</a>";
 				$tweet['content_tweet'] = str_replace($tag, $replace, $tweet['content_tweet']);
 			}
 			$tweets[$k] = $tweet;
 		}
-
 		foreach ($tweets as $k => $tweet) {
-			preg_match_all("/@([a-zA-Z]+)/", $tweet['content_tweet'], $matches);
+			preg_match_all("/@([a-zA-Z0-9]+)/", $tweet['content_tweet'], $matches);
 			foreach ($matches[0] as $key => $mention) {
 				$replace = "<a href=\"/Twitter/profile/".$matches[1][$key]."\">$mention</a>";
 				$tweet['content_tweet'] = str_replace($mention, $replace, $tweet['content_tweet']);
+			}
+			$tweets[$k] = $tweet;
+		}
+		return $tweets;
+	}
+
+	private static function checkImage($tweets)
+	{
+		foreach ($tweets as $k => $tweet) {
+			preg_match_all("/~([a-zA-Z0-9]{4})/", $tweet['content_tweet'], $m);
+			if (!empty($m[0])) {
+				foreach ($m[0] as $key => $img) {
+					$ext = is_file("/Twitter/public/upload/".$m[1][$key].".png") ? ".png" : ".jpg";
+					$replace = "<img src=\"/Twitter/public/upload/".$m[1][$key].$ext."\">";
+					$tweet['content_tweet'] = str_replace($m[0][$key], $replace, $tweet['content_tweet']);
+				}
 			}
 			$tweets[$k] = $tweet;
 		}
@@ -175,11 +199,11 @@ class TweetModel
 			$user = $match[2];
 		}
 		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar
-					FROM tweet
-					JOIN user ON tweet.id_user = user.id_user
-					WHERE user.username = ?
-					AND delete_tweet = 0
-					ORDER BY date_tweet ASC";
+		FROM tweet
+		JOIN user ON tweet.id_user = user.id_user
+		WHERE user.username = ?
+		AND delete_tweet = 0
+		ORDER BY date_tweet ASC";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([htmlspecialchars($user)]);
 		$result = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -196,16 +220,50 @@ class TweetModel
 			$user = $match[2];
 		}
 		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar
-					FROM tweet
-					JOIN user ON tweet.id_user = user.id_user
-					WHERE user.username = ?
-					AND tweet.id_tweet > ?
-					AND delete_tweet = 0
-					ORDER BY date_tweet DESC";
+		FROM tweet
+		JOIN user ON tweet.id_user = user.id_user
+		WHERE user.username = ?
+		AND tweet.id_tweet > ?
+		AND delete_tweet = 0
+		ORDER BY date_tweet DESC";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([htmlspecialchars($user), $id]);
 		$result = $req->fetchAll(PDO::FETCH_ASSOC);
 		$result = self::checkTweetAction($result);
 		echo json_encode($result);
+	}
+
+	private static function getMentions()
+	{
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
+		FROM tweet
+		JOIN user ON tweet.id_user = user.id_user 
+		WHERE content_tweet LIKE :username
+		AND delete_tweet = 0
+		ORDER BY date_tweet ASC";
+		$sql = PDOConnection::prepareAction($query);
+		$sql->bindValue(":username", "%@".$_SESSION['username']."%");
+		$sql->execute();
+		$res = $sql->fetchAll(PDO::FETCH_ASSOC);
+		$res = self::checkTweetAction($res);
+		echo json_encode($res);
+	}
+
+	private static function getLastMentions($id)
+	{
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
+		FROM tweet
+		JOIN user ON tweet.id_user = user.id_user 
+		WHERE content_tweet LIKE :username 
+		AND tweet.id_tweet > :last
+		AND delete_tweet = 0
+		ORDER BY date_tweet DESC";
+		$sql = PDOConnection::prepareAction($query);
+		$sql->bindValue(":username", "%@".$_SESSION['username']."%");
+		$sql->bindValue(":last", $id);
+		$sql->execute();
+		$res = $sql->fetchAll(PDO::FETCH_ASSOC);
+		$res = self::checkTweetAction($res);
+		echo json_encode($res);
 	}
 }

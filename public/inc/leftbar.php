@@ -9,7 +9,7 @@
 			<?php endif ?>
 			<li class="nav-item"><a id="nbTweets" class="nav-link" href="/Twitter/profile">Tweets <span class="badge badge-pill badge-primary"><?=$countTweet?></span></a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Followers <span class="badge badge-pill badge-primary"><?=$followers?></span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Following</a></li>
+			<li class="nav-item"><a class="nav-link" href="#">Following  <span class="badge badge-pill badge-primary"><?=$followings?></span></a></li>
 		</ul>
 	</div>
 </div>

@@ -2,6 +2,7 @@
 $countTweet = Controller::countTweetsAction()[0];
 $hashtags = Controller::countTagsAction();
 $followers = Controller::countFollowersAction()[0];
+$followings = Controller::countFollowersAction()[0];
 
 include 'inc/header.php';
 include 'inc/navbar.php';
