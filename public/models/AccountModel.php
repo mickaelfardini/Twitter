@@ -4,15 +4,22 @@ class AccountModel
 {
 	public function EditAction()
 	{
-		//Garder les informations de base de la personne en utilisant $_SESSION['lastname'] = lastname... etc	
-		$query = "UPDATE user SET lastname = ? , firstname = ? , email = ? , password = ?
-				WHERE user.id_user = ?";
+		$query = "UPDATE user SET ";
+		foreach ($_POST as $key => $value) {
+			if (!empty($value)) {
+				$query .= "$key = '$value' , ";
+			}
+		}
+		$query = rtrim($query,", ");
+		$query .= " WHERE user.id_user = ?";
 		$edit = PDOConnection::prepareAction($query);
-		$edit->execute([
-			$_POST['lastname'],
-			$_POST['firstname'],
-			$_POST['email'],
-			$_POST['password'],
-			$_SESSION['id_user']]);
+		$edit->execute([$_SESSION['id_user']]);
+
+		if(isset($_POST['theme'])){
+			$_SESSION['theme'] = $_POST['theme'];
+		}
+		// $hashed = hash('ripemd160', $_POST['password']);
+		// $hashed .= "si tu aimes la wac tape dans tes mains";
+		header('Location: /Twitter/profile');
 	}
 }
