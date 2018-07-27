@@ -2,7 +2,6 @@
 
 class TweetController
 {
-
 	public static function defaultAction()
 	{
 		
