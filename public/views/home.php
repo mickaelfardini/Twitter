@@ -22,9 +22,7 @@ include 'inc/modal.php'; ?>
 		</div>
 		<div class="left-tags rounded">
 			<ul class="tags list-group">
-				<?php foreach ($hashtags as $tag):
-var_dump($following);
-				 ?>
+				<?php foreach ($hashtags as $tag):?>
 					<li class="list-group-item">
 						<a href="/Twitter/tags/<?=$tag['name']?>">#<?=$tag['name']?></a> - <?=$tag['count']?> tweets
 					</li>
