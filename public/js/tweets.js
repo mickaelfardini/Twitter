@@ -198,7 +198,7 @@ $(document).ready(function () {
 				var txt = $("#myTweet").html();
 				$.each(resp, function(k, v) {
 						if (k == "ok") {
-							$("#myTweet").html(txt + " $" + resp.name);
+							$("#myTweet").html(txt + " ~" + resp.name);
 						}
 				});
 			}

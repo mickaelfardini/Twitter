@@ -82,20 +82,36 @@ class TweetModel
 
 	private static function checkTweetAction($tweets)
 	{
+		$tweets = self::checkImage($tweets);
 		foreach ($tweets as $k => $tweet) {
-			preg_match_all("/#([a-zA-Z]+)/", $tweet['content_tweet'], $matches);
+			preg_match_all("/#([a-zA-Z0-9]+)/", $tweet['content_tweet'], $matches);
 			foreach ($matches[0] as $key => $tag) {
 				$replace = "<a href=\"/Twitter/tags/".$matches[1][$key]."\">$tag</a>";
 				$tweet['content_tweet'] = str_replace($tag, $replace, $tweet['content_tweet']);
 			}
 			$tweets[$k] = $tweet;
 		}
-
 		foreach ($tweets as $k => $tweet) {
-			preg_match_all("/@([a-zA-Z]+)/", $tweet['content_tweet'], $matches);
+			preg_match_all("/@([a-zA-Z0-9]+)/", $tweet['content_tweet'], $matches);
 			foreach ($matches[0] as $key => $mention) {
 				$replace = "<a href=\"/Twitter/profile/".$matches[1][$key]."\">$mention</a>";
 				$tweet['content_tweet'] = str_replace($mention, $replace, $tweet['content_tweet']);
+			}
+			$tweets[$k] = $tweet;
+		}
+		return $tweets;
+	}
+
+	private static function checkImage($tweets)
+	{
+		foreach ($tweets as $k => $tweet) {
+			preg_match_all("/~([a-zA-Z0-9]{4})/", $tweet['content_tweet'], $m);
+			if (!empty($m[0])) {
+				foreach ($m[0] as $key => $img) {
+					$ext = is_file("/Twitter/public/upload/".$m[1][$key].".png") ? ".png" : ".jpg";
+					$replace = "<img src=\"/Twitter/public/upload/".$m[1][$key].$ext."\">";
+					$tweet['content_tweet'] = str_replace($m[0][$key], $replace, $tweet['content_tweet']);
+				}
 			}
 			$tweets[$k] = $tweet;
 		}
@@ -183,11 +199,11 @@ class TweetModel
 			$user = $match[2];
 		}
 		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar
-					FROM tweet
-					JOIN user ON tweet.id_user = user.id_user
-					WHERE user.username = ?
-					AND delete_tweet = 0
-					ORDER BY date_tweet ASC";
+		FROM tweet
+		JOIN user ON tweet.id_user = user.id_user
+		WHERE user.username = ?
+		AND delete_tweet = 0
+		ORDER BY date_tweet ASC";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([htmlspecialchars($user)]);
 		$result = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -204,12 +220,12 @@ class TweetModel
 			$user = $match[2];
 		}
 		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar
-					FROM tweet
-					JOIN user ON tweet.id_user = user.id_user
-					WHERE user.username = ?
-					AND tweet.id_tweet > ?
-					AND delete_tweet = 0
-					ORDER BY date_tweet DESC";
+		FROM tweet
+		JOIN user ON tweet.id_user = user.id_user
+		WHERE user.username = ?
+		AND tweet.id_tweet > ?
+		AND delete_tweet = 0
+		ORDER BY date_tweet DESC";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([htmlspecialchars($user), $id]);
 		$result = $req->fetchAll(PDO::FETCH_ASSOC);
