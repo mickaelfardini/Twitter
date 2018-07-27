@@ -27,6 +27,7 @@ $(document).ready(function () {
 			{id_tweet: lasttweet},
 			function(data) {
 				var obj = JSON.parse(data);
+				console.log(obj);
 				$.each(obj, (key, value) => {
 					lasttweet = value.id_tweet;
 					$("#timeline").prepend(
