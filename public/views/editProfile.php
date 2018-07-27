@@ -7,7 +7,7 @@ $hashtags = Controller::countTagsAction();
 $user = ProfileController::getUserInfo();
 ?>
 <div class="main user">
-	<div class="side left-bar">
+	<div class="form-group mx-sm-6 side left-bar" style= "overflow-wrap: break-word;">
 		<img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon">
 		<ul class="prof navbar-nav">
 			<li class="nav-item" id="firstname"><?=$user["firstname"]?></li>
@@ -18,14 +18,12 @@ $user = ProfileController::getUserInfo();
 	</div>
 	<div class="content-main rounded container bg-light row col-md-8">
 		<div>
-			<div class="row">
-				<div class="col-md-6 lead">
+				<div class="form-group mx-sm-3 mb-2 col-md-6 lead">
 					<?=$_SESSION['username']?>
 					<hr>
 				</div>
 			</div>
-		</div>
-		<form method="POST" action="/Twitter/account/edit">
+			<form method="POST" action="/Twitter/account/edit">
 			<div>
 				<div class="form-group mx-sm-3 mb-2">
 					<label class="custom-label mx-sm-3 mb-2" for="inlineFormCustomSelect">Thème</label>
