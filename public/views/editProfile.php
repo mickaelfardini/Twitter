@@ -19,7 +19,7 @@ $user = ProfileController::getUserInfo();
 	<div class="content-main rounded container bg-light row col-md-8">
 		<div>
 			<div class="row">
-				<div class="col-md-12 lead">
+				<div class="col-md-6 lead">
 					<?=$_SESSION['username']?>
 					<hr>
 				</div>
@@ -27,9 +27,9 @@ $user = ProfileController::getUserInfo();
 		</div>
 		<form method="POST" action="/Twitter/account/edit">
 			<div>
-				<div class="col-auto my-1">
-					<label class="mr-sm-2" for="inlineFormCustomSelect">Thème</label>
-					<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="theme">
+				<div class="form-group mx-sm-3 mb-2">
+					<label class="custom-label mx-sm-3 mb-2" for="inlineFormCustomSelect">Thème</label>
+					<select class="custom-select mx-sm-3 mb-2" name="theme">
 						<option value="#1da1f2">Couleur par défaut</option>
 						<option value="#DB1702">Rouge</option>
 						<option value="#0000FF">Bleu</option>
@@ -41,44 +41,44 @@ $user = ProfileController::getUserInfo();
 						<option value="#ED7F10">Orange</option>
 					</select>
 				</div>
-				<div class="form-group col-md-12">
-					<label>Edit Avatar</label>
-					<input class="form-control-file" id="inputFile" type="file">
-					<div class="form-group col-md-12">
-						<label>Last name</label>
+				<div class="form-group mx-sm-3 mb-2">
+					<label class="custom-label mx-sm-3 mb-2">Edit Avatar</label>
+					<input class="form-control-file mx-sm-3 mb-2" id="inputFile" type="file" style= "overflow-wrap: break-word;">
+					<div class="form-group mx-sm-3 mb-2">
+						<label class="custom-label mr-sm-2">Last name</label>
 						<input class="form-control" name="lastname" type="text" placeholder="<?=$user['lastname']?>">
 					</div>
-					<div class="form-group col-md-12">
-						<label>First name</label>
+					<div class="form-group mx-sm-3 mb-2">
+						<label class="custom-label mr-sm-2">First name</label>
 						<input class="form-control" name="firstname" type="text" placeholder="<?=$user['firstname']?>">
 					</div>
-					<div class="form-group col-md-12">
-						<label>Your Mail Adress</label>
+					<div class="form-group mx-sm-3 mb-2">
+						<label class="custom-label mr-sm-2">Your Mail Adress</label>
 						<input class="form-control" type="mail" name="email" placeholder="<?=$user['email']?>">
 					</div>
-					<div class="form-group col-md-12">
-						<label>Change Mail</label>
+					<div class="form-group mx-sm-3 mb-2">
+						<label class="custom-label mr-sm-2">Change Mail</label>
 						<input class="form-control" type="mail" name="email" placeholder="<?=$user['email']?>">
 					</div>
-					<div class="form-group col-md-12">
-						<label>Your Password</label>
+					<div class="form-group mx-sm-3 mb-2">
+						<label class="custom-label mr-sm-2">Your Password</label>
 						<input type="password" name="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="*****">
 					</div>
-					<div class="form-group col-md-12">
+					<div class="form-group mx-sm-3 mb-2">
 						<label for="inputPassword5">Password</label>
-<input type="password" name="newpassword" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="*****">
-<small id="passwordHelpBlock" class="form-text text-muted">
-  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
-</small>
+						<input type="password" name="newpassword" id="inputPassword6" class="form-control" aria-describedby="passwordHelpBlock" placeholder="*****">
+						<small id="passwordHelpBlock" class="form-text text-muted">
+							Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+						</small>
 					</div>
-					<input class="btn btn-primary" type="submit" id="profileEdit" value="Save Profile">
-					<input class="btn btn-danger" type="button" id="DeleteUser" name="deleteAccount" value="Delete Profile">
+					<input class="btn btn-primary mx-sm-3" type="submit" id="profileEdit" value="Save Profile">
+					<input class="btn btn-danger mx-sm-3" type="button" id="DeleteUser" name="deleteAccount" value="Delete Profile" >
 				</div>
 			</form>
 			<?php include 'inc/footer.php';?>
 		</body>
 		</html>
-</form>
-<?php include 'inc/footer.php';?>
+	</form>
+	<?php include 'inc/footer.php';?>
 </body>
 </html>
