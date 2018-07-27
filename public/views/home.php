@@ -1,6 +1,7 @@
 <?php
 $countTweet = Controller::countTweetsAction()[0];
 $hashtags = Controller::countTagsAction();
+$followers = Controller::countFollowersAction()[0];
 
 include 'inc/header.php';
 include 'inc/navbar.php';
@@ -12,8 +13,8 @@ include 'inc/modal.php'; ?>
 			<a class="profile-link" href="/Twitter/profile"><img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon"></a>
 			<a class="profile-link" href="/Twitter/profile" id="myUsername">@<?=$_SESSION['username']?></a>
 			<ul class="prof navbar-nav">	
-				<li class="nav-item"><a id="nbTweets" class="nav-link" href="/Twitter/profile"><?=$countTweet?> Tweets</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Followers</a></li>
+				<li class="nav-item"><a id="nbTweets" class="nav-link" href="/Twitter/profile">Tweets <span class="badge badge-pill badge-primary"><?=$countTweet?></span></a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Followers <span class="badge badge-pill badge-primary"><?=$followers?></span></a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Following</a></li>
 			</ul>
 		</div>
@@ -37,11 +38,16 @@ include 'inc/modal.php'; ?>
 			</div>
 			<div><button class="btn btn-primary align-middle" id="submitTweet">Tweet !</button></div>
 		</div>
-		<div class="row"><p id="charLeft">140 caracteres restants.</p></div>
-		<ol id="timeline" class="list-group">
-		</ol>
+		<div class="row">
+			<form id="imgForm">
+				<img src="/Twitter/public/img/glyphicons/glyphicons-12-camera.png" id="upImg">
+				<input hidden type="file" class="custom-file-input" name="SelectedFile" id="customFile">
+			</form>
+			<p id="charLeft">140 caracteres restants.</p></div>
+			<ol id="timeline" class="list-group">
+			</ol>
+		</div>
 	</div>
-</div>
-<?php include 'inc/footer.php';?>
+	<?php include 'inc/footer.php';?>
 </body>
 </html>
