@@ -5,7 +5,6 @@ $(document).ready(function () {
 	$.get("?page=tweet&action=getTweet")
 	.done((data) => {
 		var obj = JSON.parse(data);
-
 		$.each(obj, (key, value) => {
 			lasttweet = value.id_tweet;
 			$("#timeline").prepend(

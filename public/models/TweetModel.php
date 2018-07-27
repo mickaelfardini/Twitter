@@ -9,9 +9,12 @@ class TweetModel
 
 	public static function getTweetAction()
 	{
-		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER']))
-		{
+		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER'])) {
 			self::getTweetFromTagAction();
+			return 1;
+		}
+		if (preg_match("/\/profile(\/([a-zA-Z0-9]+))?/", $_SERVER['HTTP_REFERER'], $match)) {
+			self::getUserTweets($match);
 			return 1;
 		}
 		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
@@ -29,9 +32,12 @@ class TweetModel
 
 	public static function getLastTweetAction()
 	{
-		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER']))
-		{
+		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER'])) {
 			self::getLastTweetFromTagAction($_POST['id_tweet']);
+			return 1;
+		}
+		if (preg_match("/\/profile(\/([a-zA-Z0-9]+))?/", $_SERVER['HTTP_REFERER'], $match)) {
+			self::getUserLastTweets($match, $_POST['id_tweet']);
 			return 1;
 		}
 		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
@@ -158,5 +164,48 @@ class TweetModel
 		$result = self::checkTweetAction($result);
 		echo json_encode($result);
 		return 1;
+	}
+
+	public static function getUserTweets($match)
+	{
+		if ($match[0] == "/profile" || $match[0] == "/profile/") {
+			$user = $_SESSION['username'];
+		}
+		else {
+			$user = $match[2];
+		}
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar
+					FROM tweet
+					JOIN user ON tweet.id_user = user.id_user
+					WHERE user.username = ?
+					AND delete_tweet = 0
+					ORDER BY date_tweet ASC";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([htmlspecialchars($user)]);
+		$result = $req->fetchAll(PDO::FETCH_ASSOC);
+		$result = self::checkTweetAction($result);
+		echo json_encode($result);
+	}
+
+	public static function getUserLastTweets($match, $id)
+	{
+		if ($match[0] == "/profile" || $match[0] == "/profile/") {
+			$user = $_SESSION['username'];
+		}
+		else {
+			$user = $match[2];
+		}
+		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar
+					FROM tweet
+					JOIN user ON tweet.id_user = user.id_user
+					WHERE user.username = ?
+					AND tweet.id_tweet > ?
+					AND delete_tweet = 0
+					ORDER BY date_tweet DESC";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([htmlspecialchars($user), $id]);
+		$result = $req->fetchAll(PDO::FETCH_ASSOC);
+		$result = self::checkTweetAction($result);
+		echo json_encode($result);
 	}
 }
