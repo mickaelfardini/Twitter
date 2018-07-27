@@ -4,3 +4,4 @@
 <script src="/Twitter/public/js/bootstrap.min.js"></script>
 <script src="/Twitter/public/js/script.js"></script>
 <script src="/Twitter/public/js/tweets.js"></script>
+<script src="/Twitter/public/js/search.js"></script>

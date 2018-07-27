@@ -25,8 +25,18 @@ class Controller
 		return Model::countTagsAction();
 	}
 
+	public static function countFollowersAction()
+	{
+		return Model::countFollowersAction();
+	}
+
 	public static function noResultAction()
 	{
 		self::renderAction("404");
+	}
+
+	public static function uploadAction()
+	{
+		Model::uploadAction();
 	}
 }

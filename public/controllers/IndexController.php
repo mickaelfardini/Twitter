@@ -16,4 +16,9 @@ class IndexController
 	{
 		Session::destroySessionAction();
 	}
+
+	public static function uploadAction()
+	{
+		Controller::uploadAction();
+	}
 }
