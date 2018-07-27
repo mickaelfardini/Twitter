@@ -10,8 +10,9 @@
       <li class="nav-item"><a class="nav-link" id="msgLink" data-toggle="modal" data-target="#messageModal" href="#">Messages</a></li>
     </ul>
     <img src="/Twitter/public/img/birdie.png" alt="logo" width="35" height="35" class="d-inline-block align-top">
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0" id="formSearch">
      <input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
+      <p><ul id="searchComp"></ul></p>
     </form>
     <button type="button" id="logout" name="logout" value="logout" class="btn btn-primary">Log Out</button>
   </div>
