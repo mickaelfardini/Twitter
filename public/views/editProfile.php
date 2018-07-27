@@ -1,12 +1,13 @@
 <?php
-$user = ProfileController::getUserInfo();
 include 'inc/header.php';
 include 'inc/navbar.php';
+include 'inc/modal.php';
+
+$user = ProfileController::getUserInfo();
 ?>
-<br>
 <div class=" main user">
 	<div class="side left-bar">
-		<img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon"><!-- Recup l'icon de l'user -->
+		<img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon">
 		<ul class="prof navbar-nav">
 			<li class="nav-item" id="firstname"><?=$user["firstname"]?></li>
 			<li class="nav-item" id="username"><a class="nav-link" href="/Twitter/profile" id="myUsername">@<?=$user['username']?></a></li>
