@@ -2,6 +2,8 @@
 $countTweet = Controller::countTweetsAction()[0];
 $hashtags = Controller::countTagsAction();
 $followers = Controller::countFollowersAction()[0];
+$following = Controller::countFollowingAction()[0];
+
 
 include 'inc/header.php';
 include 'inc/navbar.php';
@@ -15,12 +17,14 @@ include 'inc/modal.php'; ?>
 			<ul class="prof navbar-nav">	
 				<li class="nav-item"><a id="nbTweets" class="nav-link" href="/Twitter/profile">Tweets <span class="badge badge-pill badge-primary"><?=$countTweet?></span></a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Followers <span class="badge badge-pill badge-primary"><?=$followers?></span></a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Following</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Following <span class="badge badge-pill badge-primary"><?=$following?></span></a></li>
 			</ul>
 		</div>
 		<div class="left-tags rounded">
 			<ul class="tags list-group">
-				<?php foreach ($hashtags as $tag): ?>
+				<?php foreach ($hashtags as $tag):
+var_dump($following);
+				 ?>
 					<li class="list-group-item">
 						<a href="/Twitter/tags/<?=$tag['name']?>">#<?=$tag['name']?></a> - <?=$tag['count']?> tweets
 					</li>
