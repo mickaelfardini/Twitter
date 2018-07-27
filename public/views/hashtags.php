@@ -15,7 +15,10 @@ include 'inc/modal.php'; ?>
 			?>
 		</div>
 		<div class="col-sm-12 col-md-8 col-lg-7">
-			<?php include 'inc/timeline.php'; ?>
+			<?php 
+			include 'inc/postTweet.php';
+			include 'inc/timeline.php';
+			?>
 		</div>
 	</div>
 	<?php include 'inc/footer.php';?>
