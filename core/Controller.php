@@ -30,6 +30,11 @@ class Controller
 		return Model::countFollowersAction();
 	}
 
+	public static function countFollowingAction()
+	{
+		return Model::countFollowingAction();
+	}
+
 	public static function noResultAction()
 	{
 		self::renderAction("404");

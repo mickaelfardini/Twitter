@@ -32,6 +32,15 @@ class Model
 		return $req->fetch();
 	}
 
+	public static function countFollowingAction()
+	{
+		$query = "SELECT COUNT(*) FROM follow
+		WHERE id_follower = ?";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_SESSION['id_user']]);
+		return $req->fetch();
+	}
+
 	public static function uploadAction()
 	{
 		$rdn = self::rdnName();

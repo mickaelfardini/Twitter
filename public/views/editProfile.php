@@ -78,3 +78,7 @@ $user = ProfileController::getUserInfo();
 			<?php include 'inc/footer.php';?>
 		</body>
 		</html>
+</form>
+<?php include 'inc/footer.php';?>
+</body>
+</html>
