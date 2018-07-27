@@ -66,10 +66,10 @@ nav {
 	height: auto;
 	background-color: #f2f2f2;
 	float: right;
-	width: 33%;
 	margin-left: 35%;
 	position: absolute;
 	margin-top: 3%;
+	width: 60%;
 }
 
 .tweet {

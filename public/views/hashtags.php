@@ -6,8 +6,7 @@ include 'inc/navbar.php';
 include 'inc/modal.php'; ?>
 
 <div class="main">
-	<div class="side">
-		<div class="left-bar">
+		<div class="side left-bar">
 			<a class="profile-link" href="/Twitter/profile"><img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon"></a>
 			<a class="profile-link" href="/Twitter/profile" id="myUsername">@<?=$_SESSION['username']?></a>
 			<ul class="prof navbar-nav">	
