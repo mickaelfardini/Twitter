@@ -27,7 +27,7 @@ include 'inc/navbar.php';
 					</div>
 					<div class="col-md-8">
 						<form method="POST" action="/Twitter/account/edit">
-							<select class="form-control">
+							<select name="theme" class="form-control">
 								<option value="#1da1f2">Couleur par défaut</option>
 								<option value="#DB1702">Rouge</option>
 								<option value="#0000FF">Bleu</option>
@@ -64,7 +64,7 @@ include 'inc/navbar.php';
 								<div class="form-group">
 									<label>New Password</label><br />
 									<input class="form-control" id="newPassword" type="password" name="newpassword" placeholder="*****">
-								<input class="form-group" type="submit" id="profileEdit" name="profilEdit" value="Save Profile">
+								<input class="form-group" type="submit" id="profileEdit" value="Save Profile">
 								<input class="btn btn-danger" type="button" id="DeleteUser" name="deleteAccount" value="Delete Profile">
 							</div>
 						</div>
