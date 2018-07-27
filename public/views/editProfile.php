@@ -2,7 +2,6 @@
 include 'inc/header.php';
 include 'inc/navbar.php';
 include 'inc/modal.php';
-
 $user = ProfileController::getUserInfo();
 ?>
 <div class=" main user">
