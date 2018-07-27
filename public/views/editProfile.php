@@ -27,7 +27,7 @@ $user = ProfileController::getUserInfo();
 						</div>
 					</div>
 					<div class="col-md-8">
-						<form method="POST" action="/Twitter/account/edit">
+						<form method="POST" action="/Twitter/profile">
 							<select class="form-control">
 								<option value="#1da1f2">Couleur par défaut</option>
 								<option value="#DB1702">Rouge</option>
