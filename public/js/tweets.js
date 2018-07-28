@@ -1,13 +1,14 @@
 $(document).ready(function () {
-
-	var lasttweet, autocomplete = 0;
+	var autocomplete = 0;
+	let lasttweet = 1;
 	var ACuser = "";
-	$.get("?page=tweet&action=getTweet")
+	$.get("?page=tweet&action=getTweet",
+		{limit: 15,
+			offset: 0})
 	.done((data) => {
 		var obj = JSON.parse(data);
-
 		$.each(obj, (key, value) => {
-			lasttweet = value.id_tweet;
+			lasttweet = (value.id_tweet > lasttweet) ? value.id_tweet : lasttweet;
 			$("#timeline").prepend(
 				'<li class="tweet list-group-item" value="'+value.username+'"'
 				+' idTweet="'+lasttweet+'">'
@@ -23,10 +24,12 @@ $(document).ready(function () {
 	})
 	// Tweet recuperation
 	function getLastTweet() {
+		console.log("Last Tweet : "+lasttweet);
 		$.post("?page=tweet&action=getLastTweet",
 			{id_tweet: lasttweet},
 			function(data) {
 				var obj = JSON.parse(data);
+				console.log(obj);
 				$.each(obj, (key, value) => {
 					lasttweet = value.id_tweet;
 					$("#timeline").prepend(
@@ -36,7 +39,7 @@ $(document).ready(function () {
 
 						+ '<a href="/Twitter/profile/'
 						+ value.username + '">@' + value.username + '</a><br>'
-						+ value.content_tweet +
+						+ value.content_tweet
 						+ '</li>');
 				});
 			});
@@ -198,7 +201,7 @@ $(document).ready(function () {
 				var txt = $("#myTweet").html();
 				$.each(resp, function(k, v) {
 						if (k == "ok") {
-							$("#myTweet").html(txt + " $" + resp.name);
+							$("#myTweet").html(txt + " ~" + resp.name);
 						}
 				});
 			}
