@@ -5,7 +5,6 @@ $(document).ready(function () {
 	$.get("?page=tweet&action=getTweet")
 	.done((data) => {
 		var obj = JSON.parse(data);
-
 		$.each(obj, (key, value) => {
 			lasttweet = value.id_tweet;
 			$("#timeline").prepend(
@@ -27,6 +26,7 @@ $(document).ready(function () {
 			{id_tweet: lasttweet},
 			function(data) {
 				var obj = JSON.parse(data);
+				console.log(obj);
 				$.each(obj, (key, value) => {
 					lasttweet = value.id_tweet;
 					$("#timeline").prepend(
@@ -198,7 +198,7 @@ $(document).ready(function () {
 				var txt = $("#myTweet").html();
 				$.each(resp, function(k, v) {
 						if (k == "ok") {
-							$("#myTweet").html(txt + " $" + resp.name);
+							$("#myTweet").html(txt + " ~" + resp.name);
 						}
 				});
 			}
