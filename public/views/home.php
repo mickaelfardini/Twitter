@@ -22,7 +22,7 @@ include 'inc/modal.php'; ?>
 			<?php 
 			include 'inc/postTweet.php';
 			?>
-			<div>
+			<div class="dropdown">
 				<ol id="timeline" class="list-group">
 				</ol>
 			</div>

@@ -269,4 +269,30 @@ class TweetModel
 		$res = self::checkTweetAction($res);
 		echo json_encode($res);
 	}
+
+	public static function getCommentsAction()
+	{
+		$query = "SELECT *, username FROM comment
+				JOIN user
+				ON comment.id_user = user.id_user
+				WHERE id_tweet = ?
+				ORDER BY date_comment ASC";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_GET['idTweet']]);
+		echo json_encode([$req->fetchAll(PDO::FETCH_ASSOC)]);
+		return 1;
+	}
+
+	public static function postCommentAction()
+	{
+		$query = "INSERT INTO comment
+					(id_user, id_tweet, content_comment)
+					VALUES
+					(?, ?, ?)";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$_SESSION['id_user'], $_POST['idTweet'],
+			htmlspecialchars($_POST['content'])]);
+		echo json_encode(["ok" => $_SESSION['username']]);
+		return 1;
+	}
 }
