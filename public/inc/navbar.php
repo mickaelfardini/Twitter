@@ -12,8 +12,10 @@
 				</ul>
 				<img src="/Twitter/public/img/birdie.png" alt="logo" width="35" height="35" class="d-inline-block align-top">
 				<form class="form-inline my-2 my-lg-0" id="formSearch">
+					<div class="dropdown">
 					<input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
 					<p><ul id="searchComp"></ul></p>
+					</div>
 				</form>
 				<button type="button" id="logout" name="logout" value="logout" class="btn btn-primary">Log Out</button>
 			</div>

@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	var autocomplete = 0;
+	var comment = 0;
 	let lasttweet = 1;
 	var ACuser = "";
 	$.get("?page=tweet&action=getTweet",
@@ -24,12 +25,10 @@ $(document).ready(function () {
 	})
 	// Tweet recuperation
 	function getLastTweet() {
-		console.log("Last Tweet : "+lasttweet);
 		$.post("?page=tweet&action=getLastTweet",
 			{id_tweet: lasttweet},
 			function(data) {
 				var obj = JSON.parse(data);
-				console.log(obj);
 				$.each(obj, (key, value) => {
 					lasttweet = value.id_tweet;
 					$("#timeline").prepend(
@@ -66,20 +65,19 @@ $(document).ready(function () {
 		.done((data) => {
 			$("#autocomp").html("");
 			$("#autocomp").fadeIn();
-			$("#autocomp").append("<ul class='list-group'>");
+			$("#autocomp").append("<div id='drpdwn' class='dropdown-menu show'></div>");
 			var obj = JSON.parse(data);
 			$.each(obj[0], function(k, v) {
-				$("#autocomp").append("<li class='list-group-item'>"+
+				$("#drpdwn").append("<a href='#' class='dropdown-item'>"+
 					"<img class='icon-tweet' src='"
-					+v.avatar+"'>@" + v.username + "</li>");
+					+v.avatar+"'>@" + v.username + "</a>");
 			});
-			$("#autocomp").append("</ul>");
+			// $("#autocomp").append("</div>");
 		});
 	}
 
-	$("#autocomp").on("click", "li", function() {
+	$("#autocomp").on("click", "a", function() {
 		$("#autocomp").fadeOut();
-		console.log(this)
 		$("#myTweet").val($("#myTweet").val().replace("@"+ACuser, this.textContent + " "));
 		ACuser = "";
 		autocomplete = 0;
@@ -88,7 +86,6 @@ $(document).ready(function () {
 	// Gestion du nombre de caracteres
 	$("#myTweet").keyup((e) => {
 		var twt = $("#myTweet").val();
-		// console.log($("#myTweet").val().match(/@([a-zA-Z0-9]+)/));
 		if(twt[twt.length-1] == "@" || autocomplete == 1) {
 			autocomplete = 1;
 			autoComplete(e);
@@ -123,30 +120,34 @@ $(document).ready(function () {
 	});
 
 	$("#timeline").on("mouseenter", "li", function(){
+		var thisTwt = this;
 		var name = $(this)[0].attributes["value"].value
 		var idTweet = $(this)[0].attributes["idTweet"].value
-		if ("@"+name == $("#myUsername").html()) {
-			return false;
-		}
 		$(this).append('<p id="btnTwt"></p>');
-		$("#btnTwt").html('<a class="btn" id="btnPrvMsg" value="'+name+'" '
-			+'data-toggle="modal" data-target="#messageToModal">'
-			+'<img src="/Twitter/public/img/glyphicons/'
-			+'glyphicons-245-conversation.png">'
-			+'</a>');
-		$("#btnTwt").append('<a class="btn" id="btnFollow" value="'+name+'">'
-			+'<img src="/Twitter/public/img/glyphicons/'
-			+'glyphicons-152-new-window.png">'
-			+'</a>')
+		if ("@"+name != $("#myUsername").html()) {
+			$("#btnTwt").html('<a class="btn" id="btnPrvMsg" value="'+name+'" '
+				+'data-toggle="modal" data-target="#messageToModal">'
+				+'<img src="/Twitter/public/img/glyphicons/'
+				+'glyphicons-11-envelope.png">'
+				+'</a>');
+			$("#btnTwt").append('<a class="btn" id="btnFollow" value="'+name+'">'
+				+'<img src="/Twitter/public/img/glyphicons/'
+				+'glyphicons-152-new-window.png">'
+				+'</a>');
+		}
 		$("#btnTwt").append('<a class="btn" id="btnRT" value="'+idTweet+'">'
 			+'<img src="/Twitter/public/img/glyphicons/'
 			+'glyphicons-230-retweet-2.png">'
-			+'</a>')
+			+'</a>');
 		$("#btnTwt").append('<a class="btn" id="btnLike" value="'+idTweet+'">'
 			+'<img src="/Twitter/public/img/glyphicons/'
 			+'glyphicons-20-heart-empty.png">'
-			+'</a>')
-
+			+'</a>');
+		$("#btnTwt").append('<a class="btn" id="btnComment" value="'+idTweet+'" '
+				+'data-toggle="modal" data-target="#commentModal">'
+				+'<img src="/Twitter/public/img/glyphicons/'
+				+'glyphicons-245-conversation.png">'
+				+'</a>');
 		$("#btnPrvMsg").click(function() {
 			$.post("?page=message&action=private",
 				{username: name})
@@ -154,7 +155,6 @@ $(document).ready(function () {
 				$("#msgToModal").html(data);
 			});
 		});
-
 		$("#btnFollow").click(function() {
 			$.post("?page=profile&action=follow",
 				{username: name})
@@ -166,6 +166,29 @@ $(document).ready(function () {
 			$.post("?page=profile&action=retweet",
 				{id_tweet: idTweet})
 			.done((data) => {
+			});
+		});
+
+		$("#btnComment").click(function() {
+			var id_tweet = $(this)[0].attributes["value"].value;
+			console.log(id_tweet);
+
+			$.get("?page=Tweet&action=comments")
+			.done((data) => {
+				$("#cmntModal").html(thisTwt.innerHTML + data);
+			});
+			$.get("?page=Tweet&action=getComments",
+				{idTweet: id_tweet})
+			.done((data) => {
+				var obj = JSON.parse(data);
+				$.each(obj[0], function (k, value) {
+					$("#commentList").append(
+						'<li class="list-group-item bg-color text-secondary">'
+						 + '<a href="/Twitter/profile/'
+						+ value.username + '">@' + value.username + '</a><br>'
+						+ value.content_comment
+						+ '</li><hr>');
+				});
 			});
 		});
 

@@ -7,6 +7,16 @@ class TweetController
 		
 	}
 
+	public static function getCommentsAction()
+	{
+		TweetModel::getCommentsAction();
+	}
+
+	public static function commentsAction()
+	{
+		include 'inc/comment.php';
+	}
+
 	public static function getTweetAction()
 	{
 		TweetModel::getTweetAction();
