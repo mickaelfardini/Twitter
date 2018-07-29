@@ -23,8 +23,10 @@ class AccountModel
 
 	public function ChangePassAction()
 	{
-		$query = "UPDATE user SET password = ? WHERE id_user = ?";
-		$_POST['password'] .= "si tu aimes la wac tape dans tes mains"
+		$_POST['password'] .= "si tu aimes la wac tape dans tes mains";
 		$hashed = hash('ripemd160', $_POST['password']);
+		$query = "UPDATE user SET password = ? WHERE id_user = ?";
+		$change= PDOConnection::prepareAction($query);
+		$change->execute([$_SESSION['id_user']]);
 	}
 }

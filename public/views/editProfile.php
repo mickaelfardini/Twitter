@@ -58,7 +58,7 @@ include 'inc/modal.php'; ?>
 						<input type="password" name="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="*****">
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
-						<label for="inputPassword5">Password</label>
+						<label for="inputPassword5">New Password</label>
 						<input type="password" name="newpassword" id="inputPassword6" class="form-control" aria-describedby="passwordHelpBlock" placeholder="*****">
 						<small id="passwordHelpBlock" class="form-text text-muted">
 							Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
