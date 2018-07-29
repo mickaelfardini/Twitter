@@ -20,4 +20,22 @@ $(document).ready(function () {
 			});
 		});
 	});
+
+	$("#commentList").on("click", "a", function(e) {
+		e.preventDefault();
+		var parent = $(this)[0].offsetParent;
+		var comId = e.currentTarget.attributes['value'].value;
+		$.post("?page=tweet&action=delComment",
+		{
+			idComment: comId
+		})
+		.done((data) => {
+			var obj = JSON.parse(data);
+			$.each(obj, function(k, v) {
+				if (k == "ok") {
+					parent.remove();
+				}
+			});
+		});
+	});
 });

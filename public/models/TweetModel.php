@@ -7,7 +7,7 @@ class TweetModel
 		
 	}
 
-	public static function getTweetAction()
+	private static function getTweetCheck()
 	{
 		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER'])) {
 			self::getTweetFromTagAction();
@@ -21,13 +21,29 @@ class TweetModel
 			self::getUserTweets($match);
 			return 1;
 		}
-		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
-		FROM tweet
-		JOIN user ON tweet.id_user = user.id_user
-		WHERE delete_tweet = 0
-		ORDER BY date_tweet DESC
-		LIMIT :lim OFFSET :offset";
+	}
+	public static function getTweetAction()
+	{
+		if (self::getTweetCheck())
+			{
+				return 1;
+			}
+		$query = "SELECT DISTINCT tweet.id_tweet, content_tweet, date_tweet, username, avatar
+					FROM tweet
+					JOIN user ON tweet.id_user = user.id_user
+					LEFT JOIN follow 
+					ON tweet.id_user = follow.id_followed
+					LEFT JOIN retweet
+					ON retweet.id_tweet = tweet.id_tweet
+					WHERE delete_tweet = 0 
+					AND ((follow.id_follower = :id_user
+						AND follow.status_follow = 1) 
+						OR tweet.id_user = :id_user
+						OR retweet.id_user = :id_user)
+					ORDER BY date_tweet DESC
+					LIMIT :lim OFFSET :offset";
 		$req = PDOConnection::prepareAction($query);
+		$req->bindValue(":id_user", (int) $_SESSION['id_user'], PDO::PARAM_INT);
 		$req->bindValue(":lim", (int) $_GET['limit'], PDO::PARAM_INT);
 		$req->bindValue(":offset", (int) $_GET['offset'], PDO::PARAM_INT);
 		$req->execute();
@@ -37,7 +53,7 @@ class TweetModel
 		return 1;
 	}
 
-	public static function getLastTweetAction()
+	private static function getLastTweetCheck()
 	{
 		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER'])) {
 			self::getLastTweetFromTagAction($_POST['id_tweet']);
@@ -51,14 +67,32 @@ class TweetModel
 			self::getUserLastTweets($match, $_POST['id_tweet']);
 			return 1;
 		}
-		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
+	}
+
+	public static function getLastTweetAction()
+	{
+		if(self::getLastTweetCheck())
+		{
+			return 1;
+		}
+		$query = "SELECT DISTINCT id_tweet, content_tweet, date_tweet, username, avatar 
 		FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
+		LEFT JOIN follow 
+		ON tweet.id_user = follow.id_followed
+		LEFT JOIN retweet
+		ON retweet.id_tweet = tweet.id_tweet
 		WHERE tweet.id_tweet > ?
-		AND delete_tweet = 0
+		AND delete_tweet = 0 
+			AND ((follow.id_follower = :id_user
+			AND follow.status_follow = 1) 
+			OR tweet.id_user = :id_user
+			OR retweet.id_user = :id_user)
 		ORDER BY date_tweet DESC";
 		$req = PDOConnection::prepareAction($query);
-		$req->execute([htmlspecialchars($_POST['id_tweet'])]);
+		$req->execute([htmlspecialchars($_POST['id_tweet']),
+						$_SESSION['id_user'],
+						$_SESSION['id_user']]);
 		$result = $req->fetchAll(PDO::FETCH_ASSOC);
 		$result = self::checkTweetAction($result);
 		echo json_encode($result);
@@ -276,6 +310,7 @@ class TweetModel
 				JOIN user
 				ON comment.id_user = user.id_user
 				WHERE id_tweet = ?
+				AND delete_comment = 0
 				ORDER BY date_comment ASC";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$_GET['idTweet']]);
@@ -293,6 +328,34 @@ class TweetModel
 		$req->execute([$_SESSION['id_user'], $_POST['idTweet'],
 			htmlspecialchars($_POST['content'])]);
 		echo json_encode(["ok" => $_SESSION['username']]);
+		return 1;
+	}
+
+	public static function deleteTweetAction()
+	{
+		$query = "UPDATE tweet SET delete_tweet = 1
+					WHERE id_tweet = ?
+					AND id_user = ?";
+		$req = PDOConnection::prepareAction($query);
+		if ($req->execute([$_POST['idTweet'], $_SESSION['id_user']])) {
+			echo json_encode(["ok" => "deleted"]);
+		} else {
+			echo json_encode(["error" => "bad account"]);
+		}
+		return 1;
+	}
+
+	public static function delCommentAction()
+	{
+		$query = "UPDATE comment SET delete_comment = 1
+					WHERE id_comment = ?
+					AND id_user = ?";
+		$req = PDOConnection::prepareAction($query);
+		if ($req->execute([$_POST['idComment'], $_SESSION['id_user']])) {
+			echo json_encode(["ok" => "deleted"]);
+		} else {
+			echo json_encode(["error" => "bad account"]);
+		}
 		return 1;
 	}
 }

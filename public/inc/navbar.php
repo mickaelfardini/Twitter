@@ -14,7 +14,7 @@
 				<form class="form-inline my-2 my-lg-0" id="formSearch">
 					<div class="dropdown">
 					<input id="searchHome" class="form-control mr-sm-2" type="text" placeholder="Search" name="search">
-					<p><ul id="searchComp"></ul></p>
+					<ul id="searchComp"></ul>
 					</div>
 				</form>
 				<button type="button" id="logout" name="logout" value="logout" class="btn btn-primary">Log Out</button>
