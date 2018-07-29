@@ -75,4 +75,25 @@ class ProfileModel
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$_SESSION['id_user'], $_POST['id_tweet']]);
 	}
+
+	public static function FollowersListAction()
+	{	
+		$query = "SELECT username, avatar FROM user LEFT JOIN follow ON follow.id_follower = user.id_user WHERE follow.id_followed = :id_user";
+
+		$sql = PDOConnection::prepareAction($query);
+		$sql->bindValue(":id_user", $_SESSION['id_user']);
+		$sql->execute();
+		return $sql->fetchAll();
+	}
+
+	public static function FollowingListAction()
+	{
+		$query = "SELECT username, avatar FROM user LEFT JOIN follow ON follow.id_followed = user.id_user WHERE follow.id_follower = :id_user";
+
+		$sql = PDOConnection::prepareAction($query);
+		$sql->bindValue(":id_user", $_SESSION['id_user']);
+		$sql->execute();
+
+		return $sql->fetchAll();
+	}
 }

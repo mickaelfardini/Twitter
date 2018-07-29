@@ -18,6 +18,16 @@ class ProfileController
 		Controller::renderAction("editProfile");
 	}
 
+	public static function followersAction()
+	{
+		Controller::renderAction("followers");
+	}
+
+	public static function followingAction()
+	{
+		Controller::renderAction("following");
+	}
+
 	public static function getUserInfo()
 	{
 		self::$user = isset($_GET['action']) ? $_GET['action'] : $_SESSION['username'];

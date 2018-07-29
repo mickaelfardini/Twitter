@@ -8,8 +8,8 @@
 			<li class="nav-item" id="editProfile"><a href="/Twitter/profile/edit">Edit profile</a></li>
 			<?php endif ?>
 			<li class="nav-item"><a id="nbTweets" class="nav-link" href="/Twitter/profile">Tweets <span class="badge badge-pill badge-primary"><?=$countTweet?></span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Followers <span class="badge badge-pill badge-primary"><?=$followers?></span></a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Following  <span class="badge badge-pill badge-primary"><?=$followings?></span></a></li>
+			<li class="nav-item"><a class="nav-link" href="/Twitter/profile/followers">Followers <span class="badge badge-pill badge-primary"><?=$followers?></span></a></li>
+			<li class="nav-item"><a class="nav-link" href="/Twitter/profile/following">Following  <span class="badge badge-pill badge-primary"><?=$followings?></span></a></li>
 		</ul>
 	</div>
 </div>
