@@ -5,7 +5,8 @@ class Model
 	public static function countTweetsAction()
 	{
 		$query = "SELECT COUNT(*) FROM tweet
-		WHERE id_user = ?";
+		WHERE id_user = ?
+		AND delete_tweet = 0";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$_SESSION['id_user']]);
 		return $req->fetch();
@@ -17,6 +18,7 @@ class Model
 		$query = "SELECT COUNT(*) AS 'count', name_hashtag AS 'name' 
 		FROM tweet_to_tag
 		JOIN hashtag ON id_tag = id_hashtag
+		WHERE status_ttt = 1
 		GROUP BY id_tag ORDER BY COUNT(*) DESC LIMIT 10";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute();
@@ -26,7 +28,8 @@ class Model
 	public static function countFollowersAction()
 	{
 		$query = "SELECT COUNT(*) FROM follow
-		WHERE id_followed = ?";
+		WHERE id_followed = ?
+		AND status_follow = 1";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$_SESSION['id_user']]);
 		return $req->fetch();
@@ -35,7 +38,8 @@ class Model
 	public static function countFollowingAction()
 	{
 		$query = "SELECT COUNT(*) FROM follow
-		WHERE id_follower = ?";
+		WHERE id_follower = ?
+		AND status_follow = 1";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$_SESSION['id_user']]);
 		return $req->fetch();

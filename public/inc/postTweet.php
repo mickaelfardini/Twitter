@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="offset-md-2 col-md-8 col-12">
 			<form id="imgForm">
-				<img src="/Twitter/public/img/glyphicons/glyphicons-12-camera.png" id="upImg">
+				<img src="/Twitter/public/img/glyphicons/glyphicons-12-camera.png" id="upImg" alt="upload">
 				<input hidden type="file" class="custom-file-input" name="SelectedFile" id="customFile">
 				<span class="float-right" id="charLeft">140 caracteres restants.</span>
 			</form>

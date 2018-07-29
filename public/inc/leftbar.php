@@ -2,8 +2,8 @@
 	<div class="row">
 		<div class="col-sm-12 left-bar bg-color rounded">
 			<a class="profile-link" href="/Twitter/profile"><img src="<?=$_SESSION["avatar"]?>" alt="icon" class="icon"></a>
-			<ul class="prof navbar-nav">	
 				<a class="profile-link" href="/Twitter/profile" id="myUsername">@<?=$_SESSION['username']?></a>
+			<ul class="prof navbar-nav">	
 			<?php if((isset($_GET['page']) && $_GET['page'] == "profile") && (!isset($_GET['action']) || $_GET['action'] == $_SESSION['username'])): ?>
 			<li class="nav-item" id="editProfile"><a href="/Twitter/profile/edit">Edit profile</a></li>
 			<?php endif ?>

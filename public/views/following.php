@@ -24,7 +24,7 @@ include 'inc/modal.php'; ?>
 				<?php 
 
 				foreach($following_list as $subs):?>
-					<li class="list-group-item"><img src="<?=$subs["avatar"]?>"><a href="/Twitter/profile/<?=$subs["username"]?>">@<?=$subs["username"]?></a>
+					<li class="list-group-item"><img alt="avatar" src="<?=$subs["avatar"]?>"><a href="/Twitter/profile/<?=$subs["username"]?>">@<?=$subs["username"]?></a>
 					</li>
 				<?php endforeach;?>
 
