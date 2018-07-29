@@ -31,6 +31,16 @@ class ProfileModel
 		$req->execute([$_POST['username']]);
 		$id = $req->fetch(PDO::FETCH_ASSOC)['id_user'];
 
+		$query = "SELECT status_follow FROM follow
+					WHERE id_followed = ?
+					AND id_follower = ?";
+		$req = PDOConnection::prepareAction($query);
+		$req->execute([$id, $_SESSION['id_user']]);
+		if ($req->fetch()) {
+			echo json_encode(["error" => "already following this person"]);
+			return 0;
+		}
+
 		$query = "INSERT INTO follow (id_followed, id_follower)
 					VALUES (?, ?)";
 		$req = PDOConnection::prepareAction($query);
