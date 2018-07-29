@@ -7,7 +7,7 @@ class TweetModel
 		
 	}
 
-	public static function getTweetAction()
+	private static function getTweetCheck()
 	{
 		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER'])) {
 			self::getTweetFromTagAction();
@@ -21,13 +21,25 @@ class TweetModel
 			self::getUserTweets($match);
 			return 1;
 		}
-		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
+	}
+	public static function getTweetAction()
+	{
+		if (self::getTweetCheck())
+			{
+				return 1;
+			}
+		$query = "SELECT DISTINCT(id_tweet), content_tweet, date_tweet, username, avatar 
 		FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
+		LEFT JOIN follow ON tweet.id_user = follow.id_followed
 		WHERE delete_tweet = 0
+		AND ((follow.id_follower = :id_user
+		AND follow.status_follow = 1)
+		OR tweet.id_user = :id_user)
 		ORDER BY date_tweet DESC
 		LIMIT :lim OFFSET :offset";
 		$req = PDOConnection::prepareAction($query);
+		$req->bindValue(":id_user", (int) $_SESSION['id_user'], PDO::PARAM_INT);
 		$req->bindValue(":lim", (int) $_GET['limit'], PDO::PARAM_INT);
 		$req->bindValue(":offset", (int) $_GET['offset'], PDO::PARAM_INT);
 		$req->execute();
@@ -37,7 +49,7 @@ class TweetModel
 		return 1;
 	}
 
-	public static function getLastTweetAction()
+	private static function getLastTweetCheck()
 	{
 		if (preg_match("/\/tags\//", $_SERVER['HTTP_REFERER'])) {
 			self::getLastTweetFromTagAction($_POST['id_tweet']);
@@ -51,14 +63,28 @@ class TweetModel
 			self::getUserLastTweets($match, $_POST['id_tweet']);
 			return 1;
 		}
-		$query = "SELECT id_tweet, content_tweet, date_tweet, username, avatar 
+	}
+
+	public static function getLastTweetAction()
+	{
+		if(self::getLastTweetCheck())
+		{
+			return 1;
+		}
+		$query = "SELECT DISTINCT(id_tweet), content_tweet, date_tweet, username, avatar 
 		FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
 		WHERE tweet.id_tweet > ?
-		AND delete_tweet = 0
+		LEFT JOIN follow ON tweet.id_user = follow.id_followed
+		WHERE delete_tweet = 0
+		AND ((follow.id_follower = ?
+		AND follow.status_follow = 1)
+		OR tweet.id_user = ?)
 		ORDER BY date_tweet DESC";
 		$req = PDOConnection::prepareAction($query);
-		$req->execute([htmlspecialchars($_POST['id_tweet'])]);
+		$req->execute([htmlspecialchars($_POST['id_tweet']),
+						$_SESSION['id_user'],
+						$_SESSION['id_user']]);
 		$result = $req->fetchAll(PDO::FETCH_ASSOC);
 		$result = self::checkTweetAction($result);
 		echo json_encode($result);
