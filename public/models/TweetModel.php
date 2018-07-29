@@ -28,16 +28,20 @@ class TweetModel
 			{
 				return 1;
 			}
-		$query = "SELECT DISTINCT(id_tweet), content_tweet, date_tweet, username, avatar 
-		FROM tweet
-		JOIN user ON tweet.id_user = user.id_user
-		LEFT JOIN follow ON tweet.id_user = follow.id_followed
-		WHERE delete_tweet = 0
-		AND ((follow.id_follower = :id_user
-		AND follow.status_follow = 1)
-		OR tweet.id_user = :id_user)
-		ORDER BY date_tweet DESC
-		LIMIT :lim OFFSET :offset";
+		$query = "SELECT DISTINCT tweet.id_tweet, content_tweet, date_tweet, username, avatar
+					FROM tweet
+					JOIN user ON tweet.id_user = user.id_user
+					LEFT JOIN follow 
+					ON tweet.id_user = follow.id_followed
+					LEFT JOIN retweet
+					ON retweet.id_tweet = tweet.id_tweet
+					WHERE delete_tweet = 0 
+					AND ((follow.id_follower = :id_user
+						AND follow.status_follow = 1) 
+						OR tweet.id_user = :id_user
+						OR retweet.id_user = :id_user)
+					ORDER BY date_tweet DESC
+					LIMIT :lim OFFSET :offset";
 		$req = PDOConnection::prepareAction($query);
 		$req->bindValue(":id_user", (int) $_SESSION['id_user'], PDO::PARAM_INT);
 		$req->bindValue(":lim", (int) $_GET['limit'], PDO::PARAM_INT);
@@ -71,15 +75,19 @@ class TweetModel
 		{
 			return 1;
 		}
-		$query = "SELECT DISTINCT(id_tweet), content_tweet, date_tweet, username, avatar 
+		$query = "SELECT DISTINCT id_tweet, content_tweet, date_tweet, username, avatar 
 		FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
+		LEFT JOIN follow 
+		ON tweet.id_user = follow.id_followed
+		LEFT JOIN retweet
+		ON retweet.id_tweet = tweet.id_tweet
 		WHERE tweet.id_tweet > ?
-		LEFT JOIN follow ON tweet.id_user = follow.id_followed
-		WHERE delete_tweet = 0
-		AND ((follow.id_follower = ?
-		AND follow.status_follow = 1)
-		OR tweet.id_user = ?)
+		AND delete_tweet = 0 
+			AND ((follow.id_follower = :id_user
+			AND follow.status_follow = 1) 
+			OR tweet.id_user = :id_user
+			OR retweet.id_user = :id_user)
 		ORDER BY date_tweet DESC";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([htmlspecialchars($_POST['id_tweet']),
