@@ -41,4 +41,9 @@ class TweetController
 	{
 		TweetModel::deleteTweetAction();
 	}
+
+	public static function delCommentAction()
+	{
+		TweetModel::delCommentAction();
+	}
 }

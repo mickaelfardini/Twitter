@@ -276,6 +276,7 @@ class TweetModel
 				JOIN user
 				ON comment.id_user = user.id_user
 				WHERE id_tweet = ?
+				AND delete_comment = 0
 				ORDER BY date_comment ASC";
 		$req = PDOConnection::prepareAction($query);
 		$req->execute([$_GET['idTweet']]);
@@ -303,6 +304,20 @@ class TweetModel
 					AND id_user = ?";
 		$req = PDOConnection::prepareAction($query);
 		if ($req->execute([$_POST['idTweet'], $_SESSION['id_user']])) {
+			echo json_encode(["ok" => "deleted"]);
+		} else {
+			echo json_encode(["error" => "bad account"]);
+		}
+		return 1;
+	}
+
+	public static function delCommentAction()
+	{
+		$query = "UPDATE comment SET delete_comment = 1
+					WHERE id_comment = ?
+					AND id_user = ?";
+		$req = PDOConnection::prepareAction($query);
+		if ($req->execute([$_POST['idComment'], $_SESSION['id_user']])) {
 			echo json_encode(["ok" => "deleted"]);
 		} else {
 			echo json_encode(["error" => "bad account"]);

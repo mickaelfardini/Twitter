@@ -149,7 +149,7 @@ $(document).ready(function () {
 				+'glyphicons-245-conversation.png">'
 				+'</a>');
 		if ("@"+name == $("#myUsername").html()) {
-			$("#btnTwt").append('<a href="#" id="btnDelete" value="'+idTweet+'" '
+			$("#btnTwt").append('<a class="float-right" href="#" id="btnDelete" value="'+idTweet+'" '
 				+'><small>Supprimer le Tweet</small>'
 				+'</a>');
 		}
@@ -190,7 +190,6 @@ $(document).ready(function () {
 
 		$("#btnComment").click(function() {
 			var id_tweet = $(this)[0].attributes["value"].value;
-			console.log(id_tweet);
 
 			$.get("?page=Tweet&action=comments")
 			.done((data) => {
@@ -207,6 +206,10 @@ $(document).ready(function () {
 						 + '<a href="/Twitter/profile/'
 						+ value.username + '">@' + value.username + '</a><br>'
 						+ value.content_comment
+						+ ($("#myUsername").html() == "@"+value.username ? '<a class="btnDelCom float-right"'
+							+' href="#"'
+							+' value="'+value.id_comment+'" '
+							+'><small>Delete comment</small></a>' : "bbb")
 						+ '</li><hr>');
 				});
 			});
