@@ -30,4 +30,9 @@ class AccountController
 		$edit = new AccountModel();
 		$edit->EditAction();
 	}
+
+	public static function delAccountAction()
+	{
+		AccountModel::delAccountAction();
+	}
 }
