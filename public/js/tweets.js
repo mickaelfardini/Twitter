@@ -148,6 +148,11 @@ $(document).ready(function () {
 				+'<img src="/Twitter/public/img/glyphicons/'
 				+'glyphicons-245-conversation.png">'
 				+'</a>');
+		if ("@"+name == $("#myUsername").html()) {
+			$("#btnTwt").append('<a href="#" id="btnDelete" value="'+idTweet+'" '
+				+'><small>Supprimer le Tweet</small>'
+				+'</a>');
+		}
 		$("#btnPrvMsg").click(function() {
 			$.post("?page=message&action=private",
 				{username: name})
@@ -159,6 +164,20 @@ $(document).ready(function () {
 			$.post("?page=profile&action=follow",
 				{username: name})
 			.done((data) => {
+			});
+		});
+		$("#btnDelete").click(function(e) {
+			e.preventDefault();
+			var idTweet = e.currentTarget.attributes['value'].value;
+			$.post("?page=tweet&action=deleteTweet",
+				{idTweet: idTweet})
+			.done((data) => {
+				var obj = JSON.parse(data);
+				$.each(obj, function(k, v) {
+					if (k == "ok") {
+						$(thisTwt).remove();
+					}
+				});
 			});
 		});
 

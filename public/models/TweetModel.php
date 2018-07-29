@@ -295,4 +295,18 @@ class TweetModel
 		echo json_encode(["ok" => $_SESSION['username']]);
 		return 1;
 	}
+
+	public static function deleteTweetAction()
+	{
+		$query = "UPDATE tweet SET delete_tweet = 1
+					WHERE id_tweet = ?
+					AND id_user = ?";
+		$req = PDOConnection::prepareAction($query);
+		if ($req->execute([$_POST['idTweet'], $_SESSION['id_user']])) {
+			echo json_encode(["ok" => "deleted"]);
+		} else {
+			echo json_encode(["error" => "bad account"]);
+		}
+		return 1;
+	}
 }
