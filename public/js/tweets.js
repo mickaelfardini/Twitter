@@ -175,7 +175,8 @@ $(document).ready(function () {
 
 			$.get("?page=Tweet&action=comments")
 			.done((data) => {
-				$("#cmntModal").html(thisTwt.innerHTML + data);
+				$("#cmntModal").html(thisTwt.innerHTML + data
+					+ "<input id='twtId' hidden value='"+id_tweet+"'>");
 			});
 			$.get("?page=Tweet&action=getComments",
 				{idTweet: id_tweet})
