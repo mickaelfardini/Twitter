@@ -50,4 +50,19 @@ $(document).ready(function () {
 			$("#msgModal").html(data);
 		});
 	});
+
+	$("#DeleteUser").click(function() {
+		$.get("?page=account&action=delAccount")
+		.done((data) => {
+			var obj = JSON.parse(data);
+			$.each(obj, (k, v) => {
+				if (k == "ok") {
+					$.get("?action=Logout")
+					.done((msg) => {
+						location.href = "/Twitter/";
+					});
+				}
+			});
+		});
+	});
 });

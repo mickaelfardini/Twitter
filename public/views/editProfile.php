@@ -65,7 +65,7 @@ include 'inc/modal.php'; ?>
 								</small>
 							</div>
 							<input class="btn btn-primary mx-sm-3" type="submit" id="profileEdit" value="Save Profile">
-							<input class="btn btn-danger mx-sm-3" type="button" id="DeleteUser" name="deleteAccount" value="Delete Profile" >
+							<input class="btn btn-danger mx-sm-3" type="button" id="DeleteUser" name="deleteAccount" value="Delete Profile">
 						</div>
 					</div>
 				</form>

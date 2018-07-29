@@ -66,4 +66,18 @@ class AccountModel
 			$sql->execute([$hashed, $_SESSION["id_user"]]);
 		}
 	}
+
+	public static function delAccountAction()
+	{
+		$query = "UPDATE user SET status = 0
+				WHERE id_user = ?";
+		$req = PDOConnection::prepareAction($query);
+		if($req->execute([$_SESSION['id_user']]))
+		{
+			echo json_encode(["ok" => "deleted"]);
+			return 1;
+		}
+		echo json_encode(["error" => "error"]);
+		return 0;
+	}
 }
