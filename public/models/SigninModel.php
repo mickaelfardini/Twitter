@@ -24,7 +24,7 @@ class SigninModel
 		$sql->execute();
 		$user = $sql->fetch();
 
-		if(empty($user)){
+		if(empty($user) || $user["status"]==0){
 			return false;	
 		}
 		else {
