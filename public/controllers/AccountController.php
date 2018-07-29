@@ -30,4 +30,10 @@ class AccountController
 		$edit = new AccountModel();
 		$edit->EditAction();
 	}
+
+	public static function changePassAction()
+	{
+		$change = new AccountModel();
+		$change->ChangePassAction();
+	}
 }

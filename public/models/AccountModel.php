@@ -20,4 +20,13 @@ class AccountModel
 		}
 		header('Location: /Twitter/profile');
 	}
+
+	public function ChangePassAction()
+	{
+		$_POST['password'] .= "si tu aimes la wac tape dans tes mains";
+		$hashed = hash('ripemd160', $_POST['password']);
+		$query = "UPDATE user SET password = ? WHERE id_user = ?";
+		$change= PDOConnection::prepareAction($query);
+		$change->execute([$_SESSION['id_user']]);
+	}
 }
