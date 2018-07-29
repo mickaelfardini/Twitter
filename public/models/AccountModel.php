@@ -20,4 +20,11 @@ class AccountModel
 		}
 		header('Location: /Twitter/profile');
 	}
+
+	public function ChangePassAction()
+	{
+		$query = "UPDATE user SET password = ? WHERE id_user = ?";
+		$_POST['password'] .= "si tu aimes la wac tape dans tes mains"
+		$hashed = hash('ripemd160', $_POST['password']);
+	}
 }
