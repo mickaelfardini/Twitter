@@ -25,12 +25,15 @@ class TweetModel
 		FROM tweet
 		JOIN user ON tweet.id_user = user.id_user
 		WHERE delete_tweet = 0
-		ORDER BY date_tweet ASC";
+		ORDER BY date_tweet DESC
+		LIMIT :lim OFFSET :offset";
 		$req = PDOConnection::prepareAction($query);
+		$req->bindValue(":lim", (int) $_GET['limit'], PDO::PARAM_INT);
+		$req->bindValue(":offset", (int) $_GET['offset'], PDO::PARAM_INT);
 		$req->execute();
 		$result = $req->fetchAll(PDO::FETCH_ASSOC);
 		$result = self::checkTweetAction($result);
-		echo json_encode($result);
+		echo json_encode(array_reverse($result));
 		return 1;
 	}
 
@@ -109,7 +112,7 @@ class TweetModel
 			if (!empty($m[0])) {
 				foreach ($m[0] as $key => $img) {
 					$ext = is_file("/Twitter/public/upload/".$m[1][$key].".png") ? ".png" : ".jpg";
-					$replace = "<img src=\"/Twitter/public/upload/".$m[1][$key].$ext."\">";
+					$replace = "<p><img src=\"/Twitter/public/upload/".$m[1][$key].$ext."\"></p>";
 					$tweet['content_tweet'] = str_replace($m[0][$key], $replace, $tweet['content_tweet']);
 				}
 			}
