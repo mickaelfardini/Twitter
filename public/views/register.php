@@ -52,5 +52,6 @@ include 'inc/header.php';
 	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 	crossorigin="anonymous"></script>
 	<script src="/Twitter/public/js/jschris.js"></script>
+	<script src="/Twitter/public/js/script.js"></script>
 </body>
 </html>
