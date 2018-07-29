@@ -7,8 +7,8 @@ class AccountModel
 
 	public function __construct()
 	{
-		$this->password = $post['Password'];
-		$this->new_password = $post['newpassword'];
+		$this->password = $_POST['password'];
+		$this->new_password = $_POST['newpassword'];
 	}
 
 	public function EditAction()
@@ -37,12 +37,11 @@ class AccountModel
 		$query = "SELECT password FROM user WHERE id_user = ?";
 		$sql = PDOConnection::prepareAction($query);
 		$sql->execute([$_SESSION['id_user']]);
-		$db_password = $sql->fetch();
+		$db_password = $sql->fetch()[0];
 		
 		$input_password = $_POST["password"];
 		$input_password .= "si tu aimes la wac tape dans tes mains";
 		$hashed_input = hash('ripemd160', $input_password);
-		var_dump($db_password);
 		if($db_password != $hashed_input)
 			return false;
 		else
@@ -51,7 +50,6 @@ class AccountModel
 
 	public function ChangePassAction()
 	{
-		var_dump(checkPassAction());
 		if (!checkPassAction()){
 			$alert = "Incorrect password combination";
 			echo json_encode(array("error"=>"$alert"));
