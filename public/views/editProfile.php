@@ -55,7 +55,7 @@ include 'inc/modal.php'; ?>
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
 						<label class="custom-label mr-sm-2">Your Password</label>
-						<input type="password" name="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="*****">
+						<input type="password" name="Password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="*****">
 					</div>
 					<div class="form-group mx-sm-3 mb-2">
 						<label for="inputPassword5">New Password</label>
